@@ -1,0 +1,14 @@
+# Projet CIR2
+------
+
+Ce projet à pour but de réaliser une application de lecture de musique permettant de rechercher des artistes, albums et morceaux pour les lire.
+Elle devra aussi permettre de gérer les profils utilisateurs avec leurs listes de lecture et indiquer les derniers morceaux joués.
+
+## Installation
+
+Dans un premier temps il est essentiel de configurer le serveur, pour cela un script est à votre disposition `config-server.sh`
+
+## Maquette & MCD
+
+Le MCD est disponible sous le fichier `bdd.mcd`, et la maquette est disponbile sur [figma](https://www.figma.com/file/iWuCapQ3FRZmkkparAza9k/Projet-CIR2?type=design&node-id=0%3A1&t=uJOvn6MFgd1tnlXz-1).
+
