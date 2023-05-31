@@ -7,6 +7,10 @@ Elle devra aussi permettre de gérer les profils utilisateurs avec leurs listes 
 ## Installation
 
 Dans un premier temps il est essentiel de configurer le serveur, pour cela un script est à votre disposition `config-server.sh`
+Pour l'ajouter à votre serveur, vous pouvez utilisez la commande suivante:
+```bash
+scp config-server.sh username@ip_address:/home/username/ 
+```
 
 ## Maquette & MCD
 
