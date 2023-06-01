@@ -206,8 +206,11 @@ class data extends database
     // Fonction pour récupérer les morceaux d'un artiste
     public function dbTracksArtist($id_artiste)
     {
-        //$query = 'SELECT * FROM morceau WHERE id_artiste = :id_artiste';
-        //TODO : récupérer les morceaux d'un artiste
+        $query = 'SELECT * FROM morceau JOIN album ON morceau.id_album = album.id WHERE album.id_artiste = :id_artiste';
+        $params = array(
+            'id_artiste' => $id_artiste
+        );
+        return $this->fetchAllRequest($query, $params);   
     }
 
     // Fonction pour rechercher un artiste

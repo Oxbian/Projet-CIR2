@@ -5,7 +5,7 @@ require_once('inc/data_encode.php'); // Contient les fonctions pour envoyer des 
 
 class database 
 {
-    private $db;
+    private PDO $db;
 
     // Constructeur qui initialise la connexion à la base de données
     public function __construct()
