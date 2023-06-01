@@ -23,12 +23,23 @@ function sendError($code)
     case 400:
       header('HTTP/1.1 400 Bad Request');
       break;
+
     case 401:
       header('HTTP/1.1 401 Unauthorized');
       break;
+
     case 404:
       header('HTTP/1.1 404 Not Found');
       break;
+
+    case 409:
+      header('HTTP/1.1 409 Conflict');
+      break;
+    
+    case 501:
+      header('HTTP/1.1 501 Not Implemented');
+      break;
+      
     case 500:
     default:
       header('HTTP/1.1 500 Internal Server Error');
