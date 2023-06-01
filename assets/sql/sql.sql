@@ -64,6 +64,7 @@ CREATE TABLE morceau(
         id       Int  Auto_increment  NOT NULL ,
         titre    Varchar (255) NOT NULL ,
         duree    Decimal (5,3) NOT NULL ,
+        chemin   Varchar (1024) NOT NULL ,
         id_album Int NOT NULL
 	,CONSTRAINT morceau_PK PRIMARY KEY (id)
 
