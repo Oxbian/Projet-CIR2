@@ -15,7 +15,7 @@ sudo mysql_secure_installation
 sudo mkdir -p /var/www/projet-cir2
 sudo chown -R $USER:$USER /var/www/projet-cir2
 cd /var/www/projet-cir2
-git clone https://github.com/Oxbian/Projet-CIR2.git
+git clone https://github.com/Oxbian/Projet-CIR2.git .
 sudo tee -a /etc/apache2/sites-available/prj-web-cir2-grp-56.conf << EOF
 <VirtualHost *:80>
 	ServerName prj-web-cir2-grp-56

@@ -1,0 +1,4 @@
+.venv/*
+assets/sql/.venv*
+package*
+node_modules*
