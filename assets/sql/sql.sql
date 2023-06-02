@@ -1,7 +1,7 @@
 #------------------------------------------------------------
 #        Change database
 #------------------------------------------------------------
-USE projet-cir2;
+USE projet_web;
 
 #------------------------------------------------------------
 #        Database cleanup
@@ -14,6 +14,7 @@ DROP TABLE IF EXISTS playlist;
 DROP TABLE IF EXISTS morceau;
 DROP TABLE IF EXISTS style;
 DROP TABLE IF EXISTS album;
+DROP TABLE IF EXISTS artiste;
 DROP TABLE IF EXISTS type;
 DROP TABLE IF EXISTS utilisateur;
 
@@ -64,6 +65,7 @@ CREATE TABLE morceau(
         id       Int  Auto_increment  NOT NULL ,
         titre    Varchar (255) NOT NULL ,
         duree    Decimal (5,3) NOT NULL ,
+        chemin   Varchar (1024) NOT NULL ,
         id_album Int NOT NULL
 	,CONSTRAINT morceau_PK PRIMARY KEY (id)
 

@@ -44,4 +44,5 @@ npm install eslint eslint-config-airbnb-base eslint eslint-plugin-import htmlhin
 
 ### Musiques
 
+- [Musique libre de droit](https://pixabay.com/music/search/cc0/) pour les musiques de test
 
