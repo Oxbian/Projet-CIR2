@@ -1,39 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/playlists.css" />
-    <script src="js/script.js" defer></script>
-  </head>
-  <body>
-    <header>
-      <nav>
-        <ul style="list-style-type: none; display: flex">
-          <li>
-            <div id="home">
-              <a href="accueil.html"></a>
-            </div>
-          </li>
 
-          <li><div class="volume"></div></li>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-          <li class="center">
-            <form>
-              <input type="text" id="search-input" placeholder="Recherche..." />
-              <button type="submit" id="rechercheIcon">
-                <!-- <a href="rechercheAlbum.html"></a> -->
-                <!-- <i class="rechercheIcon"></i> -->
-                <!-- <i class="fas fa-search"></i> -->
-              </button>
-            </form>
-          </li>
-          <li class="right"><div class="param"></div></li>
+  <!-- Style CSS -->
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/playlists.css" />
 
-          <!-- <path
+  <!-- Scripts -->
+  <script src="../assets/js/script.js" defer></script>
+  <title>Playlists</title>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <ul style="list-style-type: none; display: flex">
+        <li>
+          <div id="home">
+            <a href="accueil.html"></a>
+          </div>
+        </li>
+
+        <li>
+          <div class="volume"></div>
+        </li>
+
+        <li class="center">
+          <form>
+            <input type="text" id="search-input" placeholder="Recherche..." />
+            <button type="submit" id="rechercheIcon">
+              <!-- <a href="rechercheAlbum.html"></a> -->
+              <!-- <i class="rechercheIcon"></i> -->
+              <!-- <i class="fas fa-search"></i> -->
+            </button>
+          </form>
+        </li>
+        <li class="right">
+          <div class="param"></div>
+        </li>
+
+        <!-- <path
                       fill="#566574"
                       fill-rule="evenodd"
                       d="M14.667 0v2.747c3.853 1.146 6.666 4.72 6.666 8.946 0 4.227-2.813 7.787-6.666 8.934v2.76C20 22.173 24 17.4 24 11.693 24 5.987 20 1.213 14.667 0zM18 11.693c0-2.36-1.333-4.386-3.333-5.373v10.707c2-.947 3.333-2.987 3.333-5.334zm-18-4v8h5.333L12 22.36V1.027L5.333 7.693H0z"
@@ -52,45 +62,45 @@
                </div>
              </div>
              -->
-        </ul>
-      </nav>
-    </header>
+      </ul>
+    </nav>
+  </header>
 
-    <div class="recherche-morceau">
-      <div class="liste-morceau1">
-        <!-- <div class="morceau-icon7" ></div>
+  <div class="recherche-morceau">
+    <div class="liste-morceau1">
+      <!-- <div class="morceau-icon7" ></div>
           <div class="morceau-icon8" ></div> -->
-        <div class="morceau5"></div>
-        <div class="morceau6"></div>
+      <div class="morceau5"></div>
+      <div class="morceau6"></div>
 
-        <div class="morceau-principale1">
-          <div id="delete"></div>
-          <div class="morceau-icon9"></div>
-          <div class="titre-morceau1">Titre album</div>
-          <div class="logo-morceau1"></div>
-        </div>
-        <div class="morceau6"></div>
-        <div class="morceau8"></div>
-        <!-- <div class="morceau9"></div> -->
-        <!-- <div class="morceau-icon7" ></div>
+      <div class="morceau-principale1">
+        <div id="delete"></div>
+        <div class="morceau-icon9"></div>
+        <div class="titre-morceau1">Titre album</div>
+        <div class="logo-morceau1"></div>
+      </div>
+      <div class="morceau6"></div>
+      <div class="morceau8"></div>
+      <!-- <div class="morceau9"></div> -->
+      <!-- <div class="morceau-icon7" ></div>
           <div class="morceau-icon8" ></div> -->
-      </div>
-
-      <div class="recherche-morceau-child" id="ellipse"></div>
-      <div class="album1">
-        <div class="album-child" id="ellipse1"></div>
-        <div class="album2">artiste</div>
-      </div>
     </div>
 
-    <footer>
-      <div class="content">
-        <div class="holder">
-          <div class="audio audio-player">
-            <div class="loading">
-              <div class="spinner"></div>
-            </div>
-            <!-- <div class="play-pause-btn">
+    <div class="recherche-morceau-child" id="ellipse"></div>
+    <div class="album1">
+      <div class="album-child" id="ellipse1"></div>
+      <div class="album2">artiste</div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="content">
+      <div class="holder">
+        <div class="audio audio-player">
+          <div class="loading">
+            <div class="spinner"></div>
+          </div>
+          <!-- <div class="play-pause-btn">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="18"
@@ -106,36 +116,36 @@
                 />
               </svg>
             </div> -->
-            <div id="stopGo"></div>
-            <div id="text"></div>
+          <div id="stopGo"></div>
+          <div id="text"></div>
 
-            <div class="controls">
-              <span class="current-time">0:00</span>
-              <div class="slider" data-direction="horizontal">
-                <div class="progress">
-                  <div class="pin" id="progress-pin" data-method="rewind"></div>
-                </div>
+          <div class="controls">
+            <span class="current-time">0:00</span>
+            <div class="slider" data-direction="horizontal">
+              <div class="progress">
+                <div class="pin" id="progress-pin" data-method="rewind"></div>
               </div>
-              <span class="total-time">0:00</span>
             </div>
+            <span class="total-time">0:00</span>
+          </div>
 
-            <!-- <div class="volume">  -->
-            <!-- <div class="volume-btn"> -->
-            <!-- <svg
+          <!-- <div class="volume">  -->
+          <!-- <div class="volume-btn"> -->
+          <!-- <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="24"
                   viewBox="0 0 24 24"
                 > -->
-            <!-- <path
+          <!-- <path
                     fill="#566574"
                     fill-rule="evenodd"
                     d="M14.667 0v2.747c3.853 1.146 6.666 4.72 6.666 8.946 0 4.227-2.813 7.787-6.666 8.934v2.76C20 22.173 24 17.4 24 11.693 24 5.987 20 1.213 14.667 0zM18 11.693c0-2.36-1.333-4.386-3.333-5.373v10.707c2-.947 3.333-2.987 3.333-5.334zm-18-4v8h5.333L12 22.36V1.027L5.333 7.693H0z"
                     id="speaker"
                   /> -->
-            <!-- </svg> -->
-            <!-- </div> -->
-            <!-- <div class="volume-controls hidden">
+          <!-- </svg> -->
+          <!-- </div> -->
+          <!-- <div class="volume-controls hidden">
                 <div class="slider" data-direction="vertical">
                   <div class="progress">
                     <div
@@ -146,14 +156,15 @@
                   </div>
                 </div>
               </div> -->
-            <!-- </div> -->
+          <!-- </div> -->
 
-            <!-- <audio crossorigin>
+          <!-- <audio crossorigin>
               <source src="yo.mp3" type="audio/mpeg" />
             </audio> -->
-          </div>
         </div>
       </div>
-    </footer>
-  </body>
+    </div>
+  </footer>
+</body>
+
 </html>
