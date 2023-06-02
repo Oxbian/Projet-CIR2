@@ -1,0 +1,234 @@
+.morceau-icon6,
+.morceau-icon7 {
+  position: relative;
+
+  width: 528px;
+  height: 50px;
+  background: #dedede;
+  border-radius: 10px 0px 0px 10px;
+}
+.morceau-icon7 {
+  width: 558px;
+
+}
+.morceau-icon8,
+.morceau5,
+.morceau6 {
+  position: relative;
+  width: 588px;
+  height: 50px;
+  background: #dedede;
+  border-radius: 10px 0px 0px 10px;
+}
+.morceau5,
+.morceau6 {
+  width: 608px;
+  
+}
+.morceau6 {
+  width: 648px;
+}
+.morceau-icon9 {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  max-width: 100%;
+  /* overflow: hidden; */
+  max-height: 100%;
+  border-radius: 10px 0px 0px 10px;
+}
+.titre-morceau1 {
+  position: absolute;
+  height: 49%;
+  width: 67.51%;
+  top: 26%;
+  left: 32.49%;
+  display: inline-block;
+}
+.logo-morceau1 {
+  position: absolute;
+  height: 75%;
+  width: 14.3%;
+  top: 13%;
+  right: 82.62%;
+  bottom: 12%;
+  left: 3.07%;
+  background: blue;
+}
+.morceau-principale1 {
+  position: relative;
+  width: 748px;
+  height: 80px;
+  background: #dedede;
+  border-radius: 10px 0px 0px 10px;
+}
+.morceau8,
+.morceau9 {
+  position: relative;
+  width: 619px;
+  height: 50px;
+  background: #dedede;
+  border-radius: 10px 0px 0px 10px;
+
+}
+.morceau9 {
+  width: 588px;
+}
+.liste-morceau1 {
+  position: absolute;
+  top: 0%;
+  right: 0%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 20px;
+
+}
+
+.album-child,
+.recherche-morceau-child {
+  border-radius: 100%;
+
+  width: 255px;
+  height: 251px;
+  cursor: pointer;
+}
+.recherche-morceau-child {
+  position: absolute;
+  /* top: 154px;
+  left: 60px; */
+}
+.album-child {
+  top: 0;
+  left: 0;
+}
+.album-child,
+.album1,
+.album2 {
+  position: absolute;
+}
+.album2 {
+  top: 88px;
+  left: 42px;
+  display: inline-block;
+  width: 231px;
+  height: 95px;
+}
+.album1 {
+  position: relative;
+  max-width: 273px;
+  width: 100%;
+  /* width: 273px; */
+  height: 251px;
+  top: 8%;
+  left: 5%;
+
+  border-radius: 100%;
+  background: #dedede;
+}
+
+/* .p3 {
+  margin: 0;
+} */
+/* .temps3 {
+  position: relative;
+  font-family: var(--font-inter);
+  color: var(--color-darkgray);
+  text-align: center;
+  display: inline-block;
+  width: 200px;
+  height: 49px;
+  flex-shrink: 0;
+} */
+/* .frame9 {
+  position: absolute;
+  top: 3px;
+  left: 92px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-17xl);
+} */
+
+.logo-album {
+    position: absolute;
+    left: 5.97%;
+    right: 86.6%;
+    top: 53.66%;
+    bottom: 40.02%;
+    
+    background: #FD0000;
+}
+
+.logo-morceau2 {
+  
+position: absolute;
+left: 5.97%;
+right: 86.6%;
+top: 64.11%;
+bottom: 29.57%;
+
+background: #4457FF;
+}
+
+.logo-morceau3 {
+  
+    position: absolute;
+
+    left: 6.97%;
+    right: 87.6%;
+    top: 73.11%;
+    bottom: 18.57%;
+    
+border-radius: 100%;
+
+background: #00FD28;
+    }
+
+
+/* .recherche-morceau-item {
+  position: absolute;
+  top: 702px;
+  left: 102px;
+  border-radius: 50%;
+  background-color: var(--color-lime);
+  width: 70px;
+  height: 70px;
+  cursor: pointer;
+} */
+.album3,
+.artiste2,
+.morceau10 {
+  position: absolute;
+  top: 55%;
+  left: 218px;
+  display: inline-block;
+  width: 167px;
+  height: 71px;
+  font-family: 'JetBrains Mono';
+font-style: normal;
+font-weight: 400;
+font-size: 32px;
+line-height: 42px;
+
+color: #FFFFFF;
+}
+.artiste2,
+.morceau10 {
+  top: 65%;
+}
+.artiste2 {
+  top: 75%;
+}
+.recherche-morceau {
+  position: relative;
+  
+  overflow: hidden;
+  text-align: left;
+}
