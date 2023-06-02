@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "Projet CIR2",
-    "dateExported": "2023-06-01T19:37:46.618Z",
+    "dateExported": "2023-06-02T10:01:59.421Z",
     "version": "1.1",
     "folders": [],
     "requests": [
@@ -14,7 +14,7 @@
             "method": "GET",
             "sortNum": 10000,
             "created": "2023-06-01T14:56:13.371Z",
-            "modified": "2023-06-01T18:06:54.042Z",
+            "modified": "2023-06-02T07:00:05.959Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -78,7 +78,7 @@
             "method": "PUT",
             "sortNum": 30000,
             "created": "2023-06-01T18:23:39.673Z",
-            "modified": "2023-06-01T18:42:20.933Z",
+            "modified": "2023-06-02T07:10:39.589Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -92,11 +92,11 @@
                 "form": [
                     {
                         "name": "prenom",
-                        "value": "supere"
+                        "value": "test"
                     },
                     {
                         "name": "nom",
-                        "value": "teste"
+                        "value": "testo"
                     },
                     {
                         "name": "date_naissance",
@@ -157,7 +157,7 @@
             "method": "POST",
             "sortNum": 60000,
             "created": "2023-06-01T18:55:03.557Z",
-            "modified": "2023-06-01T19:00:34.582Z",
+            "modified": "2023-06-02T07:13:45.296Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -171,7 +171,7 @@
                 "form": [
                     {
                         "name": "id_morceau",
-                        "value": "1"
+                        "value": "6"
                     }
                 ]
             },
@@ -201,28 +201,24 @@
             "colId": "4824f6fe-fdf1-49e3-a0d7-460b74c39470",
             "containerId": "",
             "name": "Search track",
-            "url": "http://projet/Projet-CIR2/assets/php/request.php/track",
-            "method": "POST",
+            "url": "http://projet/Projet-CIR2/assets/php/request.php/track?nom_morceau=Legen",
+            "method": "GET",
             "sortNum": 80000,
             "created": "2023-06-01T19:13:00.154Z",
-            "modified": "2023-06-01T19:17:10.430Z",
+            "modified": "2023-06-02T08:14:08.888Z",
             "headers": [
                 {
                     "name": "Accept",
                     "value": ""
                 }
             ],
-            "params": [],
-            "body": {
-                "type": "formencoded",
-                "raw": "",
-                "form": [
-                    {
-                        "name": "nom_morceau",
-                        "value": "Legen"
-                    }
-                ]
-            },
+            "params": [
+                {
+                    "name": "nom_morceau",
+                    "value": "Legen",
+                    "isPath": false
+                }
+            ],
             "tests": []
         },
         {
@@ -287,32 +283,29 @@
             "colId": "4824f6fe-fdf1-49e3-a0d7-460b74c39470",
             "containerId": "",
             "name": "Search artist",
-            "url": "http://projet/Projet-CIR2/assets/php/request.php/artist",
-            "method": "POST",
+            "url": "http://projet/Projet-CIR2/assets/php/request.php/artist?nom_artiste=B&prenom_artiste=B",
+            "method": "GET",
             "sortNum": 90000,
             "created": "2023-06-01T19:19:25.598Z",
-            "modified": "2023-06-01T19:20:21.347Z",
+            "modified": "2023-06-02T08:48:15.527Z",
             "headers": [
                 {
                     "name": "Accept",
                     "value": ""
                 }
             ],
-            "params": [],
-            "body": {
-                "type": "formencoded",
-                "raw": "",
-                "form": [
-                    {
-                        "name": "nom_artiste",
-                        "value": "B"
-                    },
-                    {
-                        "name": "prenom_artiste",
-                        "value": "B"
-                    }
-                ]
-            },
+            "params": [
+                {
+                    "name": "nom_artiste",
+                    "value": "B",
+                    "isPath": false
+                },
+                {
+                    "name": "prenom_artiste",
+                    "value": "B",
+                    "isPath": false
+                }
+            ],
             "tests": []
         },
         {
@@ -358,11 +351,74 @@
             "colId": "4824f6fe-fdf1-49e3-a0d7-460b74c39470",
             "containerId": "",
             "name": "Search album info",
-            "url": "http://projet/Projet-CIR2/assets/php/request.php/album",
-            "method": "POST",
+            "url": "http://projet/Projet-CIR2/assets/php/request.php/album?nom_album=M",
+            "method": "GET",
             "sortNum": 110000,
             "created": "2023-06-01T19:22:24.254Z",
-            "modified": "2023-06-01T19:22:50.052Z",
+            "modified": "2023-06-02T09:05:34.097Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": ""
+                }
+            ],
+            "params": [
+                {
+                    "name": "nom_album",
+                    "value": "M",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "d5424168-922b-4f03-b4af-ad2ebba39f42",
+            "colId": "4824f6fe-fdf1-49e3-a0d7-460b74c39470",
+            "containerId": "",
+            "name": "Get playlist info",
+            "url": "http://projet/Projet-CIR2/assets/php/request.php/playlist/1",
+            "method": "GET",
+            "sortNum": 120000,
+            "created": "2023-06-02T09:18:21.412Z",
+            "modified": "2023-06-02T09:18:53.662Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": ""
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "101653e4-fa99-43a1-b8bb-865d1804e363",
+            "colId": "4824f6fe-fdf1-49e3-a0d7-460b74c39470",
+            "containerId": "",
+            "name": "Get playlist tracks",
+            "url": "http://projet/Projet-CIR2/assets/php/request.php/playlist/tracks/1",
+            "method": "GET",
+            "sortNum": 130000,
+            "created": "2023-06-02T09:19:11.384Z",
+            "modified": "2023-06-02T09:19:22.604Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": ""
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "ab9486e9-2b77-4e15-b2ad-44e29435636d",
+            "colId": "4824f6fe-fdf1-49e3-a0d7-460b74c39470",
+            "containerId": "",
+            "name": "Create playlist",
+            "url": "http://projet/Projet-CIR2/assets/php/request.php/playlist",
+            "method": "POST",
+            "sortNum": 140000,
+            "created": "2023-06-02T09:25:39.578Z",
+            "modified": "2023-06-02T09:26:49.359Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -375,11 +431,129 @@
                 "raw": "",
                 "form": [
                     {
-                        "name": "nom_album",
-                        "value": "B"
+                        "name": "nom_playlist",
+                        "value": "ma super playlist"
                     }
                 ]
             },
+            "tests": []
+        },
+        {
+            "_id": "2f7e8a5c-a756-4d77-a4be-8196e56d1190",
+            "colId": "4824f6fe-fdf1-49e3-a0d7-460b74c39470",
+            "containerId": "",
+            "name": "Add music to playlist",
+            "url": "http://projet/Projet-CIR2/assets/php/request.php/playlist/track",
+            "method": "POST",
+            "sortNum": 150000,
+            "created": "2023-06-02T09:32:58.675Z",
+            "modified": "2023-06-02T09:35:12.257Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": ""
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "id_morceau",
+                        "value": "5"
+                    },
+                    {
+                        "name": "id_playlist",
+                        "value": "1"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "6541edba-dfbd-45d2-9d86-b152aa398e5b",
+            "colId": "4824f6fe-fdf1-49e3-a0d7-460b74c39470",
+            "containerId": "",
+            "name": "Update playlist",
+            "url": "http://projet/Projet-CIR2/assets/php/request.php/playlist",
+            "method": "PUT",
+            "sortNum": 160000,
+            "created": "2023-06-02T09:35:53.092Z",
+            "modified": "2023-06-02T09:36:41.319Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": ""
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "nom_playlist",
+                        "value": "Test"
+                    },
+                    {
+                        "name": "id_playlist",
+                        "value": "1"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "9e7be615-68ad-4258-9557-9d4cf995a141",
+            "colId": "4824f6fe-fdf1-49e3-a0d7-460b74c39470",
+            "containerId": "",
+            "name": "Delete music playlist",
+            "url": "http://projet/Projet-CIR2/assets/php/request.php/playlist/track",
+            "method": "DELETE",
+            "sortNum": 170000,
+            "created": "2023-06-02T09:35:55.643Z",
+            "modified": "2023-06-02T09:58:17.296Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": ""
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "id_morceau",
+                        "value": "2"
+                    },
+                    {
+                        "name": "id_playlist",
+                        "value": "1"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "05cee94c-0c81-46e6-810b-f1ad42490e6f",
+            "colId": "4824f6fe-fdf1-49e3-a0d7-460b74c39470",
+            "containerId": "",
+            "name": "Delete playlist",
+            "url": "http://projet/Projet-CIR2/assets/php/request.php/playlist/1",
+            "method": "DELETE",
+            "sortNum": 180000,
+            "created": "2023-06-02T09:50:59.785Z",
+            "modified": "2023-06-02T09:52:20.470Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": ""
+                }
+            ],
+            "params": [],
             "tests": []
         }
     ]

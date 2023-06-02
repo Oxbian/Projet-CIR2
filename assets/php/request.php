@@ -18,55 +18,50 @@ if ($requestRessource == 'user') {
   switch ($requestMethod) {
     case 'GET':
       // Vérification qu'on est bien connecté
-      if ($login != null) {
-        $data = $db->dbInfoUser($login);
-
-        // Si l'utilisateur n'existe pas
-        if ($data != false) {
-          sendJsonData($data, 200);
-        } else {
-          sendError(404);
-        }
-      } else {
-        sendError(401);
+      if (!checkVariable($login, 401)) {
+        break;
       }
+      // Récupération des données de l'utilisateur
+      $data = $db->dbInfoUser($login);
+      checkData($data, 200, 404);
       break;
 
     case 'POST':
-      if (isset($_POST['email']) && isset($_POST['prenom']) && isset($_POST['nom']) && isset($_POST['date_naissance']) && isset($_POST['password'])) {
-        // Si l'utlisateur n'existe pas déjà
-        if ($db->dbInfoUser($_POST['email']) == false) {
-          $data = $db->dbCreateUser($_POST['email'], $_POST['prenom'], $_POST['nom'], $_POST['date_naissance'], $_POST['password']);
-          sendJsonData($data, 201);
-        } else {
-          sendError(409); // Demander au prof pour cette situation
-        }
-      } else {
-        sendError(400);
+      if (!checkInput(isset($_POST['email']) && isset($_POST['prenom']) && isset($_POST['nom']) && isset($_POST['date_naissance']) && isset($_POST['password']), 400)) {
+        break;
+      }
+      // Si l'utlisateur n'existe pas déjà
+      if ($db->dbInfoUser($_POST['email']) == false) {
+        $data = $db->dbCreateUser($_POST['email'], $_POST['prenom'], $_POST['nom'], $_POST['date_naissance'], $_POST['password']);
+        sendJsonData($data, 201);
+      } else { // Sinon retourner erreur conflit
+        sendError(409);
       }
       break;
 
     case 'PUT':
-      if ($login != null) {
-        parse_str(file_get_contents('php://input'), $_PUT);
-        if (isset($_PUT['prenom']) && isset($_PUT['nom']) && isset($_PUT['date_naissance']) && isset($_PUT['password'])) {
-          $data = $db->dbUpdateUser($login, $_PUT['prenom'], $_PUT['nom'], $_PUT['date_naissance'], $_PUT['password']);
-          sendJsonData($data, 200);
-        } else {
-          sendError(400);
-        }
-      } else {
-        sendError(401);
+      // Vérification que l'utilisateur est bien connecté
+      if (!checkVariable($login, 401)) {
+        break;
       }
+      // Récupération des données envoyées
+      parse_str(file_get_contents('php://input'), $_PUT);
+      if (!checkInput(isset($_PUT['prenom']) && isset($_PUT['nom']) && isset($_PUT['date_naissance']) && isset($_PUT['password']), 400)) {
+        break;
+      }
+      // Modification de l'utilisateur
+      $data = $db->dbUpdateUser($login, $_PUT['prenom'], $_PUT['nom'], $_PUT['date_naissance'], $_PUT['password']);
+      sendJsonData($data, 200);
       break;
 
     case 'DELETE':
-      if ($login != null) {
-        $data = $db->dbDeleteUser($login);
-        sendJsonData($data, 200);
-      } else {
-        sendError(401);
+      // Vérification que l'utilisateur est bien connecté
+      if (!checkVariable($login, 401)) {
+        break;
       }
+      // Suppression de l'utilisateur
+      $data = $db->dbDeleteUser($login);
+      sendJsonData($data, 200);
       break;
 
     default:
@@ -78,32 +73,29 @@ if ($requestRessource == 'user') {
 
 if ($requestRessource == "listened") {
   switch ($requestMethod) {
-    case 'GET': // TODO: retourner une liste de morceaux écoutés
+    case 'GET':
       // Vérification qu'on est bien connecté
-      if ($login != null) {
-        $data = $db->dbGetListenedTracks($login);
-        // Si l'utilisateur n'a pas de musiques écoutées
-        if ($data != false) {
-          sendJsonData($data, 200);
-        } else {
-          sendError(404);
-        }
-      } else {
-        sendError(401);
+      if (!checkVariable($login, 401)) {
+        break;
       }
+      // Récupération des musiques écoutées par l'utilisateur
+      $data = $db->dbGetListenedTracks($login);
+      // Vérification que l'utilisateur a bien une liste de musiques écoutées
+      checkData($data, 200, 404);
       break;
 
-    case 'POST': // TODO: demander si les morceaux doivent être différents ou uniques
-      if ($login != null) {
-        if (isset($_POST['id_morceau'])) {
-          $data = $db->dbAddListenedTrack($_POST['id_morceau'], $login, date('Y-m-d H:i:s'));
-          sendJsonData($data, 201);
-        } else {
-          sendError(400);
-        }
-      } else {
-        sendError(401);
+    case 'POST':
+      // Vérification qu'on est bien connecté
+      if (!checkVariable($login, 401) || !checkInput(isset($_POST['id_morceau']), 400)) {
+        break;
       }
+      // Ajout de la musique écoutée ou modification date si déjà écoutée
+      if ($db->dbGetListenedTrack($_POST['id_morceau'], $login) != false) {
+        $data = $db->dbUpdateListenedTrack($_POST['id_morceau'], $login, date('Y-m-d H:i:s'));
+      } else {
+        $data = $db->dbAddListenedTrack($_POST['id_morceau'], $login, date('Y-m-d H:i:s'));
+      }
+      sendJsonData($data, 201);
       break;
 
     default:
@@ -116,34 +108,18 @@ if ($requestRessource == "listened") {
 if ($requestRessource == "track") {
   switch ($requestMethod) {
     case 'GET':
-      $id = array_shift($request);
-      if ($id == '') {
-        $id = null;
-      }
-      if ($id != null) {
+      // Récupération de l'id
+      $id = getId($request);
+      // Récupération des infos de la musique
+      if (isset($_GET['nom_morceau'])) {
+        $data = $db->dbSearchTrack($_GET['nom_morceau']);
+      } else if ($id != null) {
         $data = $db->dbInfoTrack($id);
-        // Si la musique n'existe pas
-        if ($data != false) {
-          sendJsonData($data, 200);
-        } else {
-          sendError(404);
-        }
       } else {
         sendError(400);
       }
-      break;
-
-    case 'POST': // TODO: demander quelle type utiliser pour les recherches
-      if (isset($_POST['nom_morceau'])) {
-        $data = $db->dbSearchTrack($_POST['nom_morceau']);
-        if ($data != false) {
-          sendJsonData($data, 200);
-        } else {
-          sendError(404);
-        }
-      } else {
-        sendError(400);
-      }
+      // Vérification que la musique existe
+      checkData($data, 200, 404);
       break;
 
     default:
@@ -156,42 +132,32 @@ if ($requestRessource == "track") {
 if ($requestRessource == "artist") {
   switch ($requestMethod) {
     case 'GET':
-      $id = array_shift($request);
-      if ($id == '') {
-        $id = null;
-      }
+      // Récupération de l'id
+      $id = getId($request);
       // Vérification des infos à récupérer
-      if ($id == 'albums') {
+      if (isset($_GET['nom_artiste']) && isset($_GET['prenom_artiste'])) {
+        $data = $db->dbSearchArtist($_GET['nom_artiste'], $_GET['prenom_artiste']);
+      } else if ($id == 'albums') {
         $id = array_shift($request);
+        $id = getId($request);
+        if (!checkVariable($id, 400)) {
+          break;
+        }
         $data = $db->dbAlbumsArtist($id);
-      } else if ($id == 'tracks') { // TODO: Modifier pour récupérer seulement infos du morceau
+      } else if ($id == 'tracks') {
         $id = array_shift($request);
+        $id = getId($request);
+        if (!checkVariable($id, 400)) {
+          break;
+        }
         $data = $db->dbTracksArtist($id);
       } else if ($id != null) {
         $data = $db->dbInfoArtist($id);
       } else {
         sendError(400);
       }
-
       // Si les infos n'existent pas
-      if ($data != false) {
-        sendJsonData($data, 200);
-      } else {
-        sendError(404);
-      }
-      break;
-
-    case 'POST': // TODO: demander quelle type utiliser pour les recherches
-      if (isset($_POST['nom_artiste']) && isset($_POST['prenom_artiste'])) {
-        $data = $db->dbSearchArtist($_POST['nom_artiste'], $_POST['prenom_artiste']);
-        if ($data != false) {
-          sendJsonData($data, 200);
-        } else {
-          sendError(404);
-        }
-      } else {
-        sendError(400);
-      }
+      checkData($data, 200, 404);
       break;
 
     default:
@@ -204,14 +170,16 @@ if ($requestRessource == "artist") {
 if ($requestRessource == "album") {
   switch ($requestMethod) {
     case 'GET':
-      $id = array_shift($request);
-      if ($id == '') {
-        $id = null;
-      }
-
+      $id = getId($request);
       // Vérification des infos à récupérer
-      if ($id == 'tracks') {
+      if (isset($_GET['nom_album'])) {
+        $data = $db->dbSearchAlbum($_GET['nom_album']);
+      } else if ($id == 'tracks') {
         $id = array_shift($request);
+        $id = getId($request);
+        if (!checkVariable($id, 400)) {
+          break;
+        }
         $data = $db->dbTracksAlbum($id);
       } else if ($id != null) {
         $data = $db->dbInfoAlbum($id);
@@ -219,24 +187,7 @@ if ($requestRessource == "album") {
         sendError(400);
       }
       // Si les infos n'existent pas
-      if ($data != false) {
-        sendJsonData($data, 200);
-      } else {
-        sendError(404);
-      }
-      break;
-
-    case 'POST': // TODO: demander quelle type utiliser pour les recherches
-      if (isset($_POST['nom_album'])) {
-        $data = $db->dbSearchAlbum($_POST['nom_album']);
-        if ($data != false) {
-          sendJsonData($data, 200);
-        } else {
-          sendError(404);
-        }
-      } else {
-        sendError(400);
-      }
+      checkData($data, 200, 404);
       break;
 
     default:
@@ -249,85 +200,83 @@ if ($requestRessource == "album") {
 if ($requestRessource == "playlist") { // TODO: faire les requêtes thunder client
   switch ($requestMethod) {
     case 'GET':
-      if ($login != null) {
-        $id = array_shift($request);
-        if ($id == '') {
-          $id = null;
-        }
-
-        // Vérification des infos à récupérer
-        if ($id == 'tracks') {
-          $id = array_shift($request);
-          $data = $db->dbGetTracksPlaylist($id);
-        } else if ($id != null) {
-          $data = $db->dbInfoPlaylist($id);
-        } else {
-          sendError(400);
-        }
-        // Si les infos n'existent pas
-        if ($data != false) {
-          sendJsonData($data, 200);
-        } else {
-          sendError(404);
-        }
-      } else {
-        sendError(401);
+      // Vérification qu'on est bien connecté
+      if (!checkVariable($login, 401)) {
+        break;
       }
+      $id = getId($request);
+      // Vérification des infos à récupérer
+      if ($id == 'tracks') {
+        $id = array_shift($request);
+        $id = getId($request);
+        if (!checkVariable($id, 400)) {
+          break;
+        }
+        $data = $db->dbGetTracksPlaylist($id);
+      } else if ($id != null) {
+        $data = $db->dbInfoPlaylist($id);
+      } else {
+        sendError(400);
+      }
+      // Si les infos n'existent pas
+      checkData($data, 200, 404);
       break;
 
     case 'POST': //TODO: Gérer les conflits si déjà créer
-      if ($login != null) {
-        $id = array_shift($request);
-        if ($id == '') {
-          $id = null;
-        }
-        if (isset($_POST['id_morceau']) && $_POST['id_playlist'] && $id == 'track') {
-          $data = $db->dbAddTrackPlaylist($_POST['id_morceau'], $_POST['id_playlist'], date('Y-m-d'));
-          sendJsonData($data, 201);
-        } else if (isset($_POST['nom_playlist'])) {
-          $data = $db->dbCreatePlaylist($_POST['nom_playlist'], $login, date('Y-m-d'));
-        } else {
-          sendError(400);
-        }
+      // Vérification qu'on est bien connecté
+      if (!checkVariable($login, 401)) {
+        break;
+      }
+      $id = getId($request);
+      // Création de la playlist ou ajout de la musique
+      if (isset($_POST['id_morceau']) && $_POST['id_playlist'] && $id == 'track') {
+        $data = $db->dbAddTrackPlaylist($_POST['id_morceau'], $_POST['id_playlist'], date('Y-m-d'));
+        sendJsonData($data, 201);
+      } else if (isset($_POST['nom_playlist'])) {
+        $data = $db->dbCreatePlaylist($_POST['nom_playlist'], date('Y-m-d'), $login);
+        sendJsonData($data, 201);
       } else {
-        sendError(401);
+        sendError(400);
       }
       break;
 
     case 'PUT':
-      if ($login != null) {
-        $id = array_shift($request);
-        if ($id == '') {
-          $id = null;
-        }
-        if (isset($_POST['nom_playlist']) && isset($_POST['id_playlist'])) {
-          $data = $db->dbUpdatePlaylist($_POST['id_playlist'], $_POST['nom_playlist'], $login);
-          sendJsonData($data, 200);
-        } else {
-          sendError(400);
-        }
-      } else {
-        sendError(401);
+      // Vérification qu'on est bien connecté
+      if (!checkVariable($login, 401)) {
+        break;
       }
+      $id = getId($request);
+      // Récupération et vérification des inputs
+      parse_str(file_get_contents('php://input'), $_PUT);
+      if (!checkInput(isset($_PUT['nom_playlist']) && isset($_PUT['id_playlist']), 400)) {
+        break;
+      }
+      // Modification de la playlist
+      $data = $db->dbUpdatePlaylist($_PUT['id_playlist'], $_PUT['nom_playlist'], $login);
+      sendJsonData($data, 200);
       break;
 
     case 'DELETE':
-      if ($login != null) {
-        $id = array_shift($request);
-        if ($id == '') {
-          $id = null;
+      // Vérification qu'on est bien connecté
+      if (!checkVariable($login, 401)) {
+        break;
+      }
+      $id = getId($request);
+      // Récupération et vérification des delete
+      parse_str(file_get_contents('php://input'), $_DELETE);
+      if (isset($_DELETE['id_morceau']) && isset($_DELETE['id_playlist']) && $id == 'track') {
+        $data = $db->dbDeleteTrackPlaylist($_DELETE['id_morceau'], $_DELETE['id_playlist']);
+        sendJsonData($data, 200);
+      } else if ($id != null) {
+        echo $db->dbGetTracksPlaylist($id);
+        foreach ($tracks as $track) {
+          echo $track;
+          $db->dbDeleteTrackPlaylist($track['id_morceau'], $id);
         }
-        if (isset($_POST['id_morceau']) && isset($_POST['id_playlist']) && $id == 'track') {
-          $data = $db->dbDeleteTrackPlaylist($_POST['id_morceau'], $_POST['id_playlist'], $login);
-          sendJsonData($data, 200);
-        } else if (isset($_POST['id_playlist'])) {
-          $data = $db->dbDeletePlaylist($_POST['id_playlist'], $login);
-          sendJsonData($data, 200);
-        } else {
-          sendError(400);
-        }
+        $data = $db->dbDeletePlaylist($id);
+        sendJsonData($data, 200);
       } else {
-        sendError(401);
+        sendError(400);
       }
       break;
 
@@ -338,6 +287,44 @@ if ($requestRessource == "playlist") { // TODO: faire les requêtes thunder clie
   }
 }
 
-// TODO: faire fonction pour clean ce code
-// TODO: faire test
-// TODO: faire test thunder client
+// TODO: vérification utilisateur existe ou non
+
+// Fonction pour vérifier si les données existent
+function checkData($data, $success_code, $error_code)
+{
+  if ($data != false) {
+    sendJsonData($data, $success_code);
+  } else {
+    sendError($error_code);
+  }
+}
+
+// Fonction pour vérifier si une variable est null
+function checkVariable($variable, $error_code)
+{
+  if ($variable == null) {
+    sendError($error_code);
+    return false;
+  }
+  return true;
+}
+
+// Fonction pour vérifier les inputs
+function checkInput($input, $error_code)
+{
+  if ($input == false) {
+    sendError($error_code);
+    return false;
+  }
+  return true;
+}
+
+// Function pour récupérer l'id de la requête
+function getId($request)
+{
+  $id = array_shift($request);
+  if ($id == '') {
+    $id = null;
+  }
+  return $id;
+}

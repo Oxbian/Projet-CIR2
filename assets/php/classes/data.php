@@ -119,10 +119,33 @@ class Data extends Database
     return $this->fetchRequest($query, $params);
   }
 
+  // Fonction pour mettre à jour la date d'écoute d'une chanson
+  public function dbUpdateListenedTrack($id_morceau, $email, $date_ecoute)
+  {
+    $query = 'UPDATE morceau_utilisateur SET date_ecoute = :date_ecoute WHERE id = :id AND email = :email';
+    $params = array(
+      'id' => $id_morceau,
+      'email' => $email,
+      'date_ecoute' => $date_ecoute
+    );
+    return $this->fetchRequest($query, $params);
+  }
+
+  // Fonction pour récupérer les informations d'une musique écoutée
+  public function dbGetListenedTrack($id_morceau, $email)
+  {
+    $query = 'SELECT * FROM morceau_utilisateur WHERE id = :id AND email = :email';
+    $params = array(
+      'id' => $id_morceau,
+      'email' => $email
+    );
+    return $this->fetchRequest($query, $params);
+  }
+
   // Fonction pour récupérer les 10 dernières musiques écoutées
   public function dbGetListenedTracks($email)
   {
-    $query = 'SELECT * FROM morceau_utilisateur WHERE email = :email ORDER BY date_ecoute DESC LIMIT 10';
+    $query = 'SELECT m.id, m.titre, m.duree, m.chemin, m.id_album FROM morceau_utilisateur AS mu JOIN morceau AS m ON mu.id = m.id WHERE mu.email = :email ORDER BY mu.date_ecoute DESC LIMIT 10';
     $params = array(
       'email' => $email
     );
@@ -155,7 +178,7 @@ class Data extends Database
   // Fonction pour récupérer les morceaux d'une playlist
   public function dbGetTracksPlaylist($id_playlist)
   {
-    $query = 'SELECT * FROM morceau_playlist WHERE id_playlist = :id_playlist';
+    $query = 'SELECT m.id, m.titre, m.duree, m.chemin, m.id_album FROM morceau_playlist AS mp JOIN morceau AS m ON mp.id = m.id WHERE id_playlist = :id_playlist';
     $params = array(
       'id_playlist' => $id_playlist
     );
@@ -175,9 +198,9 @@ class Data extends Database
   // Fonction pour rechercher un morceau
   public function dbSearchTrack($titre)
   {
-    $query = 'SELECT * FROM morceau WHERE titre LIKE %:titre%';
+    $query = 'SELECT * FROM morceau WHERE titre LIKE :titre';
     $params = array(
-      'titre' => $titre
+      'titre' => '%'.$titre.'%'
     );
     return $this->fetchAllRequest($query, $params);
   }
@@ -215,10 +238,10 @@ class Data extends Database
   // Fonction pour rechercher un artiste
   public function dbSearchArtist($nom, $prenom)
   {
-    $query = 'SELECT * FROM artiste WHERE nom LIKE %:nom% OR prenom LIKE %:prenom%';
+    $query = 'SELECT * FROM artiste WHERE nom LIKE :nom OR prenom LIKE :prenom';
     $params = array(
-      'nom' => $nom,
-      'prenom' => $prenom
+      'nom' => '%'.$nom.'%',
+      'prenom' => '%'.$prenom.'%'
     );
     return $this->fetchAllRequest($query, $params);
   }
@@ -245,9 +268,9 @@ class Data extends Database
 
   public function dbSearchAlbum($titre)
   {
-    $query = 'SELECT * FROM album WHERE titre LIKE %:titre%';
+    $query = 'SELECT * FROM album WHERE titre LIKE :titre';
     $params = array(
-      'titre' => $titre
+      'titre' => '%'.$titre.'%'
     );
     return $this->fetchAllRequest($query, $params);
   }
