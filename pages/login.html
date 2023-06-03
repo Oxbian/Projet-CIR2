@@ -5,8 +5,14 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Style CSS -->
   <link rel="stylesheet" href="../assets/css/register.css">
   <link rel="stylesheet" href="../assets/css/responsive.css">
+
+  <!-- Scripts -->
+  <script src="../assets/js/ajax.js" defer></script>
+  <script src="../assets/js/login.js" defer></script>
   <title>Connexion</title>
 </head>
 
@@ -15,7 +21,7 @@
     <h1 class="title">CONNEXION</h1>
 
     <!-- Messages d'erreurs -->
-    <div id="error">
+    <div id="errors">
       <p>Erreur 404</p>
     </div>
 
@@ -32,7 +38,7 @@
     <!-- Boutons -->
     <div class="button">
       <a class="btn btn-secondary" href="register.html">Créer un compte</a>
-      <a class="btn btn-primary" href="">Se connecter</a>
+      <a class="btn btn-primary" id="login-btn">Se connecter</a>
     </div>
   </main>
 </body>

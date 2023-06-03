@@ -8,6 +8,21 @@ Pour utiliser l'API, il faut envoyer des requêtes HTTP à l'adresse du serveur,
 
 # Requêtes & réponses
 
+## Authentification
+
+### Connexion
+
+- **POST** http://prj-cir-web-grp-56/php/request.php/authentification + form-encode avec les champs suivants:  
+    - email
+    - password
+
+- **Retourne:** un dictionnaire avec l'email, le prénom, nom, date de naissance et le mot de passe de l'utilisateur.
+
+- **Code d'erreurs:**
+    - 400: Paramètres manquants ou incorrects
+    - 404: Utilisateur non trouvé / identifiants incorrects
+    - 200: Utilisateur connecté
+
 ## Utilisateur
 
 **Code d'erreurs 501:** Requête non implémentée

@@ -10,7 +10,9 @@ main {
     gap: 0.5rem;
 }
 
-div#error {
+div#errors {
+    display: none;
+    
     font-family: 'JetBrains Mono';
     font-style: normal;
     font-weight: 800;

@@ -4,7 +4,6 @@ header('Content-Type: application/json');
 header('Cache-control: no-store, no-cache, must-revalidate');
 header('Pragma: no-cache');
 
-
 /**
  * Fonction pour envoyer des données au format JSON
  *

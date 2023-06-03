@@ -7,6 +7,7 @@ require_once('classes/playlist.php');
 require_once('classes/track.php');
 require_once('classes/user.php');
 require_once('inc/data_encode.php');
+require_once('inc/utilities.php');
 //require_once('inc/debug.php');
 
 $requestMethod = $_SERVER['REQUEST_METHOD'];
@@ -15,6 +16,27 @@ $request = explode('/', $request);
 $requestRessource = array_shift($request);
 
 $login = "test@email.com";
+
+// Vérification de l'utilisateur
+if ($requestRessource == 'authentification') {
+  $db = new User(); // Création de l'objet User qui contient les fonctions pour gérer les utilisateurs
+  switch ($requestMethod) {
+    case 'POST':
+      // Vérification des données envoyées
+      if (!checkInput(isset($_POST['email']) && isset($_POST['password']), 400)) {
+        break;
+      }
+      // Vérification que l'utilisateur existe
+      $data = $db->dbCheckUser($_POST['email'], $_POST['password']);
+      checkData($data, 200, 404);
+      break;
+
+    default:
+      // Requête non implémentée
+      sendError(501);
+      break;
+  }
+}
 
 // Gestion des requêtes utilisateur
 if ($requestRessource == 'user') {
@@ -27,10 +49,12 @@ if ($requestRessource == 'user') {
       }
       // Récupération des données de l'utilisateur
       $data = $db->dbInfoUser($login);
+      // Vérification que l'utilisateur existe
       checkData($data, 200, 404);
       break;
 
     case 'POST':
+      // Vérification des données envoyées
       if (!checkInput(isset($_POST['email']) && isset($_POST['prenom']) && isset($_POST['nom']) && isset($_POST['date_naissance']) && isset($_POST['password']), 400)) {
         break;
       }
@@ -117,9 +141,9 @@ if ($requestRessource == "track") {
       // Récupération de l'id
       $id = getId($request);
       // Récupération des infos de la musique
-      if (isset($_GET['nom_morceau'])) {
+      if (isset($_GET['nom_morceau'])) { // Si on veut rechercher une musique
         $data = $db->dbSearchTrack($_GET['nom_morceau']);
-      } else if ($id != null) {
+      } else if ($id != null) { // Si on veut récupérer une musique par ID
         $data = $db->dbInfoTrack($id);
       } else {
         sendError(400);
@@ -142,23 +166,23 @@ if ($requestRessource == "artist") {
       // Récupération de l'id
       $id = getId($request);
       // Vérification des infos à récupérer
-      if (isset($_GET['nom_artiste']) && isset($_GET['prenom_artiste'])) {
+      if (isset($_GET['nom_artiste']) && isset($_GET['prenom_artiste'])) { // Si on veut rechercher un artiste
         $data = $db->dbSearchArtist($_GET['nom_artiste'], $_GET['prenom_artiste']);
-      } else if ($id == 'albums') {
+      } else if ($id == 'albums') { // Si on veut récupérer les albums d'un artiste
         $id = array_shift($request);
         $id = getId($request);
         if (!checkVariable($id, 400)) {
           break;
         }
         $data = $db->dbAlbumsArtist($id);
-      } else if ($id == 'tracks') {
+      } else if ($id == 'tracks') { // Si on veut récupérer les musiques d'un artiste
         $id = array_shift($request);
         $id = getId($request);
         if (!checkVariable($id, 400)) {
           break;
         }
         $data = $db->dbTracksArtist($id);
-      } else if ($id != null) {
+      } else if ($id != null) { // Si on veut récupérer un artiste par ID
         $data = $db->dbInfoArtist($id);
       } else {
         sendError(400);
@@ -180,16 +204,16 @@ if ($requestRessource == "album") {
     case 'GET':
       $id = getId($request);
       // Vérification des infos à récupérer
-      if (isset($_GET['nom_album'])) {
+      if (isset($_GET['nom_album'])) { // Si on veut rechercher un album
         $data = $db->dbSearchAlbum($_GET['nom_album']);
-      } else if ($id == 'tracks') {
+      } else if ($id == 'tracks') { // Si on veut récupérer les musiques d'un album
         $id = array_shift($request);
         $id = getId($request);
         if (!checkVariable($id, 400)) {
           break;
         }
         $data = $db->dbTracksAlbum($id);
-      } else if ($id != null) {
+      } else if ($id != null) { // Si on veut récupérer un album par ID
         $data = $db->dbInfoAlbum($id);
       } else {
         sendError(400);
@@ -215,14 +239,14 @@ if ($requestRessource == "playlist") {
       }
       $id = getId($request);
       // Vérification des infos à récupérer
-      if ($id == 'tracks') {
+      if ($id == 'tracks') { // Si on veut récupérer les musiques d'une playlist
         $id = array_shift($request);
         $id = getId($request);
         if (!checkVariable($id, 400)) {
           break;
         }
         $data = $db->dbGetTracksPlaylist($id);
-      } else if ($id != null) {
+      } else if ($id != null) { // Si on veut récupérer une playlist par ID
         $data = $db->dbInfoPlaylist($id);
       } else {
         sendError(400);
@@ -292,70 +316,4 @@ if ($requestRessource == "playlist") {
       sendError(501);
       break;
   }
-}
-
-// TODO: vérification utilisateur existe ou non
-
-/**
- * Fonction pour vérifier si les données existent
- *
- * @param  mixed $data Données à vérifier
- * @param  mixed $success_code Code de succès
- * @param  mixed $error_code Code d'erreur
- * @return void
- */
-function checkData($data, $success_code, $error_code)
-{
-  if ($data != false) {
-    sendJsonData($data, $success_code);
-  } else {
-    sendError($error_code);
-  }
-}
-
-/**
- * Fonction pour vérifier si une variable est null
- *
- * @param  mixed $variable Variable à vérifier
- * @param  mixed $error_code Code d'erreur
- * @return Bool true si la variable n'est pas null, false sinon
- */
-function checkVariable($variable, $error_code)
-{
-  if ($variable == null) {
-    sendError($error_code);
-    return false;
-  }
-  return true;
-}
-
-/**
- * Fonction pour vérifier les inputs
- *
- * @param  mixed $input Input à vérifier
- * @param  mixed $error_code Code d'erreur
- * @return Bool true si l'input est valide, false sinon
- */
-function checkInput($input, $error_code)
-{
-  if ($input == false) {
-    sendError($error_code);
-    return false;
-  }
-  return true;
-}
-
-/**
- * Function pour récupérer l'id de la requête
- *
- * @param  mixed $request Requête reçu
- * @return String id de la requête
- */
-function getId($request)
-{
-  $id = array_shift($request);
-  if ($id == '') {
-    $id = null;
-  }
-  return $id;
 }
