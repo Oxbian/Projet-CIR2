@@ -1,10 +1,13 @@
 <?php
 
-require_once('classes/data.php');
+require_once('classes/album.php');
+require_once('classes/artist.php');
+require_once('classes/listened.php');
+require_once('classes/playlist.php');
+require_once('classes/track.php');
+require_once('classes/user.php');
 require_once('inc/data_encode.php');
 //require_once('inc/debug.php');
-
-$db = new Data(); // Création d'un objet Data
 
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 $request = substr($_SERVER['PATH_INFO'], 1);
@@ -15,6 +18,7 @@ $login = "test@email.com";
 
 // Gestion des requêtes utilisateur
 if ($requestRessource == 'user') {
+  $db = new User(); // Création de l'objet User qui contient les fonctions pour gérer les utilisateurs
   switch ($requestMethod) {
     case 'GET':
       // Vérification qu'on est bien connecté
@@ -72,6 +76,7 @@ if ($requestRessource == 'user') {
 }
 
 if ($requestRessource == "listened") {
+  $db = new Listened(); // Création de l'objet Listened qui contient les fonctions pour gérer les écoutes
   switch ($requestMethod) {
     case 'GET':
       // Vérification qu'on est bien connecté
@@ -106,6 +111,7 @@ if ($requestRessource == "listened") {
 }
 
 if ($requestRessource == "track") {
+  $db = new Track(); // Création de l'objet Track qui contient les fonctions pour gérer les morceaux
   switch ($requestMethod) {
     case 'GET':
       // Récupération de l'id
@@ -130,6 +136,7 @@ if ($requestRessource == "track") {
 }
 
 if ($requestRessource == "artist") {
+  $db = new Artist(); // Création de l'objet Artist qui contient les fonctions pour gérer les artistes
   switch ($requestMethod) {
     case 'GET':
       // Récupération de l'id
@@ -168,6 +175,7 @@ if ($requestRessource == "artist") {
 }
 
 if ($requestRessource == "album") {
+  $db = new Album(); // Création de l'objet Album qui contient les fonctions pour gérer les albums
   switch ($requestMethod) {
     case 'GET':
       $id = getId($request);
@@ -197,7 +205,8 @@ if ($requestRessource == "album") {
   }
 }
 
-if ($requestRessource == "playlist") { // TODO: faire les requêtes thunder client
+if ($requestRessource == "playlist") {
+  $db = new Playlist(); // Création de l'objet Playlist qui contient les fonctions pour gérer les playlists
   switch ($requestMethod) {
     case 'GET':
       // Vérification qu'on est bien connecté
@@ -268,9 +277,7 @@ if ($requestRessource == "playlist") { // TODO: faire les requêtes thunder clie
         $data = $db->dbDeleteTrackPlaylist($_DELETE['id_morceau'], $_DELETE['id_playlist']);
         sendJsonData($data, 200);
       } else if ($id != null) {
-        echo $db->dbGetTracksPlaylist($id);
         foreach ($tracks as $track) {
-          echo $track;
           $db->dbDeleteTrackPlaylist($track['id_morceau'], $id);
         }
         $data = $db->dbDeletePlaylist($id);
@@ -289,7 +296,14 @@ if ($requestRessource == "playlist") { // TODO: faire les requêtes thunder clie
 
 // TODO: vérification utilisateur existe ou non
 
-// Fonction pour vérifier si les données existent
+/**
+ * Fonction pour vérifier si les données existent
+ *
+ * @param  mixed $data Données à vérifier
+ * @param  mixed $success_code Code de succès
+ * @param  mixed $error_code Code d'erreur
+ * @return void
+ */
 function checkData($data, $success_code, $error_code)
 {
   if ($data != false) {
@@ -299,7 +313,13 @@ function checkData($data, $success_code, $error_code)
   }
 }
 
-// Fonction pour vérifier si une variable est null
+/**
+ * Fonction pour vérifier si une variable est null
+ *
+ * @param  mixed $variable Variable à vérifier
+ * @param  mixed $error_code Code d'erreur
+ * @return Bool true si la variable n'est pas null, false sinon
+ */
 function checkVariable($variable, $error_code)
 {
   if ($variable == null) {
@@ -309,7 +329,13 @@ function checkVariable($variable, $error_code)
   return true;
 }
 
-// Fonction pour vérifier les inputs
+/**
+ * Fonction pour vérifier les inputs
+ *
+ * @param  mixed $input Input à vérifier
+ * @param  mixed $error_code Code d'erreur
+ * @return Bool true si l'input est valide, false sinon
+ */
 function checkInput($input, $error_code)
 {
   if ($input == false) {
@@ -319,7 +345,12 @@ function checkInput($input, $error_code)
   return true;
 }
 
-// Function pour récupérer l'id de la requête
+/**
+ * Function pour récupérer l'id de la requête
+ *
+ * @param  mixed $request Requête reçu
+ * @return String id de la requête
+ */
 function getId($request)
 {
   $id = array_shift($request);
