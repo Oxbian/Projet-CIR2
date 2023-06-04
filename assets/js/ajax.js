@@ -15,6 +15,7 @@ function ajaxRequest(type, _url, callback, data = null) {
   }
   xhr.open(type, url);
   xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  xhr.setRequestHeader('Authorization', 'Bearer ' + Cookies.get('token'));
 
   // Ajout de la fonction de retour
   xhr.onload = () => {

@@ -85,7 +85,9 @@ class Database
   function sanitize_params($params)
   {
     foreach ($params as $key => $value) {
-      $params[$key] = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+      if ($key != 'password') {
+        $params[$key] = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+      }
     }
     return $params;
   }

@@ -15,26 +15,51 @@ $request = substr($_SERVER['PATH_INFO'], 1);
 $request = explode('/', $request);
 $requestRessource = array_shift($request);
 
-$login = "test@email.com";
+$login = null;
 
 // Vérification de l'utilisateur
 if ($requestRessource == 'authentification') {
   $db = new User(); // Création de l'objet User qui contient les fonctions pour gérer les utilisateurs
-  switch ($requestMethod) {
-    case 'POST':
-      // Vérification des données envoyées
-      if (!checkInput(isset($_POST['email']) && isset($_POST['password']), 400)) {
-        break;
-      }
-      // Vérification que l'utilisateur existe
-      $data = $db->dbCheckUser($_POST['email'], $_POST['password']);
-      checkData($data, 200, 404);
-      break;
+  $email = $_SERVER['PHP_AUTH_USER'];
+  $password = $_SERVER['PHP_AUTH_PW'];
 
-    default:
-      // Requête non implémentée
-      sendError(501);
-      break;
+  // Vérification des données envoyées
+  if (!checkInput(isset($email) && isset($password), 400)) {
+    return;
+  }
+
+  // Vérification que l'utilisateur existe
+  if ($db->dbCheckUser($email, $password)) {
+    // Création du token
+    $token = base64_encode(openssl_random_pseudo_bytes(32));;
+    // Enregistrement du token dans la base de données
+    $db->dbAddToken($email, $token);
+    // Envoi du token
+    header('Content-Type: application/json; charset=utf-8');
+    header('Cache-control: no-store, no-cache, must-revalidate');
+    header('Pragma: no-cache');
+    echo ($token);
+  } else {
+    sendError(401);
+  }
+} else {
+  $db = new User(); // Création de l'objet User qui contient les fonctions pour gérer les utilisateurs
+  $headers = getallheaders();
+  $token = $headers['Authorization'];
+  if (preg_match('/Bearer (.*)/', $token, $tab)) {
+      $token = $tab[1];
+  }
+
+  // Vérification des données envoyées
+  if (!checkInput(isset($token), 400)) {
+    return;
+  }
+
+  $login = $db->dbVerifyToken($token);
+  // Vérification que l'utilisateur existe
+  if (!$login) {
+    $login = null;
+    sendError(401);
   }
 }
 
