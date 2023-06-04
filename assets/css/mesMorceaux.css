@@ -1,46 +1,110 @@
-.morceau-icon6,
-.morceau-icon7 {
-  position: relative;
+.container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 
-  width: 528px;
-  height: 50px;
-  background: #dedede;
-  border-radius: 10px 0px 0px 10px;
+#liste-morceau1{
+  width: 50vw;
+  height: 60vh;
+  overflow: hidden; /* Cache les éléments qui dépassent */
+  position: relative; /* Ajoute une position relative */
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
-.morceau-icon7 {
-  width: 558px;
+#liste-morceau1::-webkit-scrollbar{
+  width: 0px;
+}
+
+.info{
+  width: 60vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.artisteAlbum{
+  width: 25vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.artiste{
+  width: 30vw;
+  height: 30vw;
+  border-radius: 100%;
+  background-color: #dedede;
+}
+.album{
+
+  width: 30vw;
+  height: 10vh;
+  background-color: #dedede;
+  line-height: 10vh;
+}
+
+.rectInfo{
+  margin-top: 10vh;
+  width: 20vw;
+  height: 40vh;
+  background-color: #dedede;
+  line-height: 20vh;
+}
+
+
+.box{
+  background-color: #dedede;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  width: 30vw;
+  height: 50px;
+  margin: 10px;
+  border-radius: 20px;
+  box-shadow: 2px 4px 5px #000;
+  transform: translateX(100vw);
+  transition: transform 0.4s;
+  cursor:pointer;
+}
+
+.box.show{
+  transform: translateX(10vw);
+}
+
+.box.go{
+  transform: translateX(0vw);
+  height: 100px;
 
 }
-.morceau-icon8,
-.morceau5,
-.morceau6 {
-  position: relative;
-  width: 588px;
-  height: 50px;
-  background: #dedede;
-  border-radius: 10px 0px 0px 10px;
+
+.box.go2{
+  transform: translateX(5vw);
+
 }
-.morceau5,
-.morceau6 {
-  width: 608px;
-  
+.box.go3{
+  transform: translateX(7vw);
+
 }
-.morceau6 {
-  width: 648px;
+
+.box h2{
+  font-size: 45px;
+  text-shadow: 2px 3px 5px #000;
 }
-.morceau-icon9 {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  max-width: 100%;
-  /* overflow: hidden; */
-  max-height: 100%;
-  border-radius: 10px 0px 0px 10px;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
 .titre-morceau1 {
   position: absolute;
   height: 49%;
@@ -89,7 +153,7 @@
   gap: 20px;
 
 }
-
+/* 
 .album-child,
 .recherche-morceau-child {
   border-radius: 100%;
@@ -97,12 +161,12 @@
   width: 255px;
   height: 251px;
   cursor: pointer;
-}
+} */
 .recherche-morceau-child {
   position: absolute;
   /* top: 154px;
   left: 60px; */
-}
+/* }
 .album-child {
   top: 0;
   left: 0;
@@ -122,15 +186,15 @@
 .album1 {
   position: relative;
   max-width: 273px;
-  width: 100%;
+  width: 100%; */
   /* width: 273px; */
-  height: 251px;
+  /* height: 251px;
   top: 8%;
   left: 5%;
 
   border-radius: 100%;
   background: #dedede;
-}
+} */
 
 /* .p3 {
   margin: 0;
@@ -167,7 +231,7 @@
   width: 70px;
   height: 70px;
   cursor: pointer;
-} */
+/* } 
 .album3,
 .artiste2,
 .morceau10 {
@@ -232,7 +296,7 @@ color: #FFFFFF;
     align-items: flex-start;
     justify-content: flex-start;
     gap: 18px;
-  }
+  } */
   
   .description {
     position: relative;
