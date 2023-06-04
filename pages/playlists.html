@@ -1,92 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="../assets/css/box.css" />
+    <link rel="stylesheet" href="../assets/css/playlists.css" />
 
-  <!-- Style CSS -->
-  <link rel="stylesheet" href="../assets/css/style.css" />
-  <link rel="stylesheet" href="../assets/css/playlists.css" />
+    <!-- Scripts -->
+    <script src="../assets/js/script.js" defer></script>
+    <script src="../assets/js/playlists.js" defer></script>
+    <title>Playlists</title>
+  </head>
 
-  <!-- Scripts -->
-  <script src="../assets/js/script.js" defer></script>
-  <title>Playlists</title>
-</head>
+  <body>
+    <header>
+      <div class="leftHead">
+        <div id="home"></div>
+        <div class="volume"></div>
+      </div>
+      <div class="midlHead">
+        <form>
+          <input type="text" id="search-input" placeholder="Recherche..." />
 
-<body>
-  <header>
-    <div class="leftHead">
-      <div id="home"></div>
-      <div class="volume"></div>
-    </div>
-    <div class="midlHead">
-      <form>
-        <input type="text" id="search-input" placeholder="Recherche..." />
-
-        <!-- <button type="submit" id="rechercheIcon">
+          <!-- <button type="submit" id="rechercheIcon">
           <a href="pages/rechercheAlbum.html"></a>
         </button> -->
-      </form>
-      <div id="rechercheIcon"></div>
-    </div>
-    <div class="rightHead">
-      <div class="param"></div>
-    </div>
-  </header>
-
-  <div class="recherche-morceau">
-    <div class="liste-morceau1">
-      <!-- <div class="morceau-icon7" ></div>
-          <div class="morceau-icon8" ></div> -->
-      <div class="morceau5"></div>
-      <div class="morceau6"></div>
-
-      <div class="morceau-principale1">
-        <div id="delete"></div>
-        <div class="morceau-icon9"></div>
-        <div class="titre-morceau1">Titre album</div>
-        <div class="logo-morceau1"></div>
+        </form>
+        <div id="rechercheIcon"></div>
       </div>
-      <div class="morceau6"></div>
-      <div class="morceau8"></div>
-      <!-- <div class="morceau9"></div> -->
-      <!-- <div class="morceau-icon7" ></div>
-          <div class="morceau-icon8" ></div> -->
-    </div>
-
-    <div class="recherche-morceau-child" id="ellipse"></div>
-    <div class="album1">
-      <div class="album-child" id="ellipse1"></div>
-      <div class="album2">artiste</div>
-    </div>
-  </div>
-
-  <footer>
-    <div class="audio audio-player">
-      <div class="leftFooter">
-        <div id="stopGo"></div>
-        <div id="text">Artiste / musique</div>
+      <div class="rightHead">
+        <div class="param"></div>
       </div>
-      <div class="rightFooter">
-        <div id="like"></div>
-        <div id="add"></div>
-        <div class="temps">
-          <div class="controls">
-            <span class="current-time">0:00 /</span>
+    </header>
 
-            <span class="total-time">0:00</span>
-          </div>
-          <div class="slider" data-direction="horizontal">
-            <div class="progress">
-              <div class="pin" id="progress-pin" data-method="rewind"></div>
+    <div class="container">
+      <div class="info">
+        <div class="artisteAlbum">
+          <div class="artiste"></div>
+          <div class="album">Album :</div>
+        </div>
+        <div class="rectInfo">
+          <p>Nom prénom artiste :</p>
+          <p>Type:</p>
+        </div>
+      </div>
+
+      <div id="liste-morceau1">
+        <div class="box show">
+          <h2>contenue</h2>
+        </div>
+        <div class="box">
+          <h2>contenue</h2>
+        </div>
+        <div class="box">
+          <h2>contenue</h2>
+        </div>
+        <div class="box">
+          <h2>contenue</h2>
+        </div>
+        <div class="box">
+          <h2>contenue</h2>
+        </div>
+        <div class="box">
+          <h2>contenue</h2>
+        </div>
+        <div class="box">
+          <h2>contenue</h2>
+        </div>
+        <div class="box">
+          <h2>contenue</h2>
+        </div>
+        <div class="box">
+          <h2>contenue</h2>
+        </div>
+        <div class="box">
+          <h2>contenue</h2>
+        </div>
+        <div class="box">
+          <h2>contenue</h2>
+        </div>
+        <div class="box">
+          <h2>contenue</h2>
+        </div>
+        <div class="box">
+          <h2>contenue</h2>
+        </div>
+        <div class="box">
+          <h2>contenue</h2>
+        </div>
+        <div class="box">
+          <h2>contenue</h2>
+        </div>
+        <div class="box">
+          <h2>contenue</h2>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="audio audio-player">
+        <div class="leftFooter">
+          <div id="stopGo"></div>
+          <div id="text">Artiste / musique</div>
+        </div>
+        <div class="rightFooter">
+          <div id="like"></div>
+          <div id="add"></div>
+          <div class="temps">
+            <div class="controls">
+              <span class="current-time">0:00 /</span>
+
+              <span class="total-time">0:00</span>
+            </div>
+            <div class="slider" data-direction="horizontal">
+              <div class="progress">
+                <div class="pin" id="progress-pin" data-method="rewind"></div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </footer>
-</body>
-
+    </footer>
+  </body>
 </html>

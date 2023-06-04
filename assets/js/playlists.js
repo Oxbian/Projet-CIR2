@@ -1,6 +1,11 @@
+// var playlists = document.getElementById("logo-morceau1");
+
 const boxes = document.querySelectorAll(".box");
 var container = document.getElementById("liste-morceau1");
 
+// playlists.addEventListener("click", function () {
+//   window.location.href = "playlists.html";
+// });
 container.addEventListener("wheel", checkBoxes);
 
 checkBoxes();
@@ -10,6 +15,9 @@ function checkBoxes() {
   boxes.forEach((box, index) => {
     box.addEventListener("click", function () {
       box.classList.add("go");
+      const del = document.createElement("div");
+      del.classList.add("delete");
+      box.appendChild(del);
 
       const rect = document.createElement("div");
       rect.classList.add("blue-rect");
@@ -26,6 +34,10 @@ function checkBoxes() {
           otherBox.classList.remove("go");
           otherBox.classList.remove("go2");
           otherBox.classList.remove("go3");
+          const del = otherBox.querySelector(".delete");
+          if (del) {
+            del.remove();
+          }
 
           const rect = otherBox.querySelector(".blue-rect");
           if (rect) {

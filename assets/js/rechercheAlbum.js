@@ -1,3 +1,26 @@
+var album = document.querySelector(".album");
+var morceau = document.querySelector(".morceau");
+var artist = document.querySelector(".nom");
+var rect = document.querySelector(".blue-rect");
+
+album.addEventListener("click", function () {
+  window.location.href = "rechercheAlbum.html";
+});
+
+morceau.addEventListener("click", function () {
+  window.location.href = "rechercheMorceau.html";
+});
+
+artist.addEventListener("click", function () {
+  window.location.href = "rechercheArtiste.html";
+});
+
+// rect.forEach((r) => {
+//   r.addEventListener("click", function () {
+//     window.location.href = "playlists.html";
+//   });
+// });
+
 const boxes = document.querySelectorAll(".box");
 var container = document.getElementById("liste-morceau1");
 
@@ -20,6 +43,9 @@ function checkBoxes() {
         if (otherBox == box) {
           otherBox.classList.remove("go2");
           otherBox.classList.remove("go3");
+          otherBox.addEventListener("click", function () {
+            window.location.href = "playlists.html";
+          });
         }
         if (otherBox !== box) {
           // Supprime la classe "go" et "go2" des autres boîtes
