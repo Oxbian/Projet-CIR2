@@ -8,8 +8,7 @@ if (loginBtn) {
 
     // Vérification des champs
     if (email === '' || password === '') {
-      document.getElementById('errors').innerHTML = '<strong>Veuillez remplir tous les champs</strong>';
-      document.getElementById('errors').style.display = 'block';
+      sendErrorMessage('Veuillez remplir tous les champs');
       return;
     }
 
@@ -17,8 +16,7 @@ if (loginBtn) {
     const data = `email=${email}&password=${password}`;
     ajaxRequest('POST', 'http://projet:64950/Projet-CIR2/php/request.php/authentification', (response) => {
       if (response === 404 || response === 400) {
-        document.getElementById('errors').innerHTML = '<strong>Email ou mot de passe incorrect</strong>';
-        document.getElementById('errors').style.display = 'block';
+        sendErrorMessage('Email ou mot de passe incorrect');
       } else {
         document.location.href = 'accueil.html';
       }

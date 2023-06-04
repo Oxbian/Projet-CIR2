@@ -1,4 +1,10 @@
-// Fonction pour réaliser des requêtes AJAX
+/**
+ * Fonction pour réaliser des requêtes AJAX
+ * @param {*} type Type de la requête (POST, GET, PUT, DELETE)
+ * @param {*} _url URL de la requête
+ * @param {*} callback Fonction à executéer après la requête
+ * @param {*} data Data à envoyer avec la requête
+ */
 function ajaxRequest(type, _url, callback, data = null) {
   let url = _url;
 
