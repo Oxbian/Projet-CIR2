@@ -1,10 +1,18 @@
 # API REST
 
-Ce fichier contient la documentation de l'API REST du projet.
+Ce fichier contient la documentation de l'API REST du projet.  
+Un fichier [Thunderclient](https://www.thunderclient.io/) est disponible répertoire `thunder-collection_Projet CIR2.json` afin de tester l'API.  
+Dans thunder client, aller dans Collections, cliquez sur le menu burger et importer le fichier json.  
 
 # Utilisation
 
-Pour utiliser l'API, il faut envoyer des requêtes HTTP à l'adresse du serveur, par exemple `http://prj-cir-web-grp-56/`.
+Pour utiliser l'API, il faut envoyer des requêtes HTTP à l'adresse du serveur, par exemple `http://prj-cir-web-grp-56/`.  
+Afin de pouvoir utiliser l'API, il faut s'authentifier en envoyant une requête de connexion, pour cela utilisez la méthode `POST` sur l'adresse `http://prj-cir-web-grp-56/php/request.php/authentification` avec les paramètres suivants dans le basic auth:
+- email
+- password
+
+Ou utilisez la requête `Check user` de thunderclient.  
+Puis utilisez ce token en tant que cookie d'authentification dans les requêtes suivantes.  
 
 # Requêtes & réponses
 

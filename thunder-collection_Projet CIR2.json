@@ -1,10 +1,43 @@
 {
     "client": "Thunder Client",
     "collectionName": "Projet CIR2",
-    "dateExported": "2023-06-03T10:36:11.899Z",
+    "dateExported": "2023-06-04T15:05:08.838Z",
     "version": "1.1",
     "folders": [],
     "requests": [
+        {
+            "_id": "4f554824-6bb0-4cd1-a78e-b2c81527f5f7",
+            "colId": "4824f6fe-fdf1-49e3-a0d7-460b74c39470",
+            "containerId": "",
+            "name": "Check user",
+            "url": "http://projet/Projet-CIR2/php/request.php/authentification",
+            "method": "POST",
+            "sortNum": 5000,
+            "created": "2023-06-03T20:00:49.928Z",
+            "modified": "2023-06-04T14:34:13.252Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": ""
+                }
+            ],
+            "params": [],
+            "auth": {
+                "type": "basic",
+                "basic": {
+                    "username": "test@email.com",
+                    "password": "MONSUPERMOTDEPASSE"
+                }
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                }
+            ]
+        },
         {
             "_id": "b3c52ba8-d89a-45dc-aff9-58132d691f57",
             "colId": "4824f6fe-fdf1-49e3-a0d7-460b74c39470",
@@ -14,7 +47,7 @@
             "method": "GET",
             "sortNum": 10000,
             "created": "2023-06-01T14:56:13.371Z",
-            "modified": "2023-06-03T09:45:25.959Z",
+            "modified": "2023-06-04T14:59:25.785Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -22,6 +55,10 @@
                 }
             ],
             "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "Pv6mE4L4j8XXvenRmF8aIT84h4LibkY3IltqXPCNjbE="
+            },
             "tests": [
                 {
                     "type": "res-code",
@@ -70,7 +107,7 @@
             "method": "POST",
             "sortNum": 20000,
             "created": "2023-06-01T18:07:12.199Z",
-            "modified": "2023-06-03T09:36:13.328Z",
+            "modified": "2023-06-03T11:11:22.106Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -84,7 +121,7 @@
                 "form": [
                     {
                         "name": "email",
-                        "value": "supertest@email.com"
+                        "value": "superteseet@email.com"
                     },
                     {
                         "name": "prenom",
@@ -202,7 +239,7 @@
             "method": "GET",
             "sortNum": 50000,
             "created": "2023-06-01T18:51:49.745Z",
-            "modified": "2023-06-03T09:42:55.275Z",
+            "modified": "2023-06-04T14:59:37.602Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -592,7 +629,7 @@
             "method": "GET",
             "sortNum": 90000,
             "created": "2023-06-01T19:19:25.598Z",
-            "modified": "2023-06-03T09:57:28.911Z",
+            "modified": "2023-06-03T14:38:56.327Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -615,7 +652,7 @@
                 {
                     "type": "res-code",
                     "custom": "",
-                    "action": "contains",
+                    "action": "equal",
                     "value": "200"
                 },
                 {
@@ -969,7 +1006,7 @@
             "method": "POST",
             "sortNum": 150000,
             "created": "2023-06-02T09:32:58.675Z",
-            "modified": "2023-06-03T10:23:38.796Z",
+            "modified": "2023-06-03T14:15:09.017Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -987,7 +1024,7 @@
                     },
                     {
                         "name": "id_playlist",
-                        "value": "1"
+                        "value": "2"
                     }
                 ]
             },
@@ -1009,7 +1046,7 @@
             "method": "PUT",
             "sortNum": 160000,
             "created": "2023-06-02T09:35:53.092Z",
-            "modified": "2023-06-03T10:24:38.392Z",
+            "modified": "2023-06-03T14:16:35.119Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -1027,7 +1064,7 @@
                     },
                     {
                         "name": "id_playlist",
-                        "value": "1"
+                        "value": "2"
                     }
                 ]
             },
