@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "Projet CIR2",
-    "dateExported": "2023-06-02T10:01:59.421Z",
+    "dateExported": "2023-06-03T10:36:11.899Z",
     "version": "1.1",
     "folders": [],
     "requests": [
@@ -10,11 +10,11 @@
             "colId": "4824f6fe-fdf1-49e3-a0d7-460b74c39470",
             "containerId": "",
             "name": "Get user info",
-            "url": "http://projet/Projet-CIR2/assets/php/request.php/user",
+            "url": "http://projet/Projet-CIR2/php/request.php/user",
             "method": "GET",
             "sortNum": 10000,
             "created": "2023-06-01T14:56:13.371Z",
-            "modified": "2023-06-02T07:00:05.959Z",
+            "modified": "2023-06-03T09:45:25.959Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -22,18 +22,55 @@
                 }
             ],
             "params": [],
-            "tests": []
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "email"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "prenom"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "nom"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "date_naissance"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "password"
+                }
+            ]
         },
         {
             "_id": "6fee7a00-ac7f-44f3-aead-f3bd040bbddf",
             "colId": "4824f6fe-fdf1-49e3-a0d7-460b74c39470",
             "containerId": "",
             "name": "Create user",
-            "url": "http://projet/Projet-CIR2/assets/php/request.php/user",
+            "url": "http://projet/Projet-CIR2/php/request.php/user",
             "method": "POST",
             "sortNum": 20000,
             "created": "2023-06-01T18:07:12.199Z",
-            "modified": "2023-06-01T18:09:31.324Z",
+            "modified": "2023-06-03T09:36:13.328Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -67,18 +104,31 @@
                     }
                 ]
             },
-            "tests": []
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "201"
+                },
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "409"
+                }
+            ]
         },
         {
             "_id": "453a853f-6540-436a-bc42-fb130d77e096",
             "colId": "4824f6fe-fdf1-49e3-a0d7-460b74c39470",
             "containerId": "",
             "name": "Update user",
-            "url": "http://projet/Projet-CIR2/assets/php/request.php/user",
+            "url": "http://projet/Projet-CIR2/php/request.php/user",
             "method": "PUT",
             "sortNum": 30000,
             "created": "2023-06-01T18:23:39.673Z",
-            "modified": "2023-06-02T07:10:39.589Z",
+            "modified": "2023-06-03T09:38:27.675Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -96,7 +146,7 @@
                     },
                     {
                         "name": "nom",
-                        "value": "testo"
+                        "value": "test"
                     },
                     {
                         "name": "date_naissance",
@@ -108,18 +158,25 @@
                     }
                 ]
             },
-            "tests": []
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                }
+            ]
         },
         {
             "_id": "ac977a6b-5717-4acb-98fc-745ca8219d66",
             "colId": "4824f6fe-fdf1-49e3-a0d7-460b74c39470",
             "containerId": "",
             "name": "Delete user",
-            "url": "http://projet/Projet-CIR2/assets/php/request.php/user",
+            "url": "http://projet/Projet-CIR2/php/request.php/user",
             "method": "DELETE",
             "sortNum": 40000,
             "created": "2023-06-01T18:40:24.784Z",
-            "modified": "2023-06-01T18:42:48.762Z",
+            "modified": "2023-06-03T09:39:56.192Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -127,18 +184,25 @@
                 }
             ],
             "params": [],
-            "tests": []
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                }
+            ]
         },
         {
             "_id": "dc606702-ec94-4cfe-a6d7-fd24ba7bb507",
             "colId": "4824f6fe-fdf1-49e3-a0d7-460b74c39470",
             "containerId": "",
             "name": "Get listened tracks",
-            "url": "http://projet/Projet-CIR2/assets/php/request.php/listened",
+            "url": "http://projet/Projet-CIR2/php/request.php/listened",
             "method": "GET",
             "sortNum": 50000,
             "created": "2023-06-01T18:51:49.745Z",
-            "modified": "2023-06-01T18:53:22.363Z",
+            "modified": "2023-06-03T09:42:55.275Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -146,18 +210,55 @@
                 }
             ],
             "params": [],
-            "tests": []
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "id"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "titre"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "duree"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "chemin"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "id_album"
+                }
+            ]
         },
         {
             "_id": "cd6438b1-cb34-4f70-b635-648aad020dbd",
             "colId": "4824f6fe-fdf1-49e3-a0d7-460b74c39470",
             "containerId": "",
             "name": "Add listened track",
-            "url": "http://projet/Projet-CIR2/assets/php/request.php/listened",
+            "url": "http://projet/Projet-CIR2/php/request.php/listened",
             "method": "POST",
             "sortNum": 60000,
             "created": "2023-06-01T18:55:03.557Z",
-            "modified": "2023-06-02T07:13:45.296Z",
+            "modified": "2023-06-03T09:44:24.038Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -175,18 +276,25 @@
                     }
                 ]
             },
-            "tests": []
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "201"
+                }
+            ]
         },
         {
             "_id": "598b80b6-a07b-4eba-9667-20ddfeccdf28",
             "colId": "4824f6fe-fdf1-49e3-a0d7-460b74c39470",
             "containerId": "",
             "name": "Get track info",
-            "url": "http://projet/Projet-CIR2/assets/php/request.php/track/1",
+            "url": "http://projet/Projet-CIR2/php/request.php/track/1",
             "method": "GET",
             "sortNum": 70000,
             "created": "2023-06-01T19:08:59.598Z",
-            "modified": "2023-06-01T19:09:31.307Z",
+            "modified": "2023-06-03T09:46:38.561Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -194,18 +302,55 @@
                 }
             ],
             "params": [],
-            "tests": []
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "id"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "titre"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "duree"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "chemin"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "id_album"
+                }
+            ]
         },
         {
             "_id": "805b5065-d457-4f15-ba86-aecea7e7c184",
             "colId": "4824f6fe-fdf1-49e3-a0d7-460b74c39470",
             "containerId": "",
             "name": "Search track",
-            "url": "http://projet/Projet-CIR2/assets/php/request.php/track?nom_morceau=Legen",
+            "url": "http://projet/Projet-CIR2/php/request.php/track?nom_morceau=Legen",
             "method": "GET",
             "sortNum": 80000,
             "created": "2023-06-01T19:13:00.154Z",
-            "modified": "2023-06-02T08:14:08.888Z",
+            "modified": "2023-06-03T09:50:06.131Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -219,18 +364,55 @@
                     "isPath": false
                 }
             ],
-            "tests": []
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "id"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "titre"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "duree"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "chemin"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "id_album"
+                }
+            ]
         },
         {
             "_id": "fcb7073b-6865-4e5c-a3da-15c53a483a09",
             "colId": "4824f6fe-fdf1-49e3-a0d7-460b74c39470",
             "containerId": "",
             "name": "Get artist info",
-            "url": "http://projet/Projet-CIR2/assets/php/request.php/artist/1",
+            "url": "http://projet/Projet-CIR2/php/request.php/artist/1",
             "method": "GET",
             "sortNum": 85000,
             "created": "2023-06-01T19:19:23.153Z",
-            "modified": "2023-06-01T19:19:39.553Z",
+            "modified": "2023-06-03T09:51:51.834Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -238,18 +420,49 @@
                 }
             ],
             "params": [],
-            "tests": []
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "id"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "nom"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "prenom"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "type"
+                }
+            ]
         },
         {
             "_id": "4fb87706-2a8b-495d-868f-b1dfd0fe923f",
             "colId": "4824f6fe-fdf1-49e3-a0d7-460b74c39470",
             "containerId": "",
             "name": "Get artist albums",
-            "url": "http://projet/Projet-CIR2/assets/php/request.php/artist/albums/2",
+            "url": "http://projet/Projet-CIR2/php/request.php/artist/albums/2",
             "method": "GET",
             "sortNum": 87500,
             "created": "2023-06-01T19:32:59.088Z",
-            "modified": "2023-06-01T19:33:15.277Z",
+            "modified": "2023-06-03T09:54:18.382Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -257,18 +470,55 @@
                 }
             ],
             "params": [],
-            "tests": []
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "id"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "titre"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "date_parution"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "image"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "id_artiste"
+                }
+            ]
         },
         {
             "_id": "a8ec0936-694b-4d0d-a3c3-31fd3be45e3f",
             "colId": "4824f6fe-fdf1-49e3-a0d7-460b74c39470",
             "containerId": "",
             "name": "Get artist tracks",
-            "url": "http://projet/Projet-CIR2/assets/php/request.php/artist/tracks/2",
+            "url": "http://projet/Projet-CIR2/php/request.php/artist/tracks/2",
             "method": "GET",
             "sortNum": 88750,
             "created": "2023-06-01T19:33:19.915Z",
-            "modified": "2023-06-01T19:33:32.866Z",
+            "modified": "2023-06-03T09:56:49.680Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -276,18 +526,73 @@
                 }
             ],
             "params": [],
-            "tests": []
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "id"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "titre"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "duree"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "chemin"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "id_album"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "date_parution"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "image"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "id_artiste"
+                }
+            ]
         },
         {
             "_id": "1d8462ab-dff0-4ea6-96a5-1bbfc16ac014",
             "colId": "4824f6fe-fdf1-49e3-a0d7-460b74c39470",
             "containerId": "",
             "name": "Search artist",
-            "url": "http://projet/Projet-CIR2/assets/php/request.php/artist?nom_artiste=B&prenom_artiste=B",
+            "url": "http://projet/Projet-CIR2/php/request.php/artist?nom_artiste=B&prenom_artiste=B",
             "method": "GET",
             "sortNum": 90000,
             "created": "2023-06-01T19:19:25.598Z",
-            "modified": "2023-06-02T08:48:15.527Z",
+            "modified": "2023-06-03T09:57:28.911Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -306,18 +611,49 @@
                     "isPath": false
                 }
             ],
-            "tests": []
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "id"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "nom"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "prenom"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "type"
+                }
+            ]
         },
         {
             "_id": "68c87208-5f09-4f90-b548-aff2fe6b39db",
             "colId": "4824f6fe-fdf1-49e3-a0d7-460b74c39470",
             "containerId": "",
             "name": "Get album info",
-            "url": "http://projet/Projet-CIR2/assets/php/request.php/album/1",
+            "url": "http://projet/Projet-CIR2/php/request.php/album/1",
             "method": "GET",
             "sortNum": 100000,
             "created": "2023-06-01T19:22:01.842Z",
-            "modified": "2023-06-01T19:22:18.428Z",
+            "modified": "2023-06-03T09:58:20.783Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -325,18 +661,55 @@
                 }
             ],
             "params": [],
-            "tests": []
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "id"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "titre"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "date_parution"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "image"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "id_artiste"
+                }
+            ]
         },
         {
             "_id": "717abc68-9880-40bf-b811-ded958244f21",
             "colId": "4824f6fe-fdf1-49e3-a0d7-460b74c39470",
             "containerId": "",
             "name": "Get album tracks",
-            "url": "http://projet/Projet-CIR2/assets/php/request.php/album/tracks/1",
+            "url": "http://projet/Projet-CIR2/php/request.php/album/tracks/1",
             "method": "GET",
             "sortNum": 105000,
             "created": "2023-06-01T19:29:48.763Z",
-            "modified": "2023-06-01T19:31:01.474Z",
+            "modified": "2023-06-03T09:59:32.560Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -344,18 +717,55 @@
                 }
             ],
             "params": [],
-            "tests": []
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "id"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "titre"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "duree"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "chemin"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "id_album"
+                }
+            ]
         },
         {
             "_id": "9b4720c9-a1da-4e7c-82b3-80bc99e99428",
             "colId": "4824f6fe-fdf1-49e3-a0d7-460b74c39470",
             "containerId": "",
             "name": "Search album info",
-            "url": "http://projet/Projet-CIR2/assets/php/request.php/album?nom_album=M",
+            "url": "http://projet/Projet-CIR2/php/request.php/album?nom_album=M",
             "method": "GET",
             "sortNum": 110000,
             "created": "2023-06-01T19:22:24.254Z",
-            "modified": "2023-06-02T09:05:34.097Z",
+            "modified": "2023-06-03T10:10:07.382Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -369,18 +779,55 @@
                     "isPath": false
                 }
             ],
-            "tests": []
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "id"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "titre"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "date_parution"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "image"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "id_artiste"
+                }
+            ]
         },
         {
             "_id": "d5424168-922b-4f03-b4af-ad2ebba39f42",
             "colId": "4824f6fe-fdf1-49e3-a0d7-460b74c39470",
             "containerId": "",
             "name": "Get playlist info",
-            "url": "http://projet/Projet-CIR2/assets/php/request.php/playlist/1",
+            "url": "http://projet/Projet-CIR2/php/request.php/playlist/1",
             "method": "GET",
             "sortNum": 120000,
             "created": "2023-06-02T09:18:21.412Z",
-            "modified": "2023-06-02T09:18:53.662Z",
+            "modified": "2023-06-03T10:10:49.820Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -388,18 +835,49 @@
                 }
             ],
             "params": [],
-            "tests": []
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "id"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "nom"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "date_creation"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "email"
+                }
+            ]
         },
         {
             "_id": "101653e4-fa99-43a1-b8bb-865d1804e363",
             "colId": "4824f6fe-fdf1-49e3-a0d7-460b74c39470",
             "containerId": "",
             "name": "Get playlist tracks",
-            "url": "http://projet/Projet-CIR2/assets/php/request.php/playlist/tracks/1",
+            "url": "http://projet/Projet-CIR2/php/request.php/playlist/tracks/1",
             "method": "GET",
             "sortNum": 130000,
             "created": "2023-06-02T09:19:11.384Z",
-            "modified": "2023-06-02T09:19:22.604Z",
+            "modified": "2023-06-03T10:12:58.762Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -407,18 +885,55 @@
                 }
             ],
             "params": [],
-            "tests": []
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "id"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "titre"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "duree"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "chemin"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "id_album"
+                }
+            ]
         },
         {
             "_id": "ab9486e9-2b77-4e15-b2ad-44e29435636d",
             "colId": "4824f6fe-fdf1-49e3-a0d7-460b74c39470",
             "containerId": "",
             "name": "Create playlist",
-            "url": "http://projet/Projet-CIR2/assets/php/request.php/playlist",
+            "url": "http://projet/Projet-CIR2/php/request.php/playlist",
             "method": "POST",
             "sortNum": 140000,
             "created": "2023-06-02T09:25:39.578Z",
-            "modified": "2023-06-02T09:26:49.359Z",
+            "modified": "2023-06-03T10:13:17.937Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -436,84 +951,25 @@
                     }
                 ]
             },
-            "tests": []
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "201"
+                }
+            ]
         },
         {
             "_id": "2f7e8a5c-a756-4d77-a4be-8196e56d1190",
             "colId": "4824f6fe-fdf1-49e3-a0d7-460b74c39470",
             "containerId": "",
             "name": "Add music to playlist",
-            "url": "http://projet/Projet-CIR2/assets/php/request.php/playlist/track",
+            "url": "http://projet/Projet-CIR2/php/request.php/playlist/track",
             "method": "POST",
             "sortNum": 150000,
             "created": "2023-06-02T09:32:58.675Z",
-            "modified": "2023-06-02T09:35:12.257Z",
-            "headers": [
-                {
-                    "name": "Accept",
-                    "value": ""
-                }
-            ],
-            "params": [],
-            "body": {
-                "type": "formencoded",
-                "raw": "",
-                "form": [
-                    {
-                        "name": "id_morceau",
-                        "value": "5"
-                    },
-                    {
-                        "name": "id_playlist",
-                        "value": "1"
-                    }
-                ]
-            },
-            "tests": []
-        },
-        {
-            "_id": "6541edba-dfbd-45d2-9d86-b152aa398e5b",
-            "colId": "4824f6fe-fdf1-49e3-a0d7-460b74c39470",
-            "containerId": "",
-            "name": "Update playlist",
-            "url": "http://projet/Projet-CIR2/assets/php/request.php/playlist",
-            "method": "PUT",
-            "sortNum": 160000,
-            "created": "2023-06-02T09:35:53.092Z",
-            "modified": "2023-06-02T09:36:41.319Z",
-            "headers": [
-                {
-                    "name": "Accept",
-                    "value": ""
-                }
-            ],
-            "params": [],
-            "body": {
-                "type": "formencoded",
-                "raw": "",
-                "form": [
-                    {
-                        "name": "nom_playlist",
-                        "value": "Test"
-                    },
-                    {
-                        "name": "id_playlist",
-                        "value": "1"
-                    }
-                ]
-            },
-            "tests": []
-        },
-        {
-            "_id": "9e7be615-68ad-4258-9557-9d4cf995a141",
-            "colId": "4824f6fe-fdf1-49e3-a0d7-460b74c39470",
-            "containerId": "",
-            "name": "Delete music playlist",
-            "url": "http://projet/Projet-CIR2/assets/php/request.php/playlist/track",
-            "method": "DELETE",
-            "sortNum": 170000,
-            "created": "2023-06-02T09:35:55.643Z",
-            "modified": "2023-06-02T09:58:17.296Z",
+            "modified": "2023-06-03T10:23:38.796Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -535,18 +991,25 @@
                     }
                 ]
             },
-            "tests": []
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "201"
+                }
+            ]
         },
         {
-            "_id": "05cee94c-0c81-46e6-810b-f1ad42490e6f",
+            "_id": "6541edba-dfbd-45d2-9d86-b152aa398e5b",
             "colId": "4824f6fe-fdf1-49e3-a0d7-460b74c39470",
             "containerId": "",
-            "name": "Delete playlist",
-            "url": "http://projet/Projet-CIR2/assets/php/request.php/playlist/1",
-            "method": "DELETE",
-            "sortNum": 180000,
-            "created": "2023-06-02T09:50:59.785Z",
-            "modified": "2023-06-02T09:52:20.470Z",
+            "name": "Update playlist",
+            "url": "http://projet/Projet-CIR2/php/request.php/playlist",
+            "method": "PUT",
+            "sortNum": 160000,
+            "created": "2023-06-02T09:35:53.092Z",
+            "modified": "2023-06-03T10:24:38.392Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -554,7 +1017,94 @@
                 }
             ],
             "params": [],
-            "tests": []
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "nom_playlist",
+                        "value": "Test"
+                    },
+                    {
+                        "name": "id_playlist",
+                        "value": "1"
+                    }
+                ]
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                }
+            ]
+        },
+        {
+            "_id": "9e7be615-68ad-4258-9557-9d4cf995a141",
+            "colId": "4824f6fe-fdf1-49e3-a0d7-460b74c39470",
+            "containerId": "",
+            "name": "Delete music playlist",
+            "url": "http://projet/Projet-CIR2/php/request.php/playlist/track",
+            "method": "DELETE",
+            "sortNum": 170000,
+            "created": "2023-06-02T09:35:55.643Z",
+            "modified": "2023-06-03T10:24:53.854Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": ""
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "id_morceau",
+                        "value": "5"
+                    },
+                    {
+                        "name": "id_playlist",
+                        "value": "1"
+                    }
+                ]
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                }
+            ]
+        },
+        {
+            "_id": "05cee94c-0c81-46e6-810b-f1ad42490e6f",
+            "colId": "4824f6fe-fdf1-49e3-a0d7-460b74c39470",
+            "containerId": "",
+            "name": "Delete playlist",
+            "url": "http://projet/Projet-CIR2/php/request.php/playlist/8",
+            "method": "DELETE",
+            "sortNum": 180000,
+            "created": "2023-06-02T09:50:59.785Z",
+            "modified": "2023-06-03T10:35:28.492Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": ""
+                }
+            ],
+            "params": [],
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                }
+            ]
         }
     ]
 }

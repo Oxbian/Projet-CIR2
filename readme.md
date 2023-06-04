@@ -14,8 +14,9 @@ scp config-server.sh username@ip_address:/home/username/
 
 Puis dans mysql:
 ```mysql
-source assets/sql/adduser.sql
-source assets/sql/sql.sql
+source assets/sql/adduser.sql;
+source assets/sql/sql.sql;
+source assets/sql/adddata.sql;
 ```
 
 ## Maquette & MCD
@@ -40,9 +41,12 @@ npm install eslint eslint-config-airbnb-base eslint eslint-plugin-import htmlhin
 
 ### Images & Icônes
 
-- [Bootstrap Icons](https://icons.getbootstrap.com/) icônes pour le site web
+- [Bootstrap Icons](https://icons.getbootstrap.com/) icônes pour le site web  
 
 ### Musiques
 
-- [Musique libre de droit](https://pixabay.com/music/search/cc0/) pour les musiques de test
+- [Musique libre de droit](https://pixabay.com/music/search/cc0/) pour les musiques de test  
 
+## Documentation
+
+L'API REST est documentée dans le fichier `Docu/api.md` [ici](Docu/api.md) et le code est documenté avec Doxygen. 

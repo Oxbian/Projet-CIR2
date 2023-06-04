@@ -4,7 +4,13 @@ header('Content-Type: application/json');
 header('Cache-control: no-store, no-cache, must-revalidate');
 header('Pragma: no-cache');
 
-// Fonction pour envoyer des données au format JSON
+/**
+ * Fonction pour envoyer des données au format JSON
+ *
+ * @param  mixed $data Données à envoyer
+ * @param  mixed $code Code de la requête à retourner
+ * @return void
+ */
 function sendJsonData($data, $code)
 {
   if ($code == 200) {
@@ -16,7 +22,12 @@ function sendJsonData($data, $code)
   exit;
 }
 
-// Fonction pour envoyer une erreur
+/**
+ * Fonction pour envoyer une erreur
+ *
+ * @param  mixed $code Code de l'erreur à envoyer
+ * @return void
+ */
 function sendError($code)
 {
   switch ($code) {

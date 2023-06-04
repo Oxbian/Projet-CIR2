@@ -1,6 +1,14 @@
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url('../fonts/JetBrainsMono-Regular.ttf');
+}
+
 html {
     background-color: #0F0000;
     color: #ADADAD;
+    font-family: 'JetBrains Mono';
+    font-weight: 800;
+
 }
 
 main {
@@ -10,19 +18,15 @@ main {
     gap: 0.5rem;
 }
 
-div#error {
-    font-family: 'JetBrains Mono';
-    font-style: normal;
-    font-weight: 800;
+div#errors {
+    display: none;
+    
     font-size: 1.25rem;
     color: #FD0000;
     text-align: center;
 }
 
 h1.title {
-    font-family: 'JetBrains Mono';
-    font-style: normal;
-    font-weight: 800;
     font-size: 2.5rem;
     text-align: center;
 }
@@ -37,8 +41,6 @@ input {
 
 label {
     width: 21rem;
-    font-width: 2rem;
-    font-weight: 800;
     text-align: left;
 }
 

@@ -1,10 +1,14 @@
 <?php
 
-require_once('classes/data.php');
+require_once('classes/album.php');
+require_once('classes/artist.php');
+require_once('classes/listened.php');
+require_once('classes/playlist.php');
+require_once('classes/track.php');
+require_once('classes/user.php');
 require_once('inc/data_encode.php');
+require_once('inc/utilities.php');
 //require_once('inc/debug.php');
-
-$db = new Data(); // Création d'un objet Data
 
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 $request = substr($_SERVER['PATH_INFO'], 1);
@@ -13,8 +17,30 @@ $requestRessource = array_shift($request);
 
 $login = "test@email.com";
 
+// Vérification de l'utilisateur
+if ($requestRessource == 'authentification') {
+  $db = new User(); // Création de l'objet User qui contient les fonctions pour gérer les utilisateurs
+  switch ($requestMethod) {
+    case 'POST':
+      // Vérification des données envoyées
+      if (!checkInput(isset($_POST['email']) && isset($_POST['password']), 400)) {
+        break;
+      }
+      // Vérification que l'utilisateur existe
+      $data = $db->dbCheckUser($_POST['email'], $_POST['password']);
+      checkData($data, 200, 404);
+      break;
+
+    default:
+      // Requête non implémentée
+      sendError(501);
+      break;
+  }
+}
+
 // Gestion des requêtes utilisateur
 if ($requestRessource == 'user') {
+  $db = new User(); // Création de l'objet User qui contient les fonctions pour gérer les utilisateurs
   switch ($requestMethod) {
     case 'GET':
       // Vérification qu'on est bien connecté
@@ -23,10 +49,12 @@ if ($requestRessource == 'user') {
       }
       // Récupération des données de l'utilisateur
       $data = $db->dbInfoUser($login);
+      // Vérification que l'utilisateur existe
       checkData($data, 200, 404);
       break;
 
     case 'POST':
+      // Vérification des données envoyées
       if (!checkInput(isset($_POST['email']) && isset($_POST['prenom']) && isset($_POST['nom']) && isset($_POST['date_naissance']) && isset($_POST['password']), 400)) {
         break;
       }
@@ -72,6 +100,7 @@ if ($requestRessource == 'user') {
 }
 
 if ($requestRessource == "listened") {
+  $db = new Listened(); // Création de l'objet Listened qui contient les fonctions pour gérer les écoutes
   switch ($requestMethod) {
     case 'GET':
       // Vérification qu'on est bien connecté
@@ -106,14 +135,15 @@ if ($requestRessource == "listened") {
 }
 
 if ($requestRessource == "track") {
+  $db = new Track(); // Création de l'objet Track qui contient les fonctions pour gérer les morceaux
   switch ($requestMethod) {
     case 'GET':
       // Récupération de l'id
       $id = getId($request);
       // Récupération des infos de la musique
-      if (isset($_GET['nom_morceau'])) {
+      if (isset($_GET['nom_morceau'])) { // Si on veut rechercher une musique
         $data = $db->dbSearchTrack($_GET['nom_morceau']);
-      } else if ($id != null) {
+      } else if ($id != null) { // Si on veut récupérer une musique par ID
         $data = $db->dbInfoTrack($id);
       } else {
         sendError(400);
@@ -130,28 +160,29 @@ if ($requestRessource == "track") {
 }
 
 if ($requestRessource == "artist") {
+  $db = new Artist(); // Création de l'objet Artist qui contient les fonctions pour gérer les artistes
   switch ($requestMethod) {
     case 'GET':
       // Récupération de l'id
       $id = getId($request);
       // Vérification des infos à récupérer
-      if (isset($_GET['nom_artiste']) && isset($_GET['prenom_artiste'])) {
+      if (isset($_GET['nom_artiste']) && isset($_GET['prenom_artiste'])) { // Si on veut rechercher un artiste
         $data = $db->dbSearchArtist($_GET['nom_artiste'], $_GET['prenom_artiste']);
-      } else if ($id == 'albums') {
+      } else if ($id == 'albums') { // Si on veut récupérer les albums d'un artiste
         $id = array_shift($request);
         $id = getId($request);
         if (!checkVariable($id, 400)) {
           break;
         }
         $data = $db->dbAlbumsArtist($id);
-      } else if ($id == 'tracks') {
+      } else if ($id == 'tracks') { // Si on veut récupérer les musiques d'un artiste
         $id = array_shift($request);
         $id = getId($request);
         if (!checkVariable($id, 400)) {
           break;
         }
         $data = $db->dbTracksArtist($id);
-      } else if ($id != null) {
+      } else if ($id != null) { // Si on veut récupérer un artiste par ID
         $data = $db->dbInfoArtist($id);
       } else {
         sendError(400);
@@ -168,20 +199,21 @@ if ($requestRessource == "artist") {
 }
 
 if ($requestRessource == "album") {
+  $db = new Album(); // Création de l'objet Album qui contient les fonctions pour gérer les albums
   switch ($requestMethod) {
     case 'GET':
       $id = getId($request);
       // Vérification des infos à récupérer
-      if (isset($_GET['nom_album'])) {
+      if (isset($_GET['nom_album'])) { // Si on veut rechercher un album
         $data = $db->dbSearchAlbum($_GET['nom_album']);
-      } else if ($id == 'tracks') {
+      } else if ($id == 'tracks') { // Si on veut récupérer les musiques d'un album
         $id = array_shift($request);
         $id = getId($request);
         if (!checkVariable($id, 400)) {
           break;
         }
         $data = $db->dbTracksAlbum($id);
-      } else if ($id != null) {
+      } else if ($id != null) { // Si on veut récupérer un album par ID
         $data = $db->dbInfoAlbum($id);
       } else {
         sendError(400);
@@ -197,7 +229,8 @@ if ($requestRessource == "album") {
   }
 }
 
-if ($requestRessource == "playlist") { // TODO: faire les requêtes thunder client
+if ($requestRessource == "playlist") {
+  $db = new Playlist(); // Création de l'objet Playlist qui contient les fonctions pour gérer les playlists
   switch ($requestMethod) {
     case 'GET':
       // Vérification qu'on est bien connecté
@@ -206,14 +239,14 @@ if ($requestRessource == "playlist") { // TODO: faire les requêtes thunder clie
       }
       $id = getId($request);
       // Vérification des infos à récupérer
-      if ($id == 'tracks') {
+      if ($id == 'tracks') { // Si on veut récupérer les musiques d'une playlist
         $id = array_shift($request);
         $id = getId($request);
         if (!checkVariable($id, 400)) {
           break;
         }
         $data = $db->dbGetTracksPlaylist($id);
-      } else if ($id != null) {
+      } else if ($id != null) { // Si on veut récupérer une playlist par ID
         $data = $db->dbInfoPlaylist($id);
       } else {
         sendError(400);
@@ -268,9 +301,7 @@ if ($requestRessource == "playlist") { // TODO: faire les requêtes thunder clie
         $data = $db->dbDeleteTrackPlaylist($_DELETE['id_morceau'], $_DELETE['id_playlist']);
         sendJsonData($data, 200);
       } else if ($id != null) {
-        echo $db->dbGetTracksPlaylist($id);
         foreach ($tracks as $track) {
-          echo $track;
           $db->dbDeleteTrackPlaylist($track['id_morceau'], $id);
         }
         $data = $db->dbDeletePlaylist($id);
@@ -285,46 +316,4 @@ if ($requestRessource == "playlist") { // TODO: faire les requêtes thunder clie
       sendError(501);
       break;
   }
-}
-
-// TODO: vérification utilisateur existe ou non
-
-// Fonction pour vérifier si les données existent
-function checkData($data, $success_code, $error_code)
-{
-  if ($data != false) {
-    sendJsonData($data, $success_code);
-  } else {
-    sendError($error_code);
-  }
-}
-
-// Fonction pour vérifier si une variable est null
-function checkVariable($variable, $error_code)
-{
-  if ($variable == null) {
-    sendError($error_code);
-    return false;
-  }
-  return true;
-}
-
-// Fonction pour vérifier les inputs
-function checkInput($input, $error_code)
-{
-  if ($input == false) {
-    sendError($error_code);
-    return false;
-  }
-  return true;
-}
-
-// Function pour récupérer l'id de la requête
-function getId($request)
-{
-  $id = array_shift($request);
-  if ($id == '') {
-    $id = null;
-  }
-  return $id;
 }
