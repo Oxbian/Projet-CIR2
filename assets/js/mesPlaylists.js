@@ -1,14 +1,20 @@
-// var playlists = document.getElementById("logo-morceau1");
-
-const boxes = document.querySelectorAll(".box");
+let boxes = document.querySelectorAll(".box");
 var container = document.getElementById("liste-morceau1");
-
+let add = document.querySelector(".addP");
 // playlists.addEventListener("click", function () {
 //   window.location.href = "playlists.html";
 // });
 container.addEventListener("wheel", checkBoxes);
 
 checkBoxes();
+
+add.addEventListener("click", function () {
+  var newBox = document.createElement("div");
+  newBox.classList.add("box");
+
+  container.appendChild(newBox);
+  boxes = document.querySelectorAll(".box");
+});
 
 function checkBoxes() {
   const triggerBottom = (window.innerHeight / 10) * 6;
@@ -18,10 +24,14 @@ function checkBoxes() {
       const del = document.createElement("div");
       del.classList.add("delete");
       box.appendChild(del);
-
-      const add = document.createElement("div");
-      add.classList.add("addP");
-      box.appendChild(add);
+      del.addEventListener("click", function () {
+        // Supprime la box (élément parent) de l'élément carré rouge
+        var box = this.parentNode;
+        box.remove();
+      });
+      // const add = document.createElement("div");
+      // add.classList.add("addP");
+      // box.appendChild(add);
 
       const rect = document.createElement("div");
       rect.classList.add("grey-rect");
@@ -87,4 +97,3 @@ function checkBoxes() {
 function clickbutton() {
   console.log("yo");
 }
-

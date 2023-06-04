@@ -18,6 +18,11 @@ function checkBoxes() {
       const del = document.createElement("div");
       del.classList.add("delete");
       box.appendChild(del);
+      del.addEventListener("click", function () {
+        // Supprime la box (élément parent) de l'élément carré rouge
+        var box = this.parentNode;
+        box.remove();
+      });
 
       const rect = document.createElement("div");
       rect.classList.add("blue-rect");
