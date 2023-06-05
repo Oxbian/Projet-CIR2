@@ -60,7 +60,7 @@ function loadPlaylists() {
   ajaxRequest('GET', '../php/request.php/playlist/user', loadPlaylistsUser);
 }
 
-function checkBoxes() {
+function checkBoxe() {
   const triggerBottom = (window.innerHeight / 10) * 6;
   boxes.forEach((box, index) => {
     box.addEventListener('click', () => {

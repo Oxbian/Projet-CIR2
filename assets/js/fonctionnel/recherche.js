@@ -1,3 +1,21 @@
+function loadRecherche() {
+  document.getElementById('main').innerHTML = '<div class="container"><div class="info"><div class="cherche"><div class="artiste"></div><div class="album text">Album</div><div class="morceau text">Morceau</div><div class="nom text">Titre</div></div></div><div id="liste-morceau1"><div class="box show"><h2>contenue</h2></div><div class="box"><h2>contenue</h2></div><div class="box"><h2>contenue</h2></div></div></div>';
+
+  // Récupération des éléments
+  album = document.querySelector('.album');
+  morceau = document.querySelector('.morceau');
+  artist = document.querySelector('.nom');
+  rect = document.querySelector('.blue-rect');
+  boxes = document.querySelectorAll('.box');
+  container = document.getElementById('liste-morceau1');
+
+  // Ajout des événements
+  album.addEventListener('click', loadRecherche);
+  morceau.addEventListener('click', loadRecherche);
+  artist.addEventListener('click', loadRecherche);
+  container.addEventListener('wheel', checkBoxes);
+}
+
 function checkBoxes() {
   const triggerBottom = (window.innerHeight / 10) * 6;
   boxes.forEach((box, index) => {
@@ -11,7 +29,7 @@ function checkBoxes() {
         console.log('yo');
       }
       if (child.length === 1) {
-        rect = document.createElement('div');
+        const rect = document.createElement('div');
         rect.classList.add('red-rect');
         box.appendChild(rect);
       }
@@ -30,8 +48,8 @@ function checkBoxes() {
           otherBox.classList.remove('go');
           otherBox.classList.remove('go2');
           otherBox.classList.remove('go3');
-
-          rect = otherBox.querySelector('.red-rect');
+          
+          const rect = otherBox.querySelector('.red-rect');
           if (rect) {
             rect.remove();
           }
@@ -70,36 +88,3 @@ function checkBoxes() {
 
 function clickbutton() {
   console.log('yo');
-}
-
-/**
- * Fonction pour charger la page de recherche
- */
-function loadRecherche() {
-  document.getElementById('main').innerHTML = `<div class="container"><div class="info"><div class="cherche"><div class="artiste"></div>
-  <div class="album text">Album</div><div class="morceau text">Morceau</div><div class="nom text">Titre</div></div></div><div id="liste-morceau1">
-  <div class="box show"><h2>contenue</h2></div><div class="box"><h2>contenue</h2></div><div class="box"><h2>contenue</h2></div></div></div>`;
-
-  // Récupération des éléments
-  let album = document.querySelector('.album');
-  let morceau = document.querySelector('.morceau');
-  let artist = document.querySelector('.nom');
-  let rect = document.querySelector('.blue-rect');
-  let boxes = document.querySelectorAll('.box');
-  let container = document.getElementById('liste-morceau1');
-
-  // Ajout des événements
-  if (album) {
-    album.addEventListener('click', loadRecherche);
-  }
-  if (morceau) {
-    morceau.addEventListener('click', loadRecherche);
-  }
-  if (artist) {
-    artist.addEventListener('click', loadRecherche);
-  }
-  if (container) {
-    container.addEventListener('wheel', checkBoxes);
-  }
-  checkBoxes();
-}

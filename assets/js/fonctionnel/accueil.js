@@ -33,6 +33,7 @@ function loadAccueil() {
   ).innerHTML = `<div class="container"><!-- Boutons principaux -->
    <div id="rect1">Mes Morceaux</div><div id="rect2">Mes playlists</div><div id="rect3">Mes favoris</div>
    <div id="circle"></div></div>`;
+
   let circle = document.getElementById('circle');
   let rect1 = document.getElementById('rect1');
   let rect2 = document.getElementById('rect2');
@@ -43,3 +44,4 @@ function loadAccueil() {
     circle.addEventListener('click', openMenu);
   }
 }
+
