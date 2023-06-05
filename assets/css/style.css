@@ -57,7 +57,6 @@
       .volume{
         width: 40px;
         height: 40px;
-        /* margin-left: 5vw; */
         justify-content:end;
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' fill='none'%3E%3Cpath fill='%23D9D9D9' d='M32.355 40C37.078 34.882 40 27.81 40 20c0-7.81-2.922-14.882-7.645-20l-2.172 2.353C34.351 6.869 36.929 13.108 36.929 20c0 6.892-2.578 13.13-6.746 17.647L32.355 40Z'/%3E%3Cpath fill='%23D9D9D9' d='M28.012 35.294c3.612-3.914 5.846-9.321 5.846-15.294 0-5.973-2.234-11.38-5.846-15.294L25.84 7.059c3.056 3.312 4.947 7.887 4.947 12.941 0 5.054-1.89 9.63-4.947 12.941l2.172 2.353Z'/%3E%3Cpath fill='%23D9D9D9' d='M23.668 30.588c2.501-2.71 4.048-6.453 4.048-10.588 0-4.135-1.547-7.879-4.048-10.588l-2.171 2.353c1.945 2.107 3.148 5.019 3.148 8.235 0 3.216-1.203 6.128-3.148 8.235l2.171 2.353ZM17.556 5.19c.532.277.87.86.87 1.5v26.62c0 .64-.338 1.223-.87 1.5a1.44 1.44 0 0 1-1.625-.2l-7.257-6.291H1.535C.687 28.319 0 27.574 0 26.655v-13.31c0-.919.687-1.664 1.535-1.664h7.14l7.256-6.29a1.44 1.44 0 0 1 1.625-.2Z'/%3E%3C/svg%3E");
         .volume {
@@ -210,16 +209,11 @@
       /* } */
 
       .audio.audio-player {
-        /* width: 400px; */
-        
-        
         box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.07);
         display: flex;
-        /* justify-content: space-between; */
         border-radius: 4px;
         user-select: none;
         -webkit-user-select: none;
-        /* background-color: #383130; */
         /* .play-pause-btn {
           display: none;
           cursor: pointer; 
@@ -249,7 +243,7 @@
         border-radius: 2px;
           height: 4px;
           .progress {
-            width: 5vw;
+            width: 8vw;
             height: 100%;
             .pin {
               right: -8px;
