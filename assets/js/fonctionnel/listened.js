@@ -33,16 +33,15 @@ function loadListenedMusic(data) {
     listeMorceau.innerHTML = '';
     for (let index = 0; index < data.length; index += 1) {
       if (index === 0) {
-        listeMorceau.innerHTML += `<div class="box show"><h2>${data[index].titre}</h2><span>${data[index].duree}</span></div>`;
+        listeMorceau.innerHTML += `<div class="box show"><h2>${data[index].titre}</h2><h2>${data[index].duree}</h2></div>`;
         ajaxRequest('GET', `../php/request.php/album/${data[index].id_album}`, loadAlbumInfo);
       } else {
-        listeMorceau.innerHTML += `<div class="box"><h2>${data[index].titre}</h2><span>${data[index].duree}</span></div>`;
+        listeMorceau.innerHTML += `<div class="box"><h2>${data[index].titre}</h2><h2>${data[index].duree}</h2></div>`;
       }
     }
     boxes = document.querySelectorAll('.box');
   }
 }
-
 
 // checkBox();
 let boxes;
@@ -79,7 +78,7 @@ function checkBox() {
       console.log('yop');
       const child = box.childNodes;
       console.log(child);
-      if (child.length !== 2) {
+      if (child.length === 3) {
         console.log('salut');
       }
       if (child.length === 2) {
