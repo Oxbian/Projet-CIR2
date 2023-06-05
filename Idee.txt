@@ -1,1 +1,2 @@
 - Adapté le fond en fonction de la couleur des artistes
+- Image artiste

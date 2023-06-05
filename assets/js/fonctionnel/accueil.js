@@ -14,8 +14,8 @@ function openMenu() {
   rect3.classList.toggle("visible");
 
   if (isVisible) {
-    rect1.addEventListener("click", () => {
-      window.location.href = "mesMorceaux.html";
+    rect1.addEventListener('click', () => {
+      loadListened();
     });
   }
   if (isVisible) {

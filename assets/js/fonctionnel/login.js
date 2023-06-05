@@ -15,7 +15,7 @@ function validateLogin() {
 
   // Requête AJAX pour récupérer le cookie de session
   let xhr = new XMLHttpRequest();
-  xhr.open('GET', '../php/request.php/authentification');
+  xhr.open('GET', '../../php/request.php/authentification');
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhr.setRequestHeader('Authorization', 'Basic ' + btoa(`${email}:${password}`));
 
