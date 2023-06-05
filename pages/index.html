@@ -1,80 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="../assets/css/fonctionnel/utilities.css" />
+    <link rel="stylesheet" href="../assets/css/fonctionnel/responsive.css" />
+    <link rel="stylesheet" href="../assets/css/fonctionnel/accueil.css" />
+    <link rel="stylesheet" href="../assets/css/fonctionnel/recherche.css" />
+    <link rel="stylesheet" href="../assets/css/fonctionnel/box.css" />
 
-  <!-- Style CSS -->
-  <link rel="stylesheet" href="../assets/css/fonctionnel/utilities.css">
-  <link rel="stylesheet" href="../assets/css/fonctionnel/responsive.css">
-  <link rel="stylesheet" href="../assets/css/fonctionnel/accueil.css">
-  <link rel="stylesheet" href="../assets/css/fonctionnel/recherche.css">
-  <link rel="stylesheet" href="../assets/css/fonctionnel/box.css">
+    <!-- Scripts-->
+    <script src="../assets/js/fonctionnel/accueil.js" defer></script>
+    <script src="../assets/js/fonctionnel/script.js" defer></script>
+    <script src="../assets/js/fonctionnel/recherche.js" defer></script>
 
-  <!-- Scripts-->
-  <script src="../assets/js/fonctionnel/accueil.js" defer></script>
-  <script src="../assets/js/fonctionnel/script.js" defer></script>
-  <script src="../assets/js/fonctionnel/recherche.js" defer></script>
+    <title>Lecteur musique</title>
+  </head>
 
-  <title>Lecteur musique</title>
-</head>
-
-<body>
-  <!-- En tête de la page -->
-  <header>
-    <div class="left-head">
-      <div id="home"></div>
-      <div class="volume"></div>
-    </div>
-    <div class="midl-head">
-      <form>
-        <input type="text" id="search-input" placeholder="Recherche...">
-      </form>
-      <div id="recherche-icon"></div>
-    </div>
-    <div class="right-head">
-      <div class="param"></div>
-    </div>
-  </header>
-
-  <main id="main">
-    <div class="container">
-      <!-- Boutons principaux -->
-      <div id="rect1">Mes Morceaux</div>
-      <div id="rect2">Mes playlists</div>
-      <div id="rect3">Mes favoris</div>
-
-      <div id="circle"></div>
-    </div>
-  </main>
-
-  <!-- Bas de page -->
-  <footer>
-    <div class="audio audio-player">
-      <div class="left-footer">
-        <div id="stop-go"></div>
-        <div id="text">Artiste / musique</div>
+  <body>
+    <!-- En tête de la page -->
+    <header>
+      <div class="left-head">
+        <div id="home"></div>
+        <div class="volume"></div>
       </div>
-      <div class="right-footer">
-        <div id="like"></div>
-        <div id="add"></div>
-        <div class="temps">
-          <div class="controls">
-            <span class="current-time">0:00 /</span>
-            <span class="total-time">2:55</span>
-          </div>
-          <div class="slider" data-direction="horizontal">
-            <div class="progress">
-              <div class="pin" id="progress-pin" data-method="rewind"></div>
+      <div class="midl-head">
+        <form>
+          <input type="text" id="search-input" placeholder="Recherche..." />
+        </form>
+        <div id="recherche-icon"></div>
+      </div>
+      <div class="right-head">
+        <div class="param"></div>
+      </div>
+    </header>
+
+    <main id="main">
+      <div class="container">
+        <!-- Boutons principaux -->
+        <div id="rect1">Mes Morceaux</div>
+        <div id="rect2">Mes playlists</div>
+        <div id="rect3">Mes favoris</div>
+
+        <div id="circle"></div>
+      </div>
+    </main>
+
+    <!-- Bas de page -->
+    <footer>
+      <div class="audio audio-player">
+        <div class="left-footer">
+          <div id="stop-go"></div>
+          <div id="text">Artiste / musique</div>
+        </div>
+        <div class="right-footer">
+          <div id="like"></div>
+          <div id="add"></div>
+          <div class="temps">
+            <div class="controls">
+              <span class="current-time">0:00 /</span>
+              <span class="total-time">2:55</span>
+            </div>
+            <div class="slider" data-direction="horizontal">
+              <div class="progress">
+                <div class="pin" id="progress-pin" data-method="rewind"></div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-
-  </footer>
-</body>
-
+    </footer>
+  </body>
 </html>
