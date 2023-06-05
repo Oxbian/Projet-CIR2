@@ -47,19 +47,14 @@ if ($requestRessource == 'authentification') {
   $headers = getallheaders();
   $token = $headers['Authorization'];
   if (preg_match('/Bearer (.*)/', $token, $tab)) {
-      $token = $tab[1];
+    $token = $tab[1];
   }
-
-  // Vérification des données envoyées
-  if (!checkInput(isset($token), 400)) {
-    return;
-  }
-
-  $login = $db->dbVerifyToken($token);
-  // Vérification que l'utilisateur existe
-  if (!$login) {
-    $login = null;
-    sendError(401);
+  if ($token != null) {
+    $login = $db->dbVerifyToken($token);
+    // Vérification que l'utilisateur existe
+    if (!$login) {
+      $login = null;
+    }
   }
 }
 

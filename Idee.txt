@@ -1,2 +1,1 @@
-- Utilisateur connecté en tant qu'artiste (ajouter des musiques..)
 - Adapté le fond en fonction de la couleur des artistes

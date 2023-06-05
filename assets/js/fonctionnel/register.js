@@ -42,10 +42,8 @@ if (registerBtn) {
       if (response === 409 || response === 400) {
         sendErrorMessage('Utilisateur existant');
       } else {
-        setTimeout(() => {
-          sendErrorMessage('Vous êtes bien inscrit, vous allez être redirigé vers la page de connexion', 'green');
-          document.location.href = 'login.html';
-        }, 5000);
+        sendErrorMessage('Vous êtes bien inscrit, vous allez être redirigé vers la page de connexion', 'green');
+        document.location.href = 'login.html';
       }
     }, data);
   });

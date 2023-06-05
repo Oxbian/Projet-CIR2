@@ -11,7 +11,6 @@ function validateLogin() {
     sendErrorMessage('Veuillez remplir tous les champs');
     return;
   }
-  console.log(`${email}:${password}`);
   Cookies.set('login', email);
 
   // Requête AJAX pour récupérer le cookie de session
@@ -37,8 +36,10 @@ function validateLogin() {
   xhr.send();
 }
 
+// Récupération du bouton de connexion
 const loginBtn = document.getElementById('login-btn');
 
+// Clique du bouton vérification des champs et connexion
 if (loginBtn) {
   loginBtn.addEventListener('click', validateLogin);
 }
