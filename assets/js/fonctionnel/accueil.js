@@ -15,7 +15,7 @@ function openMenu() {
 
   if (isVisible) {
     rect1.addEventListener('click', () => {
-      window.location.href = 'mesMorceaux.html';
+      loadListened();
     });
   }
   if (isVisible) {

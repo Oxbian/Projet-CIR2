@@ -1,0 +1,35 @@
+.info {
+  width: 60vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.artisteAlbum {
+  width: 25vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.artiste {
+  width: 15vw;
+  height: 15vw;
+  border-radius: 100%;
+  background-color: #dedede;
+}
+
+.album {
+  width: 20vw;
+  height: 10vh;
+  background-color: #dedede;
+  line-height: 10vh;
+}
+
+.rectInfo {
+  margin-top: 10vh;
+  width: 20vw;
+  height: 40vh;
+  background-color: #dedede;
+  line-height: 20vh;
+}
