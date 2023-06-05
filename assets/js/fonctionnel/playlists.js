@@ -1,32 +1,63 @@
-let add = document.querySelector('.addP');
+/**
+ * Fonction pour charger les musiques d'une playlist
+ * @param {*} event Evènement de clique du bouton
+ */
+function loadPlaylist(event) {
+  console.log(`Playlist ${event.currentTarget.id}`);
+}
+
+/**
+ * Fonction pour charger les playlists de l'utilisateur
+ * @param {*} data Liste des playlists de l'utilisateur
+ */
+function loadPlaylistsUser(data) {
+  const listeMorceau = document.getElementById('liste-morceau1');
+  if (listeMorceau) {
+    listeMorceau.innerHTML = '';
+
+    // Ajouts des playlists la première est affichée
+    for (let index = 0; index < data.length; index += 1) {
+      if (index === 0) {
+        listeMorceau.innerHTML += `<div class="box show" id="playlist${data[index].id}"><h2>${data[index].nom}</h2></div>`;
+        document.getElementById(`playlist${data[index].id}`).addEventListener('click', loadPlaylist);
+        document.getElementById(`playlist${data[index].id}`).id = `${data[index].id}`;
+      } else {
+        listeMorceau.innerHTML += `<div class="box" id="playlist${data[index].id}"><h2>${data[index].nom}</h2></div>`;
+        document.getElementById(`playlist${data[index].id}`).addEventListener('click', loadPlaylist, data[index].id);
+      }
+    }
+  }
+}
+
+/**
+ * Fonction pour créer une playlist
+ */
+function createPlaylist() {
+  const nom = window.prompt('Nom de la playlist :');
+  ajaxRequest('POST', '../php/request.php/playlist', () => { ajaxRequest('GET', '../php/request.php/playlist/user', loadPlaylistsUser); }, `nom_playlist=${nom}`);
+}
+
+/**
+ * Fonction pour afficher les playlists de l'utilisateur
+ */
 function loadPlaylists() {
-  document.getElementById(
-    'main',
-  ).innerHTML = '<div class="container"><div class="artiste"></div><div class="addP"></div><div id="liste-morceau1"><div class="box show"><h2>contenue</h2></div><div class="box"><h2>contenue</h2></div><div class="box"><h2>contenue</h2></div></div></div>';
+  document.getElementById('main').innerHTML = '<div class="container"><div class="addP"></div><div id="liste-morceau1"></div></div>';
 
-  boxes = document.querySelectorAll('.box');
-  container = document.getElementById('liste-morceau1');
-  add = document.querySelector('.addP');
+  // Récupération des éléments
+  const boxes = document.querySelectorAll('.box');
+  const container = document.getElementById('liste-morceau1');
+  const add = document.querySelector('.addP');
 
-}
-if (artist) {
-  artist.addEventListener('click', loadRecherche);
-}
+  // Ajout des évènements sur les boutons
+  if (container) {
+    container.addEventListener('wheel', checkBoxes);
+  }
+  if (add) {
+    add.addEventListener('click', createPlaylist);
+  }
 
-if (container) {
-  container.addEventListener('wheel', checkBoxe);
-}
-
-if (add) {
-  add.addEventListener('click', () => {
-    console.log('belle fesse mathys');
-    const newBox = document.createElement('div');
-    newBox.classList.add('box');
-
-    container.appendChild(newBox);
-    boxes = document.querySelectorAll('.box');
-    console.log('coucou');
-});
+  // Chargement des playlists
+  ajaxRequest('GET', '../php/request.php/playlist/user', loadPlaylistsUser);
 }
 
 function checkBoxe() {
@@ -59,7 +90,7 @@ function checkBoxe() {
 
       boxes.forEach((otherBox, otherIndex) => {
         // Vérifie si la boîte est différente de celle cliquée
-        if (otherBox == box) {
+        if (otherBox === box) {
           otherBox.classList.remove('go2');
           otherBox.classList.remove('go3');
         }
@@ -115,4 +146,6 @@ function checkBoxe() {
   });
 }
 
-checkBoxe();
+function clickbutton() {
+  console.log('yo');
+}
