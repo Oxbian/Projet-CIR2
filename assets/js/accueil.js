@@ -34,9 +34,7 @@ function openMenu() {
  * Fonction pour charger le contenu de la page d'accueil
  */
 function loadAccueil() {
-  document.getElementById(
-    'main',
-  ).innerHTML = `<div class="container"><!-- Boutons principaux -->
+  document.getElementById('main').innerHTML = `<div class="container"><!-- Boutons principaux -->
    <div id="rect1">Mes Morceaux</div><div id="rect2">Mes playlists</div><div id="rect3">Mes favoris</div>
    <div id="circle"></div></div>`;
 
