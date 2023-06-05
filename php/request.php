@@ -266,6 +266,8 @@ if ($requestRessource == "playlist") {
           break;
         }
         $data = $db->dbGetTracksPlaylist($id);
+      } else if ($id == 'user') { // Si on veut récupérer les playlists de l'utilisateur
+        $data = $db->dbGetPlaylistsUser($login);
       } else if ($id != null) { // Si on veut récupérer une playlist par ID
         $data = $db->dbInfoPlaylist($id);
       } else {

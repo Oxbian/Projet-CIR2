@@ -230,6 +230,18 @@ Puis utilisez ce token en tant que cookie d'authentification dans les requêtes 
 
 **Code d'erreurs 501:** Requête non implémentée
 
+### Récupérer les playlists de l'utilisateur
+
+- **GET** http://prj-cir-web-grp-56/php/request.php/playlist/user
+
+- **Retourne:** une liste des playlists de l'utilisateur avec leurs infos.
+
+- **Code d'erreurs:**
+    - 400: Paramètres manquants ou incorrects
+    - 401: Utilisateur non connecté
+    - 404: Playlists non trouvées
+    - 200: Ok
+
 ### Récupérer les infos d'une playlist
 
 - **GET** http://prj-cir-web-grp-56/php/request.php/playlist/id (id = id de la playlist)

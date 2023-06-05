@@ -28,6 +28,11 @@ function checkPasswords(password, confirmPassword) {
   return password === confirmPassword;
 }
 
+/**
+ * Fonction pour envoyer un message d'erreur
+ * @param {*} message Message d'erreur à envoyé
+ * @param {*} color Couleur du message d'erreur
+ */
 function sendErrorMessage(message, color = 'red') {
   const error = document.getElementById('errors');
   error.style.color = color;

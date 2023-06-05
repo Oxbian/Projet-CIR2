@@ -3,7 +3,7 @@
  * @param {*} data Informations de l'artiste
  */
 function loadArtistInfo(data) {
-  const artiste = document.getElementById('album-info');
+  const artiste = document.getElementById('artiste-info');
   if (artiste) {
     artiste.innerHTML = `<p>Artiste : ${data.nom} ${data.prenom}</p>`;
   }
@@ -26,7 +26,6 @@ function loadAlbumInfo(data) {
  * @param {*} data Informations des musiques écoutées
  */
 function loadListenedMusic(data) {
-  console.log(data[0].titre);
   const listeMorceau = document.getElementById('liste-morceau1');
   if (listeMorceau) {
     listeMorceau.innerHTML = '';
@@ -45,9 +44,16 @@ function loadListenedMusic(data) {
  * Fonction pour charger les musiques écoutées appelé par le bouton du menu
  */
 function loadListened() {
-  document.getElementById('main').innerHTML = `
-  <div class="container"><div class="info"><div class="artisteAlbum"><div class="artiste"></div><div class="album" id="album-nom">Album :</div></div><div class="rectInfo" id="album-info"></div></div>
-  <div id="liste-morceau1"></div></div>`;
+  document.getElementById('main').innerHTML = `<div class="container"><div class="info"><div class="artisteAlbum"><div class="artiste" id="artiste" data-artiste="">
+  </div><div class="album" id="album-nom" data-album="">Album :</div></div><div class="rectInfo" id="artiste-info"></div></div><div id="liste-morceau1">
+  </div></div>`;
+
+  // Ajout des évènements sur les boutons
+  const artisteId = document.getElementById('artiste').dataset.artiste;
+  document.getElementById('artiste').addEventListener('click', loadArtiste, artisteId);
+
+  const albumId = document.getElementById('artiste').dataset.album;
+  document.getElementById('artiste').addEventListener('click', loadAlbum, albumId);
 
   // Chargement des musiques écoutées
   ajaxRequest('GET', '../php/request.php/listened', loadListenedMusic);

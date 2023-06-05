@@ -125,4 +125,18 @@ class Playlist extends Database
     );
     return $this->fetchAllRequest($query, $params);
   }
+
+  /**
+   * Fonction pour récupérer les playlists d'un utilisateur
+   * 
+   * @param  mixed $email Adresse email de l'utilisateur
+   */
+  public function dbGetPlaylistsUser($email)
+  {
+    $query = 'SELECT * FROM playlist WHERE email = :email';
+    $params = array(
+      'email' => $email
+    );
+    return $this->fetchAllRequest($query, $params);
+  }
 }
