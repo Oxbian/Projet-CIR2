@@ -1,3 +1,4 @@
+let add = document.querySelector(".addP");
 function loadPlaylists() {
   document.getElementById(
     "main"
@@ -12,24 +13,25 @@ function loadPlaylists() {
   }
 
   if (container) {
-    container.addEventListener("wheel", checkBoxes);
+    container.addEventListener("wheel", checkBoxe);
   }
-
-  if (add) {
-    add.addEventListener("click", addFunc());
-  }
-}
-function addFunc() {
-  var newBox = document.createElement("div");
-  newBox.classList.add("box");
   
-  container.appendChild(newBox);
-  boxes = document.querySelectorAll(".box");
 }
 
-checkBoxes();
+// if (addP) {
+  add.addEventListener("click", function () {
+    console.log("belle fesse mathys");
+    var newBox = document.createElement("div");
+    newBox.classList.add("box");
+  
+    container.appendChild(newBox);
+    boxes = document.querySelectorAll(".box");
+    console.log("coucou");
+  });
 
-function checkBoxes() {
+checkBoxe();
+
+function checkBoxe() {
   const triggerBottom = (window.innerHeight / 10) * 6;
   boxes.forEach((box, index) => {
     box.addEventListener("click", function () {
