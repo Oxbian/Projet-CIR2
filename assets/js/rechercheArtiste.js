@@ -34,18 +34,29 @@ function checkBoxes() {
     box.addEventListener("click", function () {
       box.classList.add("go");
 
-      const rect = document.createElement("div");
-      rect.classList.add("blue-rect");
-      box.appendChild(rect);
+      var child = box.childNodes;
+      console.log(child);
+      if (child.length !== 3) {
+        window.location.href = "rechercheArtiste.html";
+      }
+      if (child.length == 3) {
+        const rect = document.createElement("div");
+        rect.classList.add("blue-rect");
+        box.appendChild(rect);
+      }
 
       boxes.forEach((otherBox, otherIndex) => {
         // Vérifie si la boîte est différente de celle cliquée
         if (otherBox == box) {
           otherBox.classList.remove("go2");
           otherBox.classList.remove("go3");
-          otherBox.addEventListener("click", function () {
-            window.location.href = "rechercheArtiste.html";
-          });
+          var child = otherBox.childNodes;
+          // if (child.length == 4) {
+          //   otherBox.addEventListener("click", function () {
+          //     console.log("siuuuu");
+          //     // window.location.href = "rechercheArtiste.html";
+          //   });
+          // }
         }
         if (otherBox !== box) {
           // Supprime la classe "go" et "go2" des autres boîtes

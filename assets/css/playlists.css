@@ -14,14 +14,13 @@
 }
 
 .artiste{
-  width: 30vw;
-  height: 30vw;
+  width: 15vw;
+  height: 15vw;
   border-radius: 100%;
   background-color: #dedede;
 }
 .album{
-
-  width: 30vw;
+  width: 20vw;
   height: 10vh;
   background-color: #dedede;
   line-height: 10vh;

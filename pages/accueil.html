@@ -19,7 +19,14 @@
     <header>
       <div class="leftHead">
         <div id="home"></div>
-        <div class="volume"></div>
+        <div class="volume-container">
+          <div class="volume"></div>
+            <div class="volume-slider" data-direction="vertical">
+            <div class="volume-progress">
+            <div class="volume-pin"></div>
+          </div>
+        </div>
+      </div>
       </div>
       <div class="midlHead">
         <form>
@@ -52,7 +59,7 @@
           <div class="temps">
             <div class="controls">
               <span class="current-time">0:00 /</span>
-
+              
               <span class="total-time">2:55</span>
             </div>
             <div class="slider" data-direction="horizontal">

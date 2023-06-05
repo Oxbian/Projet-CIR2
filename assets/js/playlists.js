@@ -15,18 +15,26 @@ function checkBoxes() {
   boxes.forEach((box, index) => {
     box.addEventListener("click", function () {
       box.classList.add("go");
-      const del = document.createElement("div");
-      del.classList.add("delete");
-      box.appendChild(del);
-      del.addEventListener("click", function () {
-        // Supprime la box (élément parent) de l'élément carré rouge
-        var box = this.parentNode;
-        box.remove();
-      });
 
-      const rect = document.createElement("div");
-      rect.classList.add("blue-rect");
-      box.appendChild(rect);
+      var child = box.childNodes;
+      console.log(child);
+      if (child.length !== 3) {
+        console.log("salut");
+      }
+      if (child.length == 3) {
+        const rect = document.createElement("div");
+        rect.classList.add("blue-rect");
+        box.appendChild(rect);
+        const del = document.createElement("div");
+
+        del.classList.add("delete");
+        box.appendChild(del);
+        del.addEventListener("click", function () {
+          // Supprime la box (élément parent) de l'élément carré rouge
+          var box = this.parentNode;
+          box.remove();
+        });
+      }
 
       boxes.forEach((otherBox, otherIndex) => {
         // Vérifie si la boîte est différente de celle cliquée
