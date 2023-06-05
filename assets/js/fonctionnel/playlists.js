@@ -22,7 +22,7 @@ function loadPlaylists() {
 function addFunc() {
   var newBox = document.createElement("div");
   newBox.classList.add("box");
-
+  
   container.appendChild(newBox);
   boxes = document.querySelectorAll(".box");
 }
@@ -37,10 +37,10 @@ function checkBoxes() {
 
       var child = box.childNodes;
       console.log(child);
-      if (child.length !== 3) {
+      if (child.length !== 1) {
         console.log("salut");
       }
-      if (child.length == 3) {
+      if (child.length == 1) {
         const rect = document.createElement("div");
         rect.classList.add("grey-rect");
         box.appendChild(rect);
