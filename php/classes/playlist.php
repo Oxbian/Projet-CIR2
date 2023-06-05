@@ -139,4 +139,18 @@ class Playlist extends Database
     );
     return $this->fetchAllRequest($query, $params);
   }
+
+  /**
+   * Fonction pour récupérer les morceaux de la playlist Favoris d'un utilisateur
+   * 
+   * @param  mixed $email Adresse email de l'utilisateur
+   */
+  public function dbGetFavoris($email)
+  {
+    $query = 'SELECT m.id, m.titre, m.duree, m.chemin, m.id_album FROM morceau_playlist AS mp JOIN morceau AS m ON mp.id = m.id JOIN playlist AS p ON mp.id_playlist = p.id WHERE p.email = :email AND nom = "Favoris"';
+    $params = array(
+      'email' => $email
+    );
+    return $this->fetchAllRequest($query, $params);
+  }
 }

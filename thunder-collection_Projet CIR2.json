@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "Projet CIR2",
-    "dateExported": "2023-06-04T15:05:08.838Z",
+    "dateExported": "2023-06-05T16:58:08.325Z",
     "version": "1.1",
     "folders": [],
     "requests": [
@@ -239,7 +239,7 @@
             "method": "GET",
             "sortNum": 50000,
             "created": "2023-06-01T18:51:49.745Z",
-            "modified": "2023-06-04T14:59:37.602Z",
+            "modified": "2023-06-05T11:29:15.857Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -247,6 +247,10 @@
                 }
             ],
             "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "Dt3BE1XHuHRzaaJCPBu9ANT01sv6V82McqTmZVcgKmk="
+            },
             "tests": [
                 {
                     "type": "res-code",
@@ -686,11 +690,11 @@
             "colId": "4824f6fe-fdf1-49e3-a0d7-460b74c39470",
             "containerId": "",
             "name": "Get album info",
-            "url": "http://projet/Projet-CIR2/php/request.php/album/1",
+            "url": "http://projet/Projet-CIR2/php/request.php/album/3",
             "method": "GET",
             "sortNum": 100000,
             "created": "2023-06-01T19:22:01.842Z",
-            "modified": "2023-06-03T09:58:20.783Z",
+            "modified": "2023-06-05T11:32:11.823Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -698,6 +702,10 @@
                 }
             ],
             "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "<span>${data[index].duree}</span>"
+            },
             "tests": [
                 {
                     "type": "res-code",
@@ -910,11 +918,11 @@
             "colId": "4824f6fe-fdf1-49e3-a0d7-460b74c39470",
             "containerId": "",
             "name": "Get playlist tracks",
-            "url": "http://projet/Projet-CIR2/php/request.php/playlist/tracks/1",
+            "url": "http://projet/Projet-CIR2/php/request.php/playlist/tracks/2",
             "method": "GET",
             "sortNum": 130000,
             "created": "2023-06-02T09:19:11.384Z",
-            "modified": "2023-06-03T10:12:58.762Z",
+            "modified": "2023-06-05T13:02:11.196Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -922,6 +930,10 @@
                 }
             ],
             "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "Dt3BE1XHuHRzaaJCPBu9ANT01sv6V82McqTmZVcgKmk="
+            },
             "tests": [
                 {
                     "type": "res-code",
@@ -958,6 +970,66 @@
                     "custom": "",
                     "action": "contains",
                     "value": "id_album"
+                }
+            ]
+        },
+        {
+            "_id": "064c943e-79f1-4aea-a8ac-67039e9bd951",
+            "colId": "4824f6fe-fdf1-49e3-a0d7-460b74c39470",
+            "containerId": "",
+            "name": "Get playlists user",
+            "url": "http://projet/Projet-CIR2/php/request.php/playlist/user",
+            "method": "GET",
+            "sortNum": 135000,
+            "created": "2023-06-05T13:05:41.535Z",
+            "modified": "2023-06-05T13:08:13.138Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": ""
+                }
+            ],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "Dt3BE1XHuHRzaaJCPBu9ANT01sv6V82McqTmZVcgKmk="
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                }
+            ]
+        },
+        {
+            "_id": "d2f0daf2-111c-44dd-ae0b-aa987c86f063",
+            "colId": "4824f6fe-fdf1-49e3-a0d7-460b74c39470",
+            "containerId": "",
+            "name": "Get favoris tracks",
+            "url": "http://projet/Projet-CIR2/php/request.php/playlist/favoris",
+            "method": "GET",
+            "sortNum": 137500,
+            "created": "2023-06-05T14:55:11.399Z",
+            "modified": "2023-06-05T14:55:26.507Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": ""
+                }
+            ],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "Dt3BE1XHuHRzaaJCPBu9ANT01sv6V82McqTmZVcgKmk="
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
                 }
             ]
         },

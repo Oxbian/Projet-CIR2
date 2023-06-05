@@ -1,9 +1,29 @@
+let add;
+
 /**
  * Fonction pour charger les musiques d'une playlist
  * @param {*} event Evènement de clique du bouton
  */
 function loadPlaylist(event) {
-  console.log(`Playlist ${event.currentTarget.id}`);
+  console.log(`Playlist ${event.currentTarget.playlistId}`);
+  document.getElementById('main').innerHTML = `<div class="container"><div class="info"><div class="artisteAlbum"><div class="artiste" id="artiste" data-artiste="">
+  </div><div class="album" id="album-nom" data-album="">Album :</div></div><div class="rectInfo" id="artiste-info"></div></div><div id="liste-morceau1">
+  </div></div>`;
+
+  // Ajout des évènements sur les boutons
+  const artisteId = document.getElementById('artiste').dataset.artiste;
+  // document.getElementById('artiste').addEventListener('click', loadArtiste, artisteId);
+
+  const albumId = document.getElementById('artiste').dataset.album;
+  // document.getElementById('artiste').addEventListener('click', loadAlbum, albumId);
+
+  let container = document.getElementById('liste-morceau1');
+ 
+  // Chargement des musiques écoutées
+  ajaxRequest('GET', `../php/request.php/playlist/tracks/${event.currentTarget.playlistId}`, loadListenedMusic);
+  if (container) {
+    container.addEventListener('wheel', checkBox);
+  }
 }
 
 /**
@@ -20,12 +40,14 @@ function loadPlaylistsUser(data) {
       if (index === 0) {
         listeMorceau.innerHTML += `<div class="box show" id="playlist${data[index].id}"><h2>${data[index].nom}</h2></div>`;
         document.getElementById(`playlist${data[index].id}`).addEventListener('click', loadPlaylist);
-        document.getElementById(`playlist${data[index].id}`).id = `${data[index].id}`;
+        document.getElementById(`playlist${data[index].id}`).playlistId = `${data[index].id}`;
       } else {
         listeMorceau.innerHTML += `<div class="box" id="playlist${data[index].id}"><h2>${data[index].nom}</h2></div>`;
         document.getElementById(`playlist${data[index].id}`).addEventListener('click', loadPlaylist, data[index].id);
+        document.getElementById(`playlist${data[index].id}`).playlistId = `${data[index].id}`;
       }
     }
+    boxes = document.querySelectorAll('.box');
   }
 }
 
@@ -41,23 +63,34 @@ function createPlaylist() {
  * Fonction pour afficher les playlists de l'utilisateur
  */
 function loadPlaylists() {
+  // Si l'utilisateur n'est pas identifié
+  if (Cookies.get('token') === null) {
+    return;
+  }
   document.getElementById('main').innerHTML = '<div class="container"><div class="addP"></div><div id="liste-morceau1"></div></div>';
 
   // Récupération des éléments
-  const boxes = document.querySelectorAll('.box');
   const container = document.getElementById('liste-morceau1');
   const add = document.querySelector('.addP');
 
   // Ajout des évènements sur les boutons
+  /*
   if (container) {
     container.addEventListener('wheel', checkBoxes);
-  }
+  }*/
   if (add) {
     add.addEventListener('click', createPlaylist);
   }
 
   // Chargement des playlists
   ajaxRequest('GET', '../php/request.php/playlist/user', loadPlaylistsUser);
+}
+
+/**
+ * Fonction pour afficher les morceaux favoris de l'utilisateur
+ */
+function loadFavorites() {
+  loadTrackPage('../php/request.php/playlist/favoris', 'Favoris');
 }
 
 function checkBoxe() {
@@ -144,8 +177,4 @@ function checkBoxe() {
       box.classList.remove('show');
     }
   });
-}
-
-function clickbutton() {
-  console.log('yo');
 }

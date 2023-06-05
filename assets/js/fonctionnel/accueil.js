@@ -1,3 +1,9 @@
+// Récupération des éléments
+let circle = document.getElementById('circle');
+let rect1 = document.getElementById('rect1');
+let rect2 = document.getElementById('rect2');
+let rect3 = document.getElementById('rect3');
+
 /**
  * Fonction pour ouvrir le menu
  */
@@ -19,7 +25,7 @@ function openMenu() {
   }
   if (isVisible) {
     rect3.addEventListener('click', () => {
-      window.location.href = 'playlists.html';
+      loadFavorites();
     });
   }
 }
@@ -34,10 +40,10 @@ function loadAccueil() {
    <div id="rect1">Mes Morceaux</div><div id="rect2">Mes playlists</div><div id="rect3">Mes favoris</div>
    <div id="circle"></div></div>`;
 
-  let circle = document.getElementById('circle');
-  let rect1 = document.getElementById('rect1');
-  let rect2 = document.getElementById('rect2');
-  let rect3 = document.getElementById('rect3');
+  circle = document.getElementById('circle');
+  rect1 = document.getElementById('rect1');
+  rect2 = document.getElementById('rect2');
+  rect3 = document.getElementById('rect3');
 
   // Ajout des événements
   if (circle) {
@@ -45,3 +51,7 @@ function loadAccueil() {
   }
 }
 
+// Ajout des événements
+if (circle) {
+  circle.addEventListener('click', openMenu);
+}

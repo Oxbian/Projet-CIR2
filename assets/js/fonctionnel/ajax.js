@@ -22,7 +22,7 @@ function ajaxRequest(type, _url, callback, data = null) {
     switch (xhr.status) {
       case 200:
       case 201:
-        if (xhr.responseText) { // Si la réponse n'est pas vide ou false
+        if (xhr.responseText) { // Si la réponse n'est pas vide ou fausse
           callback(JSON.parse(xhr.responseText));
         } else {
           callback();
