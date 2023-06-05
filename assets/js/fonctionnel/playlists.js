@@ -1,46 +1,30 @@
-let album = document.querySelector(".album");
-let morceau = document.querySelector(".morceau");
-let artist = document.querySelector(".nom");
-let rect = document.querySelector(".blue-rect");
-let boxes = document.querySelectorAll(".box");
-let container = document.getElementById("liste-morceau1");
-
-function loadRecherche() {
+function loadPlaylists() {
   document.getElementById(
     "main"
-  ).innerHTML = `<div class="container"><div class="info"><div class="cherche"><div class="artiste"></div><div class="album text">Album</div><div class="morceau text">Morceau</div><div class="nom text">Titre</div></div></div><div id="liste-morceau1"><div class="box show"><h2>contenue</h2></div><div class="box"><h2>contenue</h2></div><div class="box"><h2>contenue</h2></div></div></div>`;
+  ).innerHTML = `<div class="container"><div class="artiste"></div><div class="addP"></div><div id="liste-morceau1"><div class="box show"><h2>contenue</h2></div><div class="box"><h2>contenue</h2></div><div class="box"><h2>contenue</h2></div></div></div>`;
 
-  // Récupération des éléments
-  album = document.querySelector(".album");
-  morceau = document.querySelector(".morceau");
-  artist = document.querySelector(".nom");
-  rect = document.querySelector(".blue-rect");
   boxes = document.querySelectorAll(".box");
   container = document.getElementById("liste-morceau1");
+  add = document.querySelector(".addP");
 
-  // Ajout des événements
-  album.addEventListener("click", loadRecherche);
-  morceau.addEventListener("click", loadRecherche);
-  artist.addEventListener("click", loadRecherche);
-  container.addEventListener("wheel", checkBoxes);
+  if (artist) {
+    artist.addEventListener("click", loadRecherche);
+  }
+
+  if (container) {
+    container.addEventListener("wheel", checkBoxes);
+  }
+
+  if (add) {
+    add.addEventListener("click", addFunc());
+  }
 }
+function addFunc() {
+  var newBox = document.createElement("div");
+  newBox.classList.add("box");
 
-if (album) {
-  album.addEventListener("click", loadRecherche);
-}
-
-if (morceau) {
-  morceau.addEventListener("click", loadRecherche);
-}
-
-if (artist) {
-  artist.addEventListener("click", loadRecherche);
-}
-
-
-
-if (container) {
-  container.addEventListener("wheel", checkBoxes);
+  container.appendChild(newBox);
+  boxes = document.querySelectorAll(".box");
 }
 
 checkBoxes();
@@ -48,37 +32,53 @@ checkBoxes();
 function checkBoxes() {
   const triggerBottom = (window.innerHeight / 10) * 6;
   boxes.forEach((box, index) => {
-    box.addEventListener("click", () => {
+    box.addEventListener("click", function () {
       box.classList.add("go");
 
       var child = box.childNodes;
       console.log(child);
-      if (child.length !== 1) {
-        // window.location.href = "playlists.html";
-        console.log("yo");
+      if (child.length !== 3) {
+        console.log("salut");
       }
-      if (child.length == 1) {
+      if (child.length == 3) {
         const rect = document.createElement("div");
-        rect.classList.add("red-rect");
+        rect.classList.add("grey-rect");
         box.appendChild(rect);
+        const del = document.createElement("div");
+        del.classList.add("delete");
+        box.appendChild(del);
+        del.addEventListener("click", function () {
+          // Supprime la box (élément parent) de l'élément carré rouge
+          var box = this.parentNode;
+          box.remove();
+        });
       }
+      // const add = document.createElement("div");
+      // add.classList.add("addP");
+      // box.appendChild(add);
 
       boxes.forEach((otherBox, otherIndex) => {
         // Vérifie si la boîte est différente de celle cliquée
         if (otherBox == box) {
           otherBox.classList.remove("go2");
           otherBox.classList.remove("go3");
-          // otherBox.addEventListener("click", () => {
-          //   window.location.href = "playlists.html";
-          // });
         }
         if (otherBox !== box) {
           // Supprime la classe "go" et "go2" des autres boîtes
           otherBox.classList.remove("go");
           otherBox.classList.remove("go2");
           otherBox.classList.remove("go3");
+          const del = otherBox.querySelector(".delete");
+          if (del) {
+            del.remove();
+          }
 
-          const rect = otherBox.querySelector(".red-rect");
+          const add = otherBox.querySelector(".addP");
+          if (add) {
+            add.remove();
+          }
+
+          const rect = otherBox.querySelector(".grey-rect");
           if (rect) {
             rect.remove();
           }
