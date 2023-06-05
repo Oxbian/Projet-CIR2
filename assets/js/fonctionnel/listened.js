@@ -39,6 +39,34 @@ function loadListenedMusic(data) {
         listeMorceau.innerHTML += `<div class="box"><h2>${data[index].titre}</h2><span>${data[index].duree}</span></div>`;
       }
     }
+    boxes = document.querySelectorAll('.box');
+  }
+}
+
+
+// checkBox();
+let boxes;
+/**
+ * Fonction pour charger les musiques écoutées appelé par le bouton du menu
+ */
+function loadListened() {
+  document.getElementById('main').innerHTML = `<div class="container"><div class="info"><div class="artisteAlbum"><div class="artiste" id="artiste" data-artiste="">
+  </div><div class="album" id="album-nom" data-album="">Album :</div></div><div class="rectInfo" id="artiste-info"></div></div><div id="liste-morceau1">
+  </div></div>`;
+
+  // Ajout des évènements sur les boutons
+  const artisteId = document.getElementById('artiste').dataset.artiste;
+  // document.getElementById('artiste').addEventListener('click', loadArtiste, artisteId);
+
+  const albumId = document.getElementById('artiste').dataset.album;
+  // document.getElementById('artiste').addEventListener('click', loadAlbum, albumId);
+
+  let container = document.getElementById('liste-morceau1');
+ 
+  // Chargement des musiques écoutées
+  ajaxRequest('GET', '../php/request.php/listened', loadListenedMusic);
+  if (container) {
+    container.addEventListener('wheel', checkBox);
   }
 }
 
@@ -51,10 +79,10 @@ function checkBox() {
       console.log('yop');
       const child = box.childNodes;
       console.log(child);
-      if (child.length !== 3) {
+      if (child.length !== 2) {
         console.log('salut');
       }
-      if (child.length === 3) {
+      if (child.length === 2) {
         const rect = document.createElement('div');
         rect.classList.add('blue-rect');
         box.appendChild(rect);
@@ -105,29 +133,4 @@ function checkBox() {
       box.classList.remove('show');
     }
   });
-}
-checkBox();
-
-/**
- * Fonction pour charger les musiques écoutées appelé par le bouton du menu
- */
-function loadListened() {
-  document.getElementById('main').innerHTML = `<div class="container"><div class="info"><div class="artisteAlbum"><div class="artiste" id="artiste" data-artiste="">
-  </div><div class="album" id="album-nom" data-album="">Album :</div></div><div class="rectInfo" id="artiste-info"></div></div><div id="liste-morceau1">
-  </div></div>`;
-
-  // Ajout des évènements sur les boutons
-  const artisteId = document.getElementById('artiste').dataset.artiste;
-  document.getElementById('artiste').addEventListener('click', loadArtiste, artisteId);
-
-  const albumId = document.getElementById('artiste').dataset.album;
-  document.getElementById('artiste').addEventListener('click', loadAlbum, albumId);
-
-  boxes = document.querySelectorAll('.box');
-  container = document.getElementById('liste-morceau1');
-  // Chargement des musiques écoutées
-  ajaxRequest('GET', '../php/request.php/listened', loadListenedMusic);
-  if (container) {
-    container.addEventListener('wheel', checkBox);
-  }
 }
