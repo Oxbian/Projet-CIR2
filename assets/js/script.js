@@ -18,7 +18,6 @@ function formatDate(date) {
   return `${dates[2]}/${dates[1]}/${dates[0]}`;
 }
 
-
 // Récupération des éléments
 const home = document.getElementById('home');
 const search = document.getElementById('recherche-icon');

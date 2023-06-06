@@ -102,3 +102,16 @@ function unlikeTrack(id_morceau) {
     }, `id_morceau=${id_morceau}&id_playlist=${data.id}`);
   }, 'nom_playlist=Favoris');
 }
+
+/**
+ * Fonction pour supprimer un morceau d'une playlist
+ * @param {*} id_morceau L'id du morceau à supprimer
+ * @param {*} id_playlist L'id de la playlist où supprimer le morceau
+ * @param {*} nom_playlist Le nom de la playlist où supprimer le morceau
+ */
+function deleteTrack(id_morceau, id_playlist, nom_playlist) {
+    // Suppression du morceau dans la playlist
+    ajaxRequest('DELETE', '../php/request.php/playlist/track', () => {
+      loadTrackPage(`../php/request.php/playlist/tracks/${id_playlist}`, `${nom_playlist}`);
+    }, `id_morceau=${id_morceau}&id_playlist=${id_playlist}`);
+}

@@ -14,7 +14,7 @@ h2 {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' fill='none'%3E%3Cpath fill='%23D9D9D9' d='M20 0a2.5 2.5 0 0 1 2.5 2.5v15h15a2.5 2.5 0 0 1 0 5h-15v15a2.5 2.5 0 0 1-5 0v-15h-15a2.5 2.5 0 0 1 0-5h15v-15A2.5 2.5 0 0 1 20 0Z'/%3E%3C/svg%3E");
 }
 
-#delete-btn {
+#delete-btn, #delete-track {
   width: 2.5rem;
   height: 2.5rem;
   cursor: pointer;
