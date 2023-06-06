@@ -51,7 +51,6 @@ function createPlaylist() {
  */
 function setFav(id, data) {
   const like = document.getElementById('like');
-  console.log(id);
   if (like) {
     like.onclick = null;
     if (data != 404 && data != 400) {
@@ -69,7 +68,6 @@ function setFav(id, data) {
  * @param {*} id_morceau L'id du morceau à ajouter
  */
 function addTrack(id_morceau) {
-  console.log(id_morceau);
   // Récupération de l'id de la playlist
   const nom_playlist = window.prompt('Nom de la playlist où ajouter le morceau: ');
   ajaxRequest('GET', '../php/request.php/playlist/search', (data) => {

@@ -64,7 +64,7 @@ function loadTrack(id) {
     document.querySelector('.total-time').innerHTML = formatTime(data.duree);
     document.querySelector('.current-time').innerHTML = '0:00';
     document.getElementById('text').textContent = data.titre;
-    // console.log(data.duree);
+
     audio.play();
 
     // Ajout du click qui permet d'ajouter le morceau dans la playlist
@@ -230,10 +230,6 @@ function checkBox() {
       box.classList.add('go');
       const child = box.childNodes;
 
-      // console.log(child);
-      if (child.length !== 3) {
-        console.log('yop');
-      }
       if (child.length === 2) {
         const rect = document.createElement('div');
         rect.classList.add('blue-rect');
