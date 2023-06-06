@@ -21,3 +21,26 @@ function loadPlaylists() {
 function loadFavorites() {
   loadTrackPage('../php/request.php/playlist/favoris', 'Favoris');
 }
+
+/**
+ * Fonction pour supprimer une playlist
+ */
+function deletePlaylist() {
+  const id = document.getElementById('title').dataset.playlistid;
+  console.log(id);
+  ajaxRequest('DELETE', `../php/request.php/playlist/${id}`, loadPlaylists);
+}
+
+/**
+ * Fonction pour modifier une playlist
+ */
+function updatePlaylist() {
+  // Récupération des données
+  const id = document.getElementById('title').dataset.playlistid;
+  const nom = window.prompt('Nom de la playlist :');
+  if (nom != null && nom !== '') {
+    ajaxRequest('PUT', '../php/request.php/playlist', () => {
+      loadTrackPage(`../php/request.php/playlist/tracks/${id}`, `${nom}`);
+    }, `nom_playlist=${nom}&id_playlist=${id}`);
+  }
+}

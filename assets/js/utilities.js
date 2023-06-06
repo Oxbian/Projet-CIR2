@@ -39,6 +39,8 @@ function loadAlbumInfo(data) {
     albumNom.innerHTML = `<p>Album : ${data.titre}<br>Date parution: ${data.date_parution}</p>`;
     albumNom.dataset.album = data.id;
   }
+
+  // Chargement des informations de l'artiste de l'album
   ajaxRequest('GET', `../php/request.php/artist/${data.id_artiste}`, loadArtistInfo);
 }
 
@@ -49,12 +51,24 @@ function loadAlbumInfo(data) {
 function loadTrack(event) {
   console.log(`Clicked on track${event.currentTarget.trackId}`);
   const { trackId } = event.currentTarget;
+  // const player = document.getElementById('player');
+  const audio = document.getElementById('player');
 
-  // Chargement de l'album content le morceau actuel & de l'artiste du morceau
+  // Chargement de l'album contenant le morceau actuel & de l'artiste du morceau
   ajaxRequest('GET', `../php/request.php/track/${trackId}`, (data) => {
     // Lancement de l'audio
-    const audio = new Audio(`../assets/musique/${data.chemin}`);
+    console.log(data);
+    document.getElementById('musique').src = `../assets/musique/${data.chemin}`;
+    audio.load();
+    document.querySelector('.total-time').innerHTML = data.duree;
+    document.querySelector('.current-time').innerHTML = '0:00';
+    // console.log(data.duree);
     audio.play();
+
+    // Ajout du morceau dans les musiques écoutées
+    ajaxRequest('POST', '../php/request.php/listened', null, `id_morceau=${trackId}`);
+
+    // Chargement des informations de l'album et de l'artiste du morceau
     ajaxRequest('GET', `../php/request.php/album/${data.id_album}`, loadAlbumInfo);
   });
 }
@@ -147,9 +161,35 @@ function loadTrackPage(request, pageTitle) {
   if (Cookies.get('token') === null) {
     return;
   }
-  document.getElementById('main').innerHTML = `<h2>${pageTitle}</h2><div class="container"><div class="info"><div class="artisteAlbum"><div class="artiste" id="artiste" data-artiste="">
+
+  // Si c'est la playlist des favoris
+  if (pageTitle === 'Favoris') {
+    loadFavorites();
+    return;
+  }
+
+  // Vérification si on charge une playlist ou non
+  if (request.includes('../php/request.php/playlist/tracks/')) {
+    const playlistId = request.split('/')[5];
+    // Chargement du contenu de la page
+    document.getElementById('main').innerHTML = `<h2 id="title" data-playlistId="${playlistId}">${pageTitle}</h2><div id="delete-btn"></div><div id="update-btn"></div><div class="container"><div class="info"><div class="artisteAlbum"><div class="artiste" id="artiste" data-artiste="">
     </div><div class="album" id="album" data-album=""></div></div><div class="rectInfo" id="artiste-info"></div></div><div id="liste-morceau1">
     </div></div>`;
+
+    // Gestion des évènements
+    const deleteBtn = document.getElementById('delete-btn');
+    if (deleteBtn) {
+      deleteBtn.addEventListener('click', deletePlaylist);
+    }
+    const updateBtn = document.getElementById('update-btn');
+    if (updateBtn) {
+      updateBtn.addEventListener('click', updatePlaylist);
+    }
+  } else {
+    document.getElementById('main').innerHTML = `<h2>${pageTitle}</h2><div class="container"><div class="info"><div class="artisteAlbum"><div class="artiste" id="artiste" data-artiste="">
+      </div><div class="album" id="album" data-album=""></div></div><div class="rectInfo" id="artiste-info"></div></div><div id="liste-morceau1">
+      </div></div>`;
+  }
 
   // Ajout des évènements sur les boutons;
   document.getElementById('artiste').addEventListener('click', loadArtiste);
@@ -180,16 +220,15 @@ function loadGroupPage(request, pageTitle) {
   let html = `<h2>${pageTitle}</h2><div class="container">`;
 
   if (pageTitle === 'Playlists') {
-    html += '<div class="addP" id="addP"></div><div id="liste-morceau1"></div></div>';
+    html += '<div class="addP" id="add-btn"></div><div id="liste-morceau1"></div></div>';
     main.innerHTML = html;
 
     // Ajout des évènements du bouton add
-    const add = document.getElementById('addP');
-    if (add) {
-      add.addEventListener('click', createPlaylist);
+    const addBtn = document.getElementById('add-btn');
+    if (addBtn) {
+      addBtn.addEventListener('click', createPlaylist);
     }
   } else if (pageTitle === 'Artiste') {
-    console.log('Load Artiste');
     html += `<div class="info"><div class="artisteAlbum"><div class="artiste" id="artiste" data-artiste=""></div></div>
     <div class="rectInfo" id="artiste-info"></div></div><div id="liste-morceau1"></div></div>`;
     main.innerHTML = html;
@@ -218,13 +257,13 @@ function loadGroupPage(request, pageTitle) {
 
 function checkBox() {
   const boxes = document.querySelectorAll('.box');
-
   const triggerBottom = (window.innerHeight / 10) * 6;
   boxes.forEach((box, index) => {
-    console.log('yoaàui');
     box.addEventListener('click', () => {
       box.classList.add('go');
       const child = box.childNodes;
+
+      // console.log(child);
       if (child.length !== 3) {
         console.log('yop');
       }
@@ -279,4 +318,13 @@ function checkBox() {
       box.classList.remove('show');
     }
   });
+}
+
+function Play() {
+  const audio = document.getElementById('player');
+  if (audio.paused) {
+    audio.play();
+  } else {
+    audio.pause();
+  }
 }
