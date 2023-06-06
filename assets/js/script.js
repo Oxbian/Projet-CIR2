@@ -23,8 +23,6 @@ function formatDate(date) {
 const home = document.getElementById('home');
 const search = document.getElementById('recherche-icon');
 const settings = document.getElementById('param');
-const like = document.getElementById('like');
-const add = document.getElementById('add');
 
 // Gestion des évènements
 if (home) {
@@ -35,12 +33,6 @@ if (search) {
 }
 if (settings) {
   settings.addEventListener('click', loadSettings);
-}
-if (like) {
-  like.addEventListener('click', likeTrack);
-}
-if (add) {
-  add.addEventListener('click', addTrack);
 }
 
 const slider = document.querySelector('.slider');
