@@ -2,39 +2,48 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../assets/css/register.css">
-    <link rel="stylesheet" href="../assets/css/responsive.css">
-    <title>Connexion</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Style CSS -->
+  <link rel="stylesheet" href="../assets/css/fonctionnel/form.css">
+  <link rel="stylesheet" href="../assets/css/fonctionnel/responsive.css">
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.1/js.cookie.min.js"
+    integrity="sha256-oE03O+I6Pzff4fiMqwEGHbdfcW7a3GRRxlL+U49L5sA=" crossorigin="anonymous" defer></script>
+  <script src="../assets/js/ajax.js" defer></script>
+  <script src="../assets/js/form-utilities.js" defer></script>
+  <script src="../assets/js/login.js" defer></script>
+  <title>Connexion</title>
 </head>
 
 <body>
-    <main>
-        <h1 class="title">CONNEXION</h1>
+  <main>
+    <h1 class="title">CONNEXION</h1>
 
-        <!-- Messages d'erreurs -->
-        <div id="error">
-            <p>Erreur 404</p>
-        </div>
+    <!-- Messages d'erreurs -->
+    <div id="errors">
+      <p>Erreur 404</p>
+    </div>
 
-        <!-- Formulaire de connexion -->
-        <div class="form">
-            <form action="" method="get">
-                <label for="email">Email</label>
-                <input type="email" name="email" id="email" placeholder="Email" required>
-                <label for="password">Mot de passe</label>
-                <input type="password" name="password" id="password" placeholder="Mot de passe" required>
-            </form>
-        </div>
+    <!-- Formulaire de connexion -->
+    <div class="form">
+      <form action="" method="get">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" placeholder="Email" required>
+        <label for="password">Mot de passe</label>
+        <input type="password" name="password" id="password" placeholder="Mot de passe" required>
+      </form>
+    </div>
 
-        <!-- Boutons -->
-        <div class="button">
-            <a class="btn btn-secondary" href="register.html">Créer un compte</a>
-            <a class="btn btn-primary" href="">Se connecter</a>
-        </div>
-    </main>
+    <!-- Boutons -->
+    <div class="button">
+      <a class="btn btn-secondary" href="register.html">Créer un compte</a>
+      <a class="btn btn-primary" id="login-btn">Se connecter</a>
+    </div>
+  </main>
 </body>
 
 </html>

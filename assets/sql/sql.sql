@@ -26,7 +26,8 @@ CREATE TABLE utilisateur(
         prenom         Varchar (255) NOT NULL ,
         nom            Varchar (255) NOT NULL ,
         date_naissance Date NOT NULL ,
-        password       Varchar (255) NOT NULL
+        password       Varchar (255) NOT NULL ,
+        token          Varchar (50)
 	,CONSTRAINT utilisateur_PK PRIMARY KEY (email)
 )ENGINE=InnoDB;
 

@@ -1,0 +1,57 @@
+
+.info{
+  width: 60vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.artisteAlbum{
+  width: 25vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.artiste{
+  width: 15vw;
+  height: 15vw;
+  border-radius: 100%;
+  background-color: #dedede;
+}
+.album{
+
+  width: 20vw;
+  height: 10vh;
+  background-color: #dedede;
+  line-height: 10vh;
+}
+
+.rectInfo{
+  margin-top: 10vh;
+  width: 20vw;
+  height: 40vh;
+  background-color: #dedede;
+  line-height: 20vh;
+}
+
+.blue-rect {
+  width: 50px;
+  height: 50px;
+  background-color: blue;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  transform: translate(-50%, -50%);
+}
+
+
+
+
+
+
+
+
+
+

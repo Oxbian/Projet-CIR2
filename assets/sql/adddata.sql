@@ -1,4 +1,4 @@
-USE projet_web;
+yUSE projet_web;
 
 
 # ------------------------------------------------------------
@@ -6,8 +6,13 @@ USE projet_web;
 # ------------------------------------------------------------
 
 INSERT INTO utilisateur (email, prenom, nom, date_naissance, password) VALUES 
-    ("test@email.com", "test", "testo", '2000-02-29', "MONSUPERMOTDEPASSE"), 
-    ("piR@email.com", "piR", "carrey", '2000-12-31', "MOTDEPASSE");
+    ("test@email.com", "test", "testo", '2000-02-29', "89f52da4a8296d45f9cc935cdf976b709ea7f4f0023669d343a2804ae2ce4396"), 
+    ("piR@email.com", "piR", "carrey", '2000-12-31', "c397fc941ee86437a1d6be69198d5b3dac38c914fd01fff555fb3373a5685a83");
+
+# ------------------------------------------------------------
+# MONSUPERMOTDEPASSE
+# MOTDEPASSE
+# ------------------------------------------------------------
 
 # ------------------------------------------------------------
 #        Ajout de type

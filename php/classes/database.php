@@ -3,11 +3,18 @@
 require_once('inc/constants.php'); // Contient les constantes de connexion à la base de données
 require_once('inc/data_encode.php'); // Contient les fonctions pour envoyer des données au format JSON
 
+/**
+ * Classe pour gérer les requêtes  à la base de données
+ */
 class Database
 {
   private PDO $db;
 
-  // Constructeur qui initialise la connexion à la base de données
+  /**
+   * Constructeur qui initialise la connexion à la base de données 
+   *
+   * @return void
+   */
   public function __construct()
   {
     try {
@@ -18,7 +25,13 @@ class Database
     }
   }
 
-  // Fonction pour faire une requête à la base de données
+  /**
+   * Fonction pour faire une requête à la base de données
+   *
+   * @param  mixed $query Requête SQL à effectuer
+   * @param  mixed $params Paramètres de la requête
+   * @return stmt Requête préparée
+   */
   function request($query, $params = null)
   {
     if ($params != null) {
@@ -35,7 +48,13 @@ class Database
     }
   }
 
-  // Fonction pour faire une requête qui retourne plusieurs données d'une requête
+  /**
+   * Fonction pour faire une requête qui retourne plusieurs données
+   *
+   * @param  mixed $query Requête SQL à effectuer
+   * @param  mixed $params Paramètres de la requête
+   * @return Liste Résultat de la requête sous forme de liste d'array
+   */
   public function fetchAllRequest($query, $params = null)
   {
     $stmt = $this->request($query, $params);
@@ -43,7 +62,13 @@ class Database
     return $result;
   }
 
-  // Fonction pour faire une requête qui retourne une seule donnée
+  /**
+   * Fonction pour faire une requête qui retourne une seule donnée
+   *
+   * @param  mixed $query Requête SQL à effectuer
+   * @param  mixed $params Paramètres de la requête
+   * @return Array Résultat de la requête sous forme d'array
+   */
   public function fetchRequest($query, $params = null)
   {
     $stmt = $this->request($query, $params);
@@ -51,11 +76,18 @@ class Database
     return $result;
   }
 
-  // Fonction pour enlever les caractères spéciaux des paramètres
+  /**
+   * Fonction pour enlever les caractères spéciaux des paramètres
+   *
+   * @param  mixed $params Paramètres à nettoyer
+   * @return Array Paramètres nettoyés
+   */
   function sanitize_params($params)
   {
     foreach ($params as $key => $value) {
-      $params[$key] = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+      if ($key != 'password') {
+        $params[$key] = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+      }
     }
     return $params;
   }

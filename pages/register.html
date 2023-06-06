@@ -5,8 +5,17 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../assets/css/register.css">
-  <link rel="stylesheet" href="../assets/css/responsive.css">
+
+  <!-- Style CSS -->
+  <link rel="stylesheet" href="../assets/css/fonctionnel/form.css">
+  <link rel="stylesheet" href="../assets/css/fonctionnel/responsive.css">
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.1/js.cookie.min.js"
+  integrity="sha256-oE03O+I6Pzff4fiMqwEGHbdfcW7a3GRRxlL+U49L5sA=" crossorigin="anonymous" defer></script>
+  <script src="../assets/js/ajax.js" defer></script>
+  <script src="../assets/js/form-utilities.js" defer></script>
+  <script src="../assets/js/register.js" defer></script>
   <title>Création de compte</title>
 </head>
 
@@ -15,21 +24,21 @@
     <h1 class="title">CRÉER UN COMPTE</h1>
 
     <!-- Messages d'erreurs -->
-    <div id="error">
+    <div id="errors">
       <p>Erreur 404</p>
     </div>
 
     <!-- Formulaire de création de compte -->
     <div class="form">
       <form action="" method="get">
-        <label for="name">Nom</label>
-        <input type="text" name="name" id="name" placeholder="Nom" required>
-        <label for="firstname">Prénom</label>
-        <input type="text" name="firstname" id="firstname" placeholder="Prénom" required>
+        <label for="nom">Nom</label>
+        <input type="text" name="nom" id="nom" placeholder="Nom" required>
+        <label for="prenom">Prénom</label>
+        <input type="text" name="prenom" id="prenom" placeholder="Prénom" required>
         <label for="email">Email</label>
         <input type="email" name="email" id="email" placeholder="Email" required>
         <label for="date-naissance">Date de naissance</label>
-        <input type="date" name="date-naissance" id="naissance" required>
+        <input type="date" name="date-naissance" id="date-naissance" required>
         <label for="password">Mot de passe</label>
         <input type="password" name="password" id="password" placeholder="Mot de passe" required>
         <label for="password2">Confirmer le mot de passe</label>
@@ -39,8 +48,8 @@
 
     <!-- Boutons -->
     <div class="button">
-      <a class="btn btn-secondary" id="cancel" href="login.html">Déjà un compte ?</a>
-      <a class="btn btn-primary" id="create" href="login.html">Créer un compte</a>
+      <a class="btn btn-secondary" href="login.html">Déjà un compte ?</a>
+      <a class="btn btn-primary" id="register-btn">Créer un compte</a>
     </div>
 
   </main>
