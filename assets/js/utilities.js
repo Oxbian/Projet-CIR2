@@ -171,18 +171,19 @@ function loadGroupPage(request, pageTitle) {
   let html = `<h2>${pageTitle}</h2><div class="container">`;
 
   if (pageTitle === 'Playlists') {
-    html += '<div class="addP" id="add"></div><div id="liste-morceau1"></div></div>';
+    html += '<div class="addP" id="addP"></div><div id="liste-morceau1"></div></div>';
+    main.innerHTML = html;
 
     // Ajout des évènements du bouton add
-    const add = document.getElementById('add');
+    const add = document.getElementById('addP');
     if (add) {
-      console.log('Add event on add button');
       add.addEventListener('click', createPlaylist);
     }
   } else if (pageTitle === 'Artiste') {
     console.log('Load Artiste');
     html += `<div class="info"><div class="artisteAlbum"><div class="artiste" id="artiste" data-artiste=""></div></div>
     <div class="rectInfo" id="artiste-info"></div></div><div id="liste-morceau1"></div></div>`;
+    main.innerHTML = html;
 
     // Ajout des évènements sur les boutons;
     document.getElementById('artiste').addEventListener('click', loadArtiste);
@@ -190,13 +191,13 @@ function loadGroupPage(request, pageTitle) {
     html = `<div class="container"><div class="info"><div class="artisteAlbum"><div class="artiste" id="artiste" data-artiste="">
     </div><div class="album" id="album" data-album=""></div></div><div class="rectInfo" id="artiste-info"></div></div><div id="liste-morceau1">
     </div></div>`;
+    main.innerHTML = html;
 
     // Ajout des évènements sur les boutons;
     document.getElementById('artiste').addEventListener('click', loadArtiste);
     document.getElementById('album').addEventListener('click', loadAlbum);
   }
 
-  main.innerHTML = html;
   /* const container = document.getElementById('liste-morceau1');
   if (container) {
     container.addEventListener('wheel', checkBox);

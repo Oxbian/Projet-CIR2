@@ -3,7 +3,9 @@
  */
 function createPlaylist() {
   const nom = window.prompt('Nom de la playlist :');
-  ajaxRequest('POST', '../php/request.php/playlist', loadPlaylists, `nom_playlist=${nom}`);
+  if (nom != null && nom !== '') {
+    ajaxRequest('POST', '../php/request.php/playlist', loadPlaylists, `nom_playlist=${nom}`);
+  }
 }
 
 /**
