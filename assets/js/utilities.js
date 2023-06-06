@@ -72,6 +72,7 @@ function loadTrackPageEvent(event) {
  * Fonction pour charger une liste d'objets dans une page (musiques, playlists, albums)
  * @param {*} data Informations des musiques écoutées
  */
+
 function loadObjects(data) {
   console.log(data);
   const listeObjet = document.getElementById('liste-morceau1');
@@ -96,7 +97,7 @@ function loadObjects(data) {
           // Chargement des infos de l'album actuel
           ajaxRequest('GET', `../php/request.php/album/${data[index].id}`, loadAlbumInfo);
         } else {
-          listeObjet.innerHTML += `<div class="box show" id="${data[index].id}"><h2>${data[index].titre}</h2><span>${data[index].duree}</span></div>`;
+          listeObjet.innerHTML += `<div class="box show" id="${data[index].id}"><h2>${data[index].titre}</h2><h2>${data[index].duree}</h2></div>`;
           // Chargement des infos de l'album du morceau actuel
           ajaxRequest('GET', `../php/request.php/album/${data[index].id_album}`, loadAlbumInfo);
         }
@@ -105,7 +106,7 @@ function loadObjects(data) {
       } else if (data[index].nom || data[index].type) {
         listeObjet.innerHTML += `<div class="box" id="${data[index].id}"><h2>${data[index].nom}</h2></div>`;
       } else {
-        listeObjet.innerHTML += `<div class="box" id="${data[index].id}"><h2>${data[index].titre}</h2><span>${data[index].duree}</span></div>`;
+        listeObjet.innerHTML += `<div class="box" id="${data[index].id}"><h2>${data[index].titre}</h2><h2>${data[index].duree}</h2></div>`;
       }
 
       // Ajout de l'évènement sur l'objet
@@ -146,10 +147,10 @@ function loadTrackPage(request, pageTitle) {
   document.getElementById('artiste').addEventListener('click', loadArtiste);
   document.getElementById('album').addEventListener('click', loadAlbum);
 
-  /* const container = document.getElementById('liste-morceau1');
+  const container = document.getElementById('liste-morceau1');
   if (container) {
     container.addEventListener('wheel', checkBox);
-  } */
+  }
 
   // Chargement des éléments
   ajaxRequest('GET', request, loadObjects);
@@ -198,11 +199,76 @@ function loadGroupPage(request, pageTitle) {
     document.getElementById('album').addEventListener('click', loadAlbum);
   }
 
-  /* const container = document.getElementById('liste-morceau1');
+  const container = document.getElementById('liste-morceau1');
   if (container) {
     container.addEventListener('wheel', checkBox);
-  } */
+  }
 
   // Chargement des éléments
   ajaxRequest('GET', request, loadObjects);
+}
+
+function checkBox() {
+  let boxes = document.querySelectorAll('.box');
+  
+  const triggerBottom = (window.innerHeight / 10) * 6;
+  boxes.forEach((box, index) => {
+    console.log('yoaàui');
+    box.addEventListener('click', () => {
+      box.classList.add('go');
+      const child = box.childNodes;
+      if (child.length !== 3) {
+        console.log('yop');
+      }
+      if (child.length === 2) {
+        const rect = document.createElement('div');
+        rect.classList.add('blue-rect');
+        box.appendChild(rect);
+      }
+      boxes.forEach((otherBox, otherIndex) => {
+        // Vérifie si la boîte est différente de celle cliquée
+        if (otherBox === box) {
+          otherBox.classList.remove('go2');
+          otherBox.classList.remove('go3');
+        }
+        if (otherBox !== box) {
+          // Supprime la classe "go" et "go2" des autres boîtes
+          otherBox.classList.remove('go');
+          otherBox.classList.remove('go2');
+          otherBox.classList.remove('go3');
+          const blueRect = otherBox.querySelector('.blue-rect');
+          if (blueRect) {
+            blueRect.remove();
+          }
+        }
+        if (otherIndex === index - 1) {
+          otherBox.classList.add('go2');
+          otherBox.classList.remove('go3');
+        }
+
+        // Vérifie la boîte en dessous
+        if (otherIndex === index + 1) {
+          otherBox.classList.add('go2');
+          otherBox.classList.remove('go3');
+        }
+
+        if (otherIndex === index - 2) {
+          otherBox.classList.add('go3');
+          otherBox.classList.remove('go2');
+        }
+
+        // Vérifie la boîte en dessous
+        if (otherIndex === index + 2) {
+          otherBox.classList.add('go3');
+          otherBox.classList.remove('go2');
+        }
+      });
+    });
+    const boxTop = box.getBoundingClientRect().top;
+    if (boxTop < triggerBottom) {
+      box.classList.add('show');
+    } else {
+      box.classList.remove('show');
+    }
+  });
 }
