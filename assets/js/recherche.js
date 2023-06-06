@@ -46,7 +46,13 @@ function loadRecherche() {
   if (artist) {
     artist.addEventListener('click', () => { document.getElementById('liste-morceau1').innerHTML = ''; searchArtist(); });
   }
-  //container.addEventListener('wheel', checkBoxes);
+
+
+  // container.addEventListener('wheel', checkBoxes);
+  const container = document.getElementById('liste-morceau1');
+  if (container) {
+    container.addEventListener('wheel', checkBox);
+  }
 
   searchMorceau();
   searchAlbum();
