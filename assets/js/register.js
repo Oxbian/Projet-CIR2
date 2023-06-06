@@ -1,5 +1,3 @@
-const {create} = require("eslint-plugin-import/lib/rules/no-unresolved");
-
 // Récupération des éléments
 const registerBtn = document.getElementById('register-btn');
 const passwordInput = document.getElementById('password');
