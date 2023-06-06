@@ -24,7 +24,7 @@ function validateLogin() {
       case 200:
         Cookies.set('token', xhr.responseText);
         sendErrorMessage('Authentification réussite !', 'green');
-        document.location.href = 'accueil.html';
+        document.location.href = 'index.html';
         break;
 
       default:
