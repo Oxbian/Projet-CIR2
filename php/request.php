@@ -325,8 +325,9 @@ if ($requestRessource == "playlist") {
         $data = $db->dbDeleteTrackPlaylist($_DELETE['id_morceau'], $_DELETE['id_playlist']);
         sendJsonData($data, 200);
       } else if ($id != null) {
+        $tracks = $db->dbGetTracksPlaylist($id);
         foreach ($tracks as $track) {
-          $db->dbDeleteTrackPlaylist($track['id_morceau'], $id);
+          $db->dbDeleteTrackPlaylist($track['id'], $id);
         }
         $data = $db->dbDeletePlaylist($id);
         sendJsonData($data, 200);
