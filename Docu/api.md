@@ -74,7 +74,7 @@ Puis utilisez ce token en tant que cookie d'authentification dans les requêtes 
 
 - **Code d'erreurs:** 
     - 400: Paramètres manquants ou incorrects
-    - 401: Utilisatuer non connecté
+    - 401: Utilisateur non connecté
     - 200: Utilisateur modifié
 
 ### Supprimer un utilisateur

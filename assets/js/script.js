@@ -1,16 +1,17 @@
 const home = document.getElementById('home');
 const search = document.getElementById('recherche-icon');
+const settings = document.getElementById('param');
 
 if (home) {
-  home.addEventListener('click', () => {
-    loadAccueil();
-  });
+  home.addEventListener('click', loadAccueil);
 }
 
 if (search) {
-  search.addEventListener('click', () => {
-    loadRecherche();
-  });
+  search.addEventListener('click', loadRecherche);
+}
+
+if (settings) {
+  settings.addEventListener('click', loadSettings);
 }
 
 // Sélectionner les éléments nécessaires
