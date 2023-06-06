@@ -50,12 +50,19 @@ function loadAlbumInfo(data) {
  */
 function loadTrack(event) {
   console.log(`Clicked on track${event.currentTarget.trackId}`);
-  const {trackId} = event.currentTarget;
+  const { trackId } = event.currentTarget;
+  // const player = document.getElementById('player');
+  const audio = document.getElementById('player');
 
   // Chargement de l'album contenant le morceau actuel & de l'artiste du morceau
   ajaxRequest('GET', `../php/request.php/track/${trackId}`, (data) => {
     // Lancement de l'audio
-    const audio = new Audio(`../assets/musique/${data.chemin}`);
+    console.log(data);
+    document.getElementById('musique').src = `../assets/musique/${data.chemin}`;
+    audio.load();
+    document.querySelector('.total-time').innerHTML = data.duree;
+    document.querySelector('.current-time').innerHTML = '0:00';
+    // console.log(data.duree);
     audio.play();
 
     // Ajout du morceau dans les musiques écoutées
@@ -250,13 +257,13 @@ function loadGroupPage(request, pageTitle) {
 
 function checkBox() {
   const boxes = document.querySelectorAll('.box');
-
   const triggerBottom = (window.innerHeight / 10) * 6;
   boxes.forEach((box, index) => {
-    console.log('yoaàui');
     box.addEventListener('click', () => {
       box.classList.add('go');
       const child = box.childNodes;
+
+      // console.log(child);
       if (child.length !== 3) {
         console.log('yop');
       }
@@ -311,4 +318,13 @@ function checkBox() {
       box.classList.remove('show');
     }
   });
+}
+
+function Play() {
+  const audio = document.getElementById('player');
+  if (audio.paused) {
+    audio.play();
+  } else {
+    audio.pause();
+  }
 }

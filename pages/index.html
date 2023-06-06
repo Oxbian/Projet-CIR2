@@ -62,9 +62,11 @@
 
   <!-- Bas de page -->
   <footer>
-    <div class="audio audio-player">
+      <audio id="player" >
+        <source id="musique" src="" type="audio/mpeg"/>
+      </audio>
       <div class="left-footer">
-        <div id="stop-go"></div>
+        <div id="stop-go" onclick="Play()"></div>
         <div id="text">Artiste / musique</div>
       </div>
       <div class="right-footer">
@@ -82,7 +84,7 @@
           </div>
         </div>
       </div>
-    </div>
+      
   </footer>
 </body>
 </html>
