@@ -163,7 +163,7 @@ function loadTrackPage(request, pageTitle) {
   }
 
   // Si c'est la playlist des favoris
-  if (pageTitle === 'Favoris') {
+  if (pageTitle === 'Favoris' && request.includes('../php/request.php/playlist/tracks/')) {
     loadFavorites();
     return;
   }
