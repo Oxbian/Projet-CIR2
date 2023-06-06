@@ -237,3 +237,28 @@ footer {
     transform: rotateZ(1turn);
   }
 }
+
+div.row {
+  gap: 1rem;
+  flex-direction: column;
+}
+
+div.parameters {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+div.parameters > h3 {
+  color: white;
+  font-weight: 800;
+}
+
+h2.title {
+  color: white;
+  font-weight: 800;
+  font-size: 1.5rem;
+  text-decoration: underline;
+}

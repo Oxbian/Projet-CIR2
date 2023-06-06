@@ -22,7 +22,7 @@ function createUser() {
 
   // Requête AJAX
   const data = `email=${email}&prenom=${prenom}&nom=${nom}&date_naissance=${datenaissance}&password=${password}`;
-  ajaxRequest('POST', '../../php/request.php/user', (response) => {
+  ajaxRequest('POST', '../php/request.php/user', (response) => {
     if (response === 409 || response === 400) {
       sendErrorMessage('Utilisateur existant');
     } else {

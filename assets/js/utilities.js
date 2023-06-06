@@ -48,7 +48,7 @@ function loadAlbumInfo(data) {
  */
 function loadTrack(event) {
   console.log(`Clicked on track${event.currentTarget.trackId}`);
-  const {trackId} = event.currentTarget;
+  const { trackId } = event.currentTarget;
 
   // Chargement de l'album content le morceau actuel & de l'artiste du morceau
   ajaxRequest('GET', `../php/request.php/track/${trackId}`, (data) => {
@@ -72,6 +72,7 @@ function loadTrackPageEvent(event) {
  * Fonction pour charger une liste d'objets dans une page (musiques, playlists, albums)
  * @param {*} data Informations des musiques écoutées
  */
+
 function loadObjects(data) {
   console.log(data);
   const listeObjet = document.getElementById('liste-morceau1');
@@ -85,40 +86,48 @@ function loadObjects(data) {
     listeObjet.innerHTML = '';
     for (let index = 0; index < data.length; index += 1) {
       // Vérification s'il s'agit de l'élément à afficher ou non
-      if (index === 0) { // TODO: Ajouter bouton pour favoris une musique
+      if (index === 0) {
         // Vérification s'il s'agit d'une playlist, d'un artiste, d'un album ou de musiques
-        if (data[index].nom && data[index].prenom) {
+        if (data[index].type) { // Si on charge un artiste
           listeObjet.innerHTML += `<div class="box show" id="${data[index].id}"><h2>${data[index].nom} ${data[index].prenom}</h2></div>`;
-        } else if (data[index].nom) {
+        } else if (data[index].nom) { // Si on charge une playlist
           listeObjet.innerHTML += `<div class="box show" id="${data[index].id}"><h2>${data[index].nom}</h2></div>`;
-        } else if (data[index].date_parution) {
+        } else if (data[index].date_parution) { // Si on charge un album
           listeObjet.innerHTML += `<div class="box show" id="${data[index].id}"><h2>${data[index].titre}</h2></div>`;
+
           // Chargement des infos de l'album actuel
           ajaxRequest('GET', `../php/request.php/album/${data[index].id}`, loadAlbumInfo);
-        } else {
-          listeObjet.innerHTML += `<div class="box show" id="${data[index].id}"><h2>${data[index].titre}</h2><span>${data[index].duree}</span></div>`;
+        } else { // Si on charge un morceau
+          listeObjet.innerHTML += `<div class="box show" id="${data[index].id}"><h2>${data[index].titre}</h2><h2>${data[index].duree}</h2></div>`;
+
           // Chargement des infos de l'album du morceau actuel
           ajaxRequest('GET', `../php/request.php/album/${data[index].id_album}`, loadAlbumInfo);
         }
-      } else if (data[index].nom && data[index].prenom) {
+      } else if (data[index].type) { // Si on charge un artiste
         listeObjet.innerHTML += `<div class="box show" id="${data[index].id}"><h2>${data[index].nom} ${data[index].prenom}</h2></div>`;
-      } else if (data[index].nom || data[index].type) {
+      } else if (data[index].nom) { // Si on charge une playlist
         listeObjet.innerHTML += `<div class="box" id="${data[index].id}"><h2>${data[index].nom}</h2></div>`;
+      } else if (data[index].date_parution) { // Si on charge un album
+        listeObjet.innerHTML += `<div class="box" id="${data[index].id}"><h2>${data[index].titre}</h2></div>`;
       } else {
-        listeObjet.innerHTML += `<div class="box" id="${data[index].id}"><h2>${data[index].titre}</h2><span>${data[index].duree}</span></div>`;
+        listeObjet.innerHTML += `<div class="box" id="${data[index].id}"><h2>${data[index].titre}</h2><h2>${data[index].duree}</h2></div>`;
       }
 
       // Ajout de l'évènement sur l'objet
       const objet = document.getElementById(`${data[index].id}`);
-      if (objet) { // TODO: vérifier que le bouton clique bien
+      if (objet) {
         // Si c'est une playlist alors on charge les musiques de la playlist
-        if (data[index].nom) {
+        if (data[index].type) {
+          objet.addEventListener('click', loadTrackPageEvent);
+          objet.playlistId = data[index].id;
+          objet.playlistName = 'Artiste';
+        } else if (data[index].date_parution) { // Si on charge un album
+          objet.addEventListener('click', loadAlbumInfo);
+          objet.albumId = data[index].id;
+        } else if (data[index].nom) { // Si on charge une playlist
           objet.addEventListener('click', loadTrackPageEvent);
           objet.playlistId = data[index].id;
           objet.playlistName = data[index].nom;
-        } else if (data[index].type) { // Si on charge un artiste
-          objet.addEventListener('click', loadAlbumInfo);
-          objet.albumId = data[index].id;
         } else { // sinon on charge une musique
           objet.addEventListener('click', loadTrack);
           objet.trackId = data[index].id;
@@ -146,10 +155,10 @@ function loadTrackPage(request, pageTitle) {
   document.getElementById('artiste').addEventListener('click', loadArtiste);
   document.getElementById('album').addEventListener('click', loadAlbum);
 
-  /* const container = document.getElementById('liste-morceau1');
+  const container = document.getElementById('liste-morceau1');
   if (container) {
     container.addEventListener('wheel', checkBox);
-  } */
+  }
 
   // Chargement des éléments
   ajaxRequest('GET', request, loadObjects);
@@ -198,11 +207,76 @@ function loadGroupPage(request, pageTitle) {
     document.getElementById('album').addEventListener('click', loadAlbum);
   }
 
-  /* const container = document.getElementById('liste-morceau1');
+  const container = document.getElementById('liste-morceau1');
   if (container) {
     container.addEventListener('wheel', checkBox);
-  } */
+  }
 
   // Chargement des éléments
   ajaxRequest('GET', request, loadObjects);
+}
+
+function checkBox() {
+  const boxes = document.querySelectorAll('.box');
+
+  const triggerBottom = (window.innerHeight / 10) * 6;
+  boxes.forEach((box, index) => {
+    console.log('yoaàui');
+    box.addEventListener('click', () => {
+      box.classList.add('go');
+      const child = box.childNodes;
+      if (child.length !== 3) {
+        console.log('yop');
+      }
+      if (child.length === 2) {
+        const rect = document.createElement('div');
+        rect.classList.add('blue-rect');
+        box.appendChild(rect);
+      }
+      boxes.forEach((otherBox, otherIndex) => {
+        // Vérifie si la boîte est différente de celle cliquée
+        if (otherBox === box) {
+          otherBox.classList.remove('go2');
+          otherBox.classList.remove('go3');
+        }
+        if (otherBox !== box) {
+          // Supprime la classe "go" et "go2" des autres boîtes
+          otherBox.classList.remove('go');
+          otherBox.classList.remove('go2');
+          otherBox.classList.remove('go3');
+          const blueRect = otherBox.querySelector('.blue-rect');
+          if (blueRect) {
+            blueRect.remove();
+          }
+        }
+        if (otherIndex === index - 1) {
+          otherBox.classList.add('go2');
+          otherBox.classList.remove('go3');
+        }
+
+        // Vérifie la boîte en dessous
+        if (otherIndex === index + 1) {
+          otherBox.classList.add('go2');
+          otherBox.classList.remove('go3');
+        }
+
+        if (otherIndex === index - 2) {
+          otherBox.classList.add('go3');
+          otherBox.classList.remove('go2');
+        }
+
+        // Vérifie la boîte en dessous
+        if (otherIndex === index + 2) {
+          otherBox.classList.add('go3');
+          otherBox.classList.remove('go2');
+        }
+      });
+    });
+    const boxTop = box.getBoundingClientRect().top;
+    if (boxTop < triggerBottom) {
+      box.classList.add('show');
+    } else {
+      box.classList.remove('show');
+    }
+  });
 }
