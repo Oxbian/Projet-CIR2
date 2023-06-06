@@ -214,10 +214,7 @@
         border-radius: 4px;
         user-select: none;
         -webkit-user-select: none;
-        /* .play-pause-btn {
-          display: none;
-          cursor: pointer; 
-        } */
+        
       }
 
       .temps{
@@ -228,13 +225,17 @@
         width: 30vw;
       }
       .controls {
+        -webkit-user-select: none;
         font-family: "Roboto", sans-serif;
         font-size: 2vw;
         line-height: 18px;
         color: #dedede;
         justify-content: start;
+      }
 
-        
+      .current-time{
+        -webkit-user-select: none;
+        user-select: none;
       }
       
       .slider {

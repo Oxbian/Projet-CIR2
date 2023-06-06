@@ -5,8 +5,10 @@
 }
 
 #circle {
-  width: 30vw;
-  height: 30vw;
+  /* width: 30vw;
+  height: 30vw; */
+  width: 30rem;
+  height: 30rem;
 
   border-radius: 100%;
   background: #FF4644;
@@ -23,8 +25,8 @@
 }
 
 #circle::before {
-  width: 119px;
-  height: 147px;
+  width: 7.4rem;
+  height: 9.18rem;
 
   content: "";
   display: block;
@@ -34,13 +36,13 @@
 }
 
 #circle.clicked::before {
-  width: 168px;
-  height: 157px;
+  width: 10.5rem;
+  height: 9.8rem;
 
   margin-left: -1vw;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='168' height='157' fill='none'%3E%3Cpath fill='%23D9D9D9' d='M31.5 7.85C48.897 7.85 63 18.394 63 31.4v94.2c0 13.006-14.103 23.55-31.5 23.55S0 138.606 0 125.6V31.4C0 18.394 14.103 7.85 31.5 7.85ZM136.5 7.85c17.397 0 31.5 10.544 31.5 23.55v94.2c0 13.006-14.103 23.55-31.5 23.55S105 138.606 105 125.6V31.4c0-13.006 14.103-23.55 31.5-23.55Z'/%3E%3C/svg%3E") !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10.5rem' height='9.8rem' fill='none'%3E%3Cpath fill='%23D9D9D9' d='M31.5 7.85C48.897 7.85 63 18.394 63 31.4v94.2c0 13.006-14.103 23.55-31.5 23.55S0 138.606 0 125.6V31.4C0 18.394 14.103 7.85 31.5 7.85ZM136.5 7.85c17.397 0 31.5 10.544 31.5 23.55v94.2c0 13.006-14.103 23.55-31.5 23.55S105 138.606 105 125.6V31.4c0-13.006 14.103-23.55 31.5-23.55Z'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat;
 }
-
 
 #circle.clicked {
   transform: translateX(-20vw);
@@ -51,7 +53,7 @@
   position: absolute;
   width: 100%;
   /* Utilisation d'une unité de mesure relative */
-  max-width: 40vw;
+  max-width: 30rem;
   /* Limite la largeur maximale à 450px */
   height: auto;
   /* Permet à la hauteur de s'ajuster automatiquement */
@@ -62,6 +64,7 @@
   transform: translate(-50%, -50%);
   /* Centre précisément */
   text-align: right;
+  -webkit-user-select: none;
   z-index: 0;
   font-size: 2vw;
   /* Utilisation d'une unité de mesure relative (vw) pour une taille de police responsive */
@@ -75,8 +78,9 @@
 #rect2 {
   position: absolute;
   width: 100%;
+  -webkit-user-select: none;
   /* Utilisation d'une unité de mesure relative */
-  max-width: 50vw;
+  max-width: 42rem;
   /* Limite la largeur maximale à 450px */
   height: auto;
   /* Permet à la hauteur de s'ajuster automatiquement */
@@ -100,12 +104,13 @@
 #rect3 {
   position: absolute;
   width: 100%;
+  -webkit-user-select: none;
   /* Utilisation d'une unité de mesure relative */
-  max-width: 60vw;
+  max-width: 45rem;
   /* Limite la largeur maximale à 450px */
   height: auto;
   /* Permet à la hauteur de s'ajuster automatiquement */
-  left: 50vw;
+  left: 55vw;
   /* Centre horizontalement */
   top: 65vh;
   /* Centre verticalement */

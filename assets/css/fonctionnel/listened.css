@@ -20,10 +20,10 @@
 }
 
 .album {
-  width: 20vw;
+  width: 30vw;
   height: 10vh;
   background-color: #dedede;
-  line-height: 10vh;
+  line-height: 5vh;
 }
 
 .rectInfo {
@@ -31,5 +31,5 @@
   width: 20vw;
   height: 40vh;
   background-color: #dedede;
-  line-height: 20vh;
+  line-height: 10vh;
 }
