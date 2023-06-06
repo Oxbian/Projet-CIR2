@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "Projet CIR2",
-    "dateExported": "2023-06-05T16:58:08.325Z",
+    "dateExported": "2023-06-06T14:57:17.935Z",
     "version": "1.1",
     "folders": [],
     "requests": [
@@ -47,7 +47,7 @@
             "method": "GET",
             "sortNum": 10000,
             "created": "2023-06-01T14:56:13.371Z",
-            "modified": "2023-06-04T14:59:25.785Z",
+            "modified": "2023-06-06T09:20:09.965Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -57,7 +57,7 @@
             "params": [],
             "auth": {
                 "type": "bearer",
-                "bearer": "Pv6mE4L4j8XXvenRmF8aIT84h4LibkY3IltqXPCNjbE="
+                "bearer": "G7DPg9ByyZOLgbK7b5pUcBtsM7+2XCENJqNb88Ia5W8="
             },
             "tests": [
                 {
@@ -503,7 +503,7 @@
             "method": "GET",
             "sortNum": 87500,
             "created": "2023-06-01T19:32:59.088Z",
-            "modified": "2023-06-03T09:54:18.382Z",
+            "modified": "2023-06-05T20:46:07.200Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -750,11 +750,11 @@
             "colId": "4824f6fe-fdf1-49e3-a0d7-460b74c39470",
             "containerId": "",
             "name": "Get album tracks",
-            "url": "http://projet/Projet-CIR2/php/request.php/album/tracks/1",
+            "url": "http://projet/Projet-CIR2/php/request.php/album/tracks/3",
             "method": "GET",
             "sortNum": 105000,
             "created": "2023-06-01T19:29:48.763Z",
-            "modified": "2023-06-03T09:59:32.560Z",
+            "modified": "2023-06-05T20:46:16.505Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -918,11 +918,11 @@
             "colId": "4824f6fe-fdf1-49e3-a0d7-460b74c39470",
             "containerId": "",
             "name": "Get playlist tracks",
-            "url": "http://projet/Projet-CIR2/php/request.php/playlist/tracks/2",
+            "url": "http://projet/Projet-CIR2/php/request.php/playlist/tracks/1",
             "method": "GET",
             "sortNum": 130000,
             "created": "2023-06-02T09:19:11.384Z",
-            "modified": "2023-06-05T13:02:11.196Z",
+            "modified": "2023-06-06T14:47:15.842Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -932,7 +932,7 @@
             "params": [],
             "auth": {
                 "type": "bearer",
-                "bearer": "Dt3BE1XHuHRzaaJCPBu9ANT01sv6V82McqTmZVcgKmk="
+                "bearer": "kpNKRbPbIAb2Nv3FqTURF5kbYOvj/76n1+lsMUYOYIY="
             },
             "tests": [
                 {
@@ -1012,7 +1012,7 @@
             "method": "GET",
             "sortNum": 137500,
             "created": "2023-06-05T14:55:11.399Z",
-            "modified": "2023-06-05T14:55:26.507Z",
+            "modified": "2023-06-06T14:21:00.209Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -1022,7 +1022,43 @@
             "params": [],
             "auth": {
                 "type": "bearer",
-                "bearer": "Dt3BE1XHuHRzaaJCPBu9ANT01sv6V82McqTmZVcgKmk="
+                "bearer": "kpNKRbPbIAb2Nv3FqTURF5kbYOvj/76n1+lsMUYOYIY="
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                }
+            ]
+        },
+        {
+            "_id": "385a4bf4-7e57-4197-ae1c-4c409d2ad2bb",
+            "colId": "4824f6fe-fdf1-49e3-a0d7-460b74c39470",
+            "containerId": "",
+            "name": "Search playlist info",
+            "url": "http://projet/Projet-CIR2/php/request.php/playlist/search?nom_playlist=Favoris",
+            "method": "GET",
+            "sortNum": 138750,
+            "created": "2023-06-06T14:19:51.405Z",
+            "modified": "2023-06-06T14:56:44.761Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": ""
+                }
+            ],
+            "params": [
+                {
+                    "name": "nom_playlist",
+                    "value": "Favoris",
+                    "isPath": false
+                }
+            ],
+            "auth": {
+                "type": "bearer",
+                "bearer": "kpNKRbPbIAb2Nv3FqTURF5kbYOvj/76n1+lsMUYOYIY="
             },
             "tests": [
                 {
@@ -1078,7 +1114,7 @@
             "method": "POST",
             "sortNum": 150000,
             "created": "2023-06-02T09:32:58.675Z",
-            "modified": "2023-06-03T14:15:09.017Z",
+            "modified": "2023-06-06T13:39:30.388Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -1100,6 +1136,10 @@
                     }
                 ]
             },
+            "auth": {
+                "type": "bearer",
+                "bearer": "kpNKRbPbIAb2Nv3FqTURF5kbYOvj/76n1+lsMUYOYIY="
+            },
             "tests": [
                 {
                     "type": "res-code",
@@ -1118,7 +1158,7 @@
             "method": "PUT",
             "sortNum": 160000,
             "created": "2023-06-02T09:35:53.092Z",
-            "modified": "2023-06-03T14:16:35.119Z",
+            "modified": "2023-06-06T13:05:14.227Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -1136,7 +1176,7 @@
                     },
                     {
                         "name": "id_playlist",
-                        "value": "2"
+                        "value": "1"
                     }
                 ]
             },
@@ -1194,11 +1234,11 @@
             "colId": "4824f6fe-fdf1-49e3-a0d7-460b74c39470",
             "containerId": "",
             "name": "Delete playlist",
-            "url": "http://projet/Projet-CIR2/php/request.php/playlist/8",
+            "url": "http://projet/Projet-CIR2/php/request.php/playlist/1",
             "method": "DELETE",
             "sortNum": 180000,
             "created": "2023-06-02T09:50:59.785Z",
-            "modified": "2023-06-03T10:35:28.492Z",
+            "modified": "2023-06-06T13:00:01.118Z",
             "headers": [
                 {
                     "name": "Accept",
@@ -1206,6 +1246,10 @@
                 }
             ],
             "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "0e/eccA/tBCx3/0t8kjpKo1Np4LuBnl6A0TaUtOqtyY="
+            },
             "tests": [
                 {
                     "type": "res-code",

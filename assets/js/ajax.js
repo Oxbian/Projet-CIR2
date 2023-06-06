@@ -18,22 +18,24 @@ function ajaxRequest(type, _url, callback, data = null) {
   xhr.setRequestHeader('Authorization', 'Bearer ' + Cookies.get('token'));
 
   // Ajout de la fonction de retour
-  xhr.onload = () => {
-    switch (xhr.status) {
-      case 200:
-      case 201:
-        if (xhr.responseText) { // Si la réponse n'est pas vide ou fausse
-          callback(JSON.parse(xhr.responseText));
-        } else {
-          callback();
-        }
-        break;
+  if (callback != null) {
+    xhr.onload = () => {
+      switch (xhr.status) {
+        case 200:
+        case 201:
+          if (xhr.responseText) { // Si la réponse n'est pas vide ou fausse
+            callback(JSON.parse(xhr.responseText));
+          } else {
+            callback();
+          }
+          break;
 
-      default:
-        callback(xhr.status);
-        break;
-    }
-  };
+        default:
+          callback(xhr.status);
+          break;
+      }
+    };
+  }
   // Envoi de la requête
   xhr.send(data);
 }

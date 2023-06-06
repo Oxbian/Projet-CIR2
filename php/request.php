@@ -268,7 +268,9 @@ if ($requestRessource == "playlist") {
         $data = $db->dbGetTracksPlaylist($id);
       } else if ($id == 'user') { // Si on veut récupérer les playlists de l'utilisateur
         $data = $db->dbGetPlaylistsUser($login);
-      } else if ($id = 'favoris') { // Si on veut récupérer les playlists favorites de l'utilisateur
+      } else if ($id == 'search' && isset($_GET['nom_playlist'])){ // Si on veut récupérer les informations d'une playlist
+        $data = $db->dbCheckPlaylist($_GET['nom_playlist'], $login);
+      } else if ($id == 'favoris') { // Si on veut récupérer les morceaux de la playlist favoris de l'utilisateur
         $data = $db->dbGetFavoris($login);
       } else if ($id != null) { // Si on veut récupérer une playlist par ID
         $data = $db->dbInfoPlaylist($id);
@@ -279,7 +281,7 @@ if ($requestRessource == "playlist") {
       checkData($data, 200, 404);
       break;
 
-    case 'POST': //TODO: Gérer les conflits si déjà créer
+    case 'POST':
       // Vérification qu'on est bien connecté
       if (!checkVariable($login, 401)) {
         break;
@@ -287,9 +289,19 @@ if ($requestRessource == "playlist") {
       $id = getId($request);
       // Création de la playlist ou ajout de la musique
       if (isset($_POST['id_morceau']) && $_POST['id_playlist'] && $id == 'track') {
+        // Vérification si le morceau est déjà dans la playlist
+        if ($db->dbCheckMorceauPlaylist($_POST['id_morceau'], $_POST['id_playlist'])) {
+          sendError(409);
+          break;
+        }
         $data = $db->dbAddTrackPlaylist($_POST['id_morceau'], $_POST['id_playlist'], date('Y-m-d'));
         sendJsonData($data, 201);
       } else if (isset($_POST['nom_playlist'])) {
+        // Vérification si la playlist existe déjà
+        if ($db->dbCheckPlaylist($_POST['nom_playlist'], $login)) {
+          sendError(409);
+          break;
+        }
         $data = $db->dbCreatePlaylist($_POST['nom_playlist'], date('Y-m-d'), $login);
         sendJsonData($data, 201);
       } else {

@@ -49,15 +49,13 @@ function loadAlbumInfo(data) {
  * @param {*} event Objet musique sur laquelle l'utilisateur à cliqué
  */
 function loadTrack(event) {
-  console.log(`Clicked on track${event.currentTarget.trackId}`);
   const { trackId } = event.currentTarget;
-  // const player = document.getElementById('player');
   const audio = document.getElementById('player');
+  audio.dataset.musiqueid = trackId;
 
   // Chargement de l'album contenant le morceau actuel & de l'artiste du morceau
   ajaxRequest('GET', `../php/request.php/track/${trackId}`, (data) => {
     // Lancement de l'audio
-    console.log(data);
     document.getElementById('musique').src = `../assets/musique/${data.chemin}`;
     audio.load();
     document.querySelector('.total-time').innerHTML = data.duree;
