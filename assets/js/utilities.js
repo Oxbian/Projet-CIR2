@@ -49,7 +49,7 @@ function loadAlbumInfo(data) {
  * @param {*} event Objet musique sur laquelle l'utilisateur à cliqué
  */
 function loadTrack(event) {
-  const { trackId } = event.currentTarget;
+  const {trackId} = event.currentTarget;
   const audio = document.getElementById('player');
   audio.dataset.musiqueid = trackId;
 
@@ -58,8 +58,9 @@ function loadTrack(event) {
     // Lancement de l'audio
     document.getElementById('musique').src = `../assets/musique/${data.chemin}`;
     audio.load();
-    document.querySelector('.total-time').innerHTML = data.duree;
+    document.querySelector('.total-time').innerHTML = formatTime(data.duree);
     document.querySelector('.current-time').innerHTML = '0:00';
+    document.getElementById('text').textContent = data.titre;
     // console.log(data.duree);
     audio.play();
 
@@ -101,7 +102,7 @@ function loadObjects(data) {
       if (index === 0) {
         // Vérification s'il s'agit d'une playlist, d'un artiste, d'un album ou de musiques
         if (data[index].type) { // Si on charge un artiste
-          listeObjet.innerHTML += `<div class="box show" id="${data[index].id}"><h2>${data[index].nom} ${data[index].prenom}</h2></div>`;
+          listeObjet.innerHTML += `<div class="box show" onclick=""}"><h2>${data[index].nom} ${data[index].prenom}</h2></div>`;
         } else if (data[index].nom) { // Si on charge une playlist
           listeObjet.innerHTML += `<div class="box show" id="${data[index].id}"><h2>${data[index].nom}</h2></div>`;
         } else if (data[index].date_parution) { // Si on charge un album

@@ -1,3 +1,16 @@
+/**
+ * Fonction pour formater le temps
+ * @param {*} time Temps à formatter
+ * @returns Temps formaté en minutes : secondes
+ */
+function formatTime(time) {
+  const times = time.split('.');
+  return `${times[0]}:${times[1].substring(0, times[1].length - 1)}`;
+}
+
+/**
+ * Fonction pour ajouter une musique à une playlist
+ */
 function addTrack() {
   const id = document.getElementById('player').dataset.musiqueid;
   // Récupération de l'id de la playlist
@@ -51,7 +64,7 @@ const pauseButton = document.querySelector('#stop-go');
 
 // Obtenir le temps total à partir de l'élément HTML
 const totalDurationText = totalTimeElement.textContent;
-let [minutes, seconds] = totalDurationText.split(':');
+const [minutes, seconds] = totalDurationText.split(':');
 const totalDuration = parseInt(minutes, 10) * 60 + parseInt(seconds, 10);
 
 // Variables pour le temps écoulé, la barre de progression, l'intervalle et l'état de la pause
@@ -59,13 +72,6 @@ let currentTime = 0;
 let progressWidth = 0;
 let intervalId;
 let isPaused = false; // Variable pour suivre l'état de la pause
-
-// Fonction pour formater le temps au format mm:ss
-function formatTime(time) {
-  minutes = Math.floor(time / 60);
-  seconds = Math.floor(time % 60);
-  return `${minutes}:${seconds.toString().padStart(2, '0')}`;
-}
 
 // Fonction pour mettre à jour la barre de progression et le temps écoulé
 function updateProgress() {
