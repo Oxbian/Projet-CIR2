@@ -153,4 +153,33 @@ class Playlist extends Database
     );
     return $this->fetchAllRequest($query, $params);
   }
+
+  /**
+   * Fonction pour vérifier si un morceau est déjà dans une playlist
+   * 
+   * @param  mixed $morceau_id Identifiant du morceau
+   * @param  mixed $playlist_id Identifiant de la playlist
+   */
+  public function dbCheckMorceauPlaylist($morceau_id, $playlist_id) 
+  {
+    $query = 'SELECT * FROM morceau_playlist AS mp JOIN morceau AS m ON mp.id = m.id WHERE mp.id_playlist = :id_playlist AND m.id = :id_morceau';
+    $params = array(
+      'id_playlist' => $playlist_id,
+      'id_morceau' => $morceau_id
+    );
+    return $this->fetchAllRequest($query, $params);
+  }
+
+  /**
+   * Fonction pour vérifier si une playlist existe déjà
+   */
+  public function dbCheckPlaylist($nom, $email) 
+  {
+    $query = 'SELECT * FROM playlist WHERE nom = :nom AND email = :email';
+    $params = array(
+      'nom' => $nom,
+      'email' => $email
+    );
+    return $this->fetchRequest($query, $params);
+  }
 }
