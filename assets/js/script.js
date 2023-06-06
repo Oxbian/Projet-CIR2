@@ -13,13 +13,12 @@ if (search) {
   });
 }
 
-// Sélectionner les éléments nécessaires
 const slider = document.querySelector('.slider');
 const progress = document.querySelector('.progress');
 const pin = document.querySelector('.pin');
 const currentTimeElement = document.querySelector('.current-time');
 const totalTimeElement = document.querySelector('.total-time');
-const pauseButton = document.querySelector('#stop-go'); // Sélectionner le bouton de pause par son ID
+const pauseButton = document.querySelector('#stop-go');
 
 // Obtenir le temps total à partir de l'élément HTML
 const totalDurationText = totalTimeElement.textContent;
@@ -109,7 +108,7 @@ pauseButton.addEventListener('click', togglePause);
 
 // Initialisation de la barre de progression et du temps écoulé
 currentTimeElement.textContent = formatTime(currentTime);
-updateProgress();
+
 
 // Mise à jour du temps écoulé et de la barre de progression de current_time à total_time
 intervalId = setInterval(() => {
