@@ -1,5 +1,3 @@
-const {create} = require("eslint-plugin-import/lib/rules/no-unresolved");
-
 // Récupération des éléments
 const registerBtn = document.getElementById('register-btn');
 const passwordInput = document.getElementById('password');
@@ -24,7 +22,7 @@ function createUser() {
 
   // Requête AJAX
   const data = `email=${email}&prenom=${prenom}&nom=${nom}&date_naissance=${datenaissance}&password=${password}`;
-  ajaxRequest('POST', '../../php/request.php/user', (response) => {
+  ajaxRequest('POST', '../php/request.php/user', (response) => {
     if (response === 409 || response === 400) {
       sendErrorMessage('Utilisateur existant');
     } else {
