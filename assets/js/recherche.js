@@ -29,7 +29,8 @@ function searchArtist() {
 }
 
 function loadRecherche() {
-  document.getElementById('main').innerHTML = '<div class="container"><div class="info"><div class="cherche"><div class="artiste"></div><div class="album text">Album</div><div class="morceau text">Morceau</div><div class="nom text">Titre</div></div></div><div id="liste-morceau1"></div></div>';
+  document.getElementById('main').innerHTML = `<div class="container"><div class="info"><div class="cherche"><div class="artiste">
+  </div><div class="album text">Album</div><div class="morceau text">Morceau</div><div class="nom text">Titre</div></div></div><div id="liste-morceau1"></div></div>`;
 
   // Récupération des éléments
   let album = document.querySelector('.album');
@@ -52,8 +53,8 @@ function loadRecherche() {
     container.addEventListener('wheel', checkBox);
   }
 
+  // Recherche des albums, morceaux et artistes correspondants
   searchMorceau();
   searchAlbum();
   searchArtist();
-  // AJAX loadObjets pour les albums, artistes, musiques
 }

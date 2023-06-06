@@ -107,7 +107,6 @@ function loadObjects(data, playlistId = null, playlistName = null) {
   }
 
   if (listeObjet) {
-    listeObjet.innerHTML = '';
     for (let index = 0; index < data.length; index += 1) {
       // Vérification s'il s'agit de l'élément à afficher ou non
       if (index === 0) {
@@ -136,11 +135,11 @@ function loadObjects(data, playlistId = null, playlistName = null) {
         // d'un album (.date_parution) ou de musiques
         // eslint-disable-next-line no-lonely-if
         if (data[index].type) {
-          listeObjet.innerHTML += `<div class="box" onclick="loadTrackPageEvent(${data[index].id},'Artiste'"><h2>${data[index].nom} ${data[index].prenom}</h2></div>`;
+          listeObjet.innerHTML += `<div class="box" onclick="loadTrackPageEvent(${data[index].id},'Artiste')"><h2>${data[index].nom} ${data[index].prenom}</h2></div>`;
         } else if (data[index].nom) {
           listeObjet.innerHTML += `<div class="box" onclick="loadTrackPageEvent(${data[index].id}, '${data[index].nom}')"><h2>${data[index].nom}</h2></div>`;
         } else if (data[index].date_parution) {
-          listeObjet.innerHTML += `<div class="box show" onclick="loadAlbum(${data[index].id})"><h2>${data[index].titre}</h2></div>`;
+          listeObjet.innerHTML += `<div class="box" onclick="loadAlbum(${data[index].id})"><h2>${data[index].titre}</h2></div>`;
         } else if (playlistId) {
           listeObjet.innerHTML += `<div id="delete-track" onclick="deleteTrack(${data[index].id}, ${playlistId}, '${playlistName}')"><div class="box" onclick="loadTrack(${data[index].id})"><h2>${data[index].titre}</h2><h2>${formatTime(data[index].duree)}</h2></div></div>`;
         } else {
