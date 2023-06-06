@@ -13,8 +13,6 @@
   width: 0px;
 }
 
-
-
 .box {
   background-color: #dedede;
   color: #fff;
@@ -52,5 +50,7 @@
   /* titre dans les boxes */
 .box h2 {
   margin-left: 5vw;
+  font-size: medium;
+  color: #000;
   text-shadow: 2px 3px 5px #000;
 }
