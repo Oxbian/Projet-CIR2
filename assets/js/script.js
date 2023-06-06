@@ -9,6 +9,16 @@ function formatTime(time) {
 }
 
 /**
+ * Fonction pour formatter une date en jj/mm/aaaa
+ * @param {*} date Date à formatter
+ * @returns Date formatée en jj/mm/aaaa
+ */
+function formatDate(date) {
+  const dates = date.split('-');
+  return `${dates[2]}/${dates[1]}/${dates[0]}`;
+}
+
+/**
  * Fonction pour ajouter une musique à une playlist
  */
 function addTrack() {
