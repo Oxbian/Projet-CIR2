@@ -168,24 +168,26 @@ function loadGroupPage(request, pageTitle) {
 
   // Chargement du contenu de la page
   const main = document.getElementById('main');
-  main.innerHTML = `<h2>${pageTitle}</h2><div class="container">`;
+  let html = `<h2>${pageTitle}</h2><div class="container">`;
 
   if (pageTitle === 'Playlists') {
-    main.innerHTML += '<div class="addP"></div><div id="liste-morceau1"></div></div>';
+    html += '<div class="addP" id="add"></div><div id="liste-morceau1"></div></div>';
 
     // Ajout des évènements du bouton add
-    const add = document.querySelector('.addP');
+    const add = document.getElementById('add');
     if (add) {
+      console.log('Add event on add button');
       add.addEventListener('click', createPlaylist);
     }
   } else if (pageTitle === 'Artiste') {
-    main.innerHTML += `<div class="info"><div class="artisteAlbum"><div class="artiste" id="artiste" data-artiste="">
-    </div></div><div class="rectInfo" id="artiste-info"></div></div><div id="liste-morceau1"></div></div>`;
+    console.log('Load Artiste');
+    html += `<div class="info"><div class="artisteAlbum"><div class="artiste" id="artiste" data-artiste=""></div></div>
+    <div class="rectInfo" id="artiste-info"></div></div><div id="liste-morceau1"></div></div>`;
 
     // Ajout des évènements sur les boutons;
     document.getElementById('artiste').addEventListener('click', loadArtiste);
   } else if (pageTitle === 'Album') {
-    main.innerHTML += `<div class="container"><div class="info"><div class="artisteAlbum"><div class="artiste" id="artiste" data-artiste="">
+    html = `<div class="container"><div class="info"><div class="artisteAlbum"><div class="artiste" id="artiste" data-artiste="">
     </div><div class="album" id="album" data-album=""></div></div><div class="rectInfo" id="artiste-info"></div></div><div id="liste-morceau1">
     </div></div>`;
 
@@ -194,6 +196,7 @@ function loadGroupPage(request, pageTitle) {
     document.getElementById('album').addEventListener('click', loadAlbum);
   }
 
+  main.innerHTML = html;
   /* const container = document.getElementById('liste-morceau1');
   if (container) {
     container.addEventListener('wheel', checkBox);
