@@ -123,7 +123,7 @@ function loadObjects(data, playlistId = null, playlistName = null) {
           ajaxRequest('GET', `../php/request.php/artist/${data[index].id_artiste}`, loadArtistInfo);
         } else {
           if (playlistId) {
-            listeObjet.innerHTML += `<div id="delete-track" onclick="deleteTrack(${data[index].id}, ${playlistId}, '${playlistName}')"><div class="box show" onclick="loadTrack(${data[index].id})"><h2>${data[index].titre}</h2><h2>${formatTime(data[index].duree)}</h2></div></div>`;
+            listeObjet.innerHTML += `<div class="box show" onclick="loadTrack(${data[index].id})"><div id="delete-track" onclick="deleteTrack(${data[index].id}, ${playlistId}, '${playlistName}')"></div><h2>${data[index].titre}</h2><h2>${formatTime(data[index].duree)}</h2></div></div>`;
           } else {
             listeObjet.innerHTML += `<div class="box show" onclick="loadTrack(${data[index].id})"><h2>${data[index].titre}</h2><h2>${formatTime(data[index].duree)}</h2></div>`;
           }
@@ -141,7 +141,7 @@ function loadObjects(data, playlistId = null, playlistName = null) {
         } else if (data[index].date_parution) {
           listeObjet.innerHTML += `<div class="box" onclick="loadAlbum(${data[index].id})"><h2>${data[index].titre}</h2></div>`;
         } else if (playlistId) {
-          listeObjet.innerHTML += `<div id="delete-track" onclick="deleteTrack(${data[index].id}, ${playlistId}, '${playlistName}')"><div class="box" onclick="loadTrack(${data[index].id})"><h2>${data[index].titre}</h2><h2>${formatTime(data[index].duree)}</h2></div></div>`;
+          listeObjet.innerHTML += `<div class="box" onclick="loadTrack(${data[index].id})"><div id="delete-track" onclick="deleteTrack(${data[index].id}, ${playlistId}, '${playlistName}')"></div><h2>${data[index].titre}</h2><h2>${formatTime(data[index].duree)}</h2></div></div>`;
         } else {
           listeObjet.innerHTML += `<div class="box" onclick="loadTrack(${data[index].id})"><h2>${data[index].titre}</h2><h2>${formatTime(data[index].duree)}</h2></div>`;
         }
@@ -155,8 +155,8 @@ function loadObjects(data, playlistId = null, playlistName = null) {
  * @param {*} request Requête Ajax à effectuer
  * @param {*} pageTitle Titre de la page
  */
+// Si l'utilisateur n'est pas identifié
 function loadTrackPage(request, pageTitle) {
-  // Si l'utilisateur n'est pas identifié
   if (Cookies.get('token') === null) {
     return;
   }
@@ -171,7 +171,7 @@ function loadTrackPage(request, pageTitle) {
   if (request.includes('../php/request.php/playlist/tracks/')) {
     const playlistId = request.split('/')[5];
     // Chargement du contenu de la page
-    document.getElementById('main').innerHTML = `<h2>${pageTitle}</h2><div id="delete-btn" onclick="deletePlaylist(${playlistId})"></div><div id="update-btn" onclick="updatePlaylist(${playlistId})"></div>
+    document.getElementById('main').innerHTML = `<div class="container button"><h2>${pageTitle}</h2><div class="button"><div id="delete-btn" onclick="deletePlaylist(${playlistId})"></div><div id="update-btn" onclick="updatePlaylist(${playlistId})"></div></div></div>
     <div class="container"><div class="info"><div class="artisteAlbum"><div class="artiste" id="artiste"></div><div class="album" id="album">
     </div></div><div class="rectInfo" id="artiste-info"></div></div><div id="liste-morceau1">
     </div></div>`;
@@ -191,7 +191,6 @@ function loadTrackPage(request, pageTitle) {
   if (container) {
     container.addEventListener('wheel', checkBox);
   }
-
 }
 
 /**
