@@ -14,7 +14,7 @@ function loadFavorites() {
 
 /**
  * Fonction pour supprimer une playlist
- * @param {*} id - L'id de la playlist à supprimer
+ * @param {*} id L'id de la playlist à supprimer
  */
 function deletePlaylist(id) {
   ajaxRequest('DELETE', `../php/request.php/playlist/${id}`, loadPlaylists);
@@ -22,7 +22,7 @@ function deletePlaylist(id) {
 
 /**
  * Fonction pour modifier une playlist
- * @param {*} id - L'id de la playlist à modifier
+ * @param {*} id L'id de la playlist à modifier
  */
 function updatePlaylist(id) {
   // Récupération des données
@@ -42,4 +42,65 @@ function createPlaylist() {
   if (nom != null && nom !== '') {
     ajaxRequest('POST', '../php/request.php/playlist', loadPlaylists, `nom_playlist=${nom}`);
   }
+}
+
+/**
+ * Fonction pour mettre à jour le bouton like
+ * @param {*} id L'id du morceau à liker
+ * @param {*} data Les données de la requête
+ */
+function setFav(id, data) {
+  const like = document.getElementById('like');
+  console.log(id);
+  if (like) {
+    like.onclick = null;
+    if (data != 404 && data != 400) {
+      like.classList.add('liked');
+      like.onclick = () => { unlikeTrack(id); };
+    } else {
+      like.classList.remove('liked');
+      like.onclick = () => { likeTrack(id); };
+    }
+  }
+}
+
+/**
+ * Fonction pour ajouter une musique à une playlist
+ * @param {*} id_morceau L'id du morceau à ajouter
+ */
+function addTrack(id_morceau) {
+  console.log(id_morceau);
+  // Récupération de l'id de la playlist
+  const nom_playlist = window.prompt('Nom de la playlist où ajouter le morceau: ');
+  ajaxRequest('GET', '../php/request.php/playlist/search', (data) => {
+    ajaxRequest('POST', '../php/request.php/playlist/track', null, `id_morceau=${id_morceau}&id_playlist=${data.id}`);
+  }, `nom_playlist=${nom_playlist}`);
+}
+
+/**
+ * Fonction pour liker une musique
+ * @param {*} id_morceau L'id du morceau à liker
+ */
+function likeTrack(id_morceau) {
+  ajaxRequest('GET', '../php/request.php/playlist/search', (data) => {
+    // Ajout du like
+    ajaxRequest('POST', '../php/request.php/playlist/track', () => {
+      // Vérification du like
+      ajaxRequest('GET', '../php/request.php/playlist/checkfav', (data) => { setFav(id_morceau, data); }, `id_morceau=${id_morceau}`);
+    }, `id_morceau=${id_morceau}&id_playlist=${data.id}`);
+  }, 'nom_playlist=Favoris');
+}
+
+/**
+ * Fonction pour disliker un morceau
+ * @param {*} id_morceau L'id du morceau à unliker
+ */
+function unlikeTrack(id_morceau) {
+  ajaxRequest('GET', '../php/request.php/playlist/search', (data) => {
+    // Suppression du like
+    ajaxRequest('DELETE', '../php/request.php/playlist/track', () => {
+      // Vérification du like
+      ajaxRequest('GET', '../php/request.php/playlist/checkfav', (data) => { setFav(id_morceau, data); }, `id_morceau=${id_morceau}`);
+    }, `id_morceau=${id_morceau}&id_playlist=${data.id}`);
+  }, 'nom_playlist=Favoris');
 }

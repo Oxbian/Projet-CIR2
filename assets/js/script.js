@@ -18,28 +18,6 @@ function formatDate(date) {
   return `${dates[2]}/${dates[1]}/${dates[0]}`;
 }
 
-/**
- * Fonction pour ajouter une musique à une playlist
- */
-function addTrack() {
-  const id = document.getElementById('player').dataset.musiqueid;
-  // Récupération de l'id de la playlist
-  const nom_playlist = window.prompt('Nom de la playlist où ajouter le morceau: ');
-  ajaxRequest('GET', '../php/request.php/playlist/search', (data) => {
-    ajaxRequest('POST', '../php/request.php/playlist/track', null, `id_morceau=${id}&id_playlist=${data.id}`);
-  }, `nom_playlist=${nom_playlist}`);
-}
-
-/**
- * Fonction pour liker une musique
- */
-function likeTrack() {
-  const id = document.getElementById('player').dataset.musiqueid;
-  ajaxRequest('GET', '../php/request.php/playlist/favorisid', (data) => {
-    console.log(data);
-    ajaxRequest('POST', '../php/request.php/playlist/track', null, `id_morceau=${id}&id_playlist=${data.id}`);
-  });
-}
 
 // Récupération des éléments
 const home = document.getElementById('home');

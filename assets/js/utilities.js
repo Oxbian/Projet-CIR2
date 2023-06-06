@@ -55,7 +55,6 @@ function loadAlbumInfo(data) {
  */
 function loadTrack(id) {
   const audio = document.getElementById('player');
-  audio.dataset.musiqueid = id;
 
   // Chargement de l'album contenant le morceau actuel & de l'artiste du morceau
   ajaxRequest('GET', `../php/request.php/track/${id}`, (data) => {
@@ -67,6 +66,13 @@ function loadTrack(id) {
     document.getElementById('text').textContent = data.titre;
     // console.log(data.duree);
     audio.play();
+
+    // Ajout du click qui permet d'ajouter le morceau dans la playlist
+    document.getElementById('add').onclick = null;
+    document.getElementById('add').onclick = () => { addTrack(id); };
+
+    // Ajout du morceau dans les favoris
+    ajaxRequest('GET', '../php/request.php/playlist/checkfav', (data) => { setFav(id, data); }, `id_morceau=${id}`);
 
     // Ajout du morceau dans les musiques écoutées
     ajaxRequest('POST', '../php/request.php/listened', null, `id_morceau=${id}`);
@@ -165,7 +171,7 @@ function loadTrackPage(request, pageTitle) {
     </div></div>`;
   } else {
     document.getElementById('main').innerHTML = `<h2>${pageTitle}</h2><div class="container"><div class="info"><div class="artisteAlbum"><div class="artiste" id="artiste">
-      </div><div class="album" id="album" data-album=""></div></div><div class="rectInfo" id="artiste-info"></div></div><div id="liste-morceau1">
+      </div><div class="album" id="album"></div></div><div class="rectInfo" id="artiste-info"></div></div><div id="liste-morceau1">
       </div></div>`;
   }
 
@@ -200,18 +206,11 @@ function loadGroupPage(request, pageTitle) {
     html += `<div class="info"><div class="artisteAlbum"><div class="artiste" id="artiste"></div></div>
     <div class="rectInfo" id="artiste-info"></div></div><div id="liste-morceau1"></div></div>`;
     main.innerHTML = html;
-
-    // Ajout des évènements sur les boutons;
-    document.getElementById('artiste').addEventListener('click', loadArtiste);
   } else if (pageTitle === 'Album') {
     html += `<div class="info"><div class="artisteAlbum"><div class="artiste" id="artiste">
     </div><div class="album" id="album"></div></div><div class="rectInfo" id="artiste-info"></div></div><div id="liste-morceau1">
     </div></div>`;
     main.innerHTML = html;
-
-    // Ajout des évènements sur les boutons;
-    document.getElementById('artiste').addEventListener('click', loadArtiste);
-    document.getElementById('album').addEventListener('click', loadAlbum);
   }
 
   const container = document.getElementById('liste-morceau1');
