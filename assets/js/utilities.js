@@ -103,6 +103,7 @@ function loadObjects(data, playlistId = null, playlistName = null) {
   // Récupération du parent des objets à charger
   const listeObjet = document.getElementById('liste-morceau1');
 
+  console.log(playlistId);
   // Si on n'a pas de donnée à charger, on fait rien
   if (data === false || data.length === 0) {
     return;
@@ -115,7 +116,7 @@ function loadObjects(data, playlistId = null, playlistName = null) {
         // Vérification s'il s'agit d'un artiste (.type), d'une playlist (.nom),
         // d'un album (.date_parution) ou de musiques
         if (data[index].type) {
-          listeObjet.innerHTML += `<div class="box show" onclick="loadTrackPageEvent(${data[index].id}, 'Artiste')"><h2>${data[index].nom} ${data[index].prenom}</h2></div>`;
+          listeObjet.innerHTML += `<div class="box show" onclick="loadArtiste(${data[index].id})"><h2>${data[index].nom} ${data[index].prenom}</h2></div>`;
         } else if (data[index].nom) {
           listeObjet.innerHTML += `<div class="box show" onclick="loadTrackPageEvent(${data[index].id}, '${data[index].nom}')"><h2>${data[index].nom}</h2></div>`;
         } else if (data[index].date_parution) {
@@ -135,9 +136,8 @@ function loadObjects(data, playlistId = null, playlistName = null) {
       } else {
         // Vérification s'il s'agit d'un artiste (.type), d'une playlist (.nom),
         // d'un album (.date_parution) ou de musiques
-        // eslint-disable-next-line no-lonely-if
         if (data[index].type) {
-          listeObjet.innerHTML += `<div class="box" onclick="loadTrackPageEvent(${data[index].id},'Artiste')"><h2>${data[index].nom} ${data[index].prenom}</h2></div>`;
+          listeObjet.innerHTML += `<div class="box" onclick="loadArtiste(${data[index].id})"><h2>${data[index].nom} ${data[index].prenom}</h2></div>`;
         } else if (data[index].nom) {
           listeObjet.innerHTML += `<div class="box" onclick="loadTrackPageEvent(${data[index].id}, '${data[index].nom}')"><h2>${data[index].nom}</h2></div>`;
         } else if (data[index].date_parution) {
