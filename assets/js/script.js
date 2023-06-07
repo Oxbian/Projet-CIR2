@@ -78,14 +78,16 @@ function handlePinDrag(event) {
   updateProgress();
 }
 
-// Événement de déplacement du pin
-pin.addEventListener('mousedown', () => {
-  // Activer le suivi du déplacement du pin
-  document.addEventListener('mousemove', handlePinDrag);
+if (pin) {
+  // Événement de déplacement du pin
+  pin.addEventListener('mousedown', () => {
+    // Activer le suivi du déplacement du pin
+    document.addEventListener('mousemove', handlePinDrag);
 
-  // Désactiver la sélection de texte pendant le déplacement du pin
-  document.addEventListener('selectstart', (e) => e.preventDefault());
-});
+    // Désactiver la sélection de texte pendant le déplacement du pin
+    document.addEventListener('selectstart', (e) => e.preventDefault());
+  });
+}
 
 // Événement de fin de déplacement du pin
 document.addEventListener('mouseup', () => {
@@ -137,4 +139,3 @@ intervalId = setInterval(() => {
     }
   }
 }, 1000); // Mettez à jour toutes les secondes (ajustez selon vos besoins)
->>>>>>> 8971427927961f33a0b4119a1f21788421fb2c83
