@@ -56,3 +56,4 @@ L'API REST est documentée dans le fichier `Docu/api.md` [ici](Docu/api.md) et l
 ## Modifications
 
 - [x] Modification de bugs graphiques (couleurs en noirs, artiste modifiable / supprimable)
+- [x] Modification du style graphique du site pour un rendu plus sympa & plus de compréhension du design
