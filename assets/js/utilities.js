@@ -66,6 +66,8 @@ function loadTrack(id) {
     document.querySelector('.current-time').innerHTML = '0:00';
     document.getElementById('text').textContent = data.titre;
     // console.log(data.duree);
+    // Accéder à l'élément input range
+    stopGo.classList.add('clicked');
     audio.play();
 
     // Ajout du morceau dans les musiques écoutées
@@ -288,11 +290,60 @@ function checkBox() {
   });
 }
 
+const elapsed = document.querySelector('.current-time');
+const audio = document.querySelector('audio');
+const track = document.querySelector('#track');
+const volume = document.querySelector('#volume');
+const volumeValue = document.querySelector('#volume-value');
+const trackTime = document.querySelector('.total-time');
+const volumeIcone = document.querySelector('.volumeIcone');
+const stopGo = document.getElementById('stop-go');
+
+volumeIcone.addEventListener('click', () => {
+  if (volume.style.display === 'none') {
+    volume.style.display = 'initial'; // Afficher la barre de volume
+    volumeValue.style.display = 'initial'; // afficher le pourcentage de volume
+  } else {
+    volume.style.display = 'none'; // Masquer la barre de volume
+    volumeValue.style.display = 'none'; // Masquer le pourcentage de volume
+  }
+});
+
+const { duration } = audio;
+trackTime.textContent = buildDuration(duration);
+
+
 function Play() {
   const audio = document.getElementById('player');
+  stopGo.classList.toggle('clicked');
   if (audio.paused) {
     audio.play();
+    audio.volume = volume.value;
   } else {
     audio.pause();
+    audio.volume = volume.value;
   }
+}
+
+audio.addEventListener('timeupdate', function () {
+  track.value = this.currentTime;
+  elapsed.textContent = buildDuration(this.currentTime);
+});
+
+track.addEventListener('input', function () {
+  elapsed.textContent = buildDuration(this.value);
+  audio.currentTime = this.value;
+});
+
+volume.addEventListener('input', function () {
+  audio.volume = this.value;
+  volumeValue.textContent = `${this.value * 100}%`;
+});
+
+function buildDuration(duration) {
+  const minutes = Math.floor(duration / 60);
+  const rest = duration % 60;
+  let secondes = Math.floor(rest);
+  secondes = String(secondes).padStart(2, '0');
+  return `${minutes}:${secondes}`;
 }
