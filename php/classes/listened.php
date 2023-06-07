@@ -70,7 +70,7 @@ class Listened extends Database
    */
   public function dbGetListenedTracks($email)
   {
-    $query = 'SELECT m.id, m.titre, m.duree, m.chemin, m.id_album FROM morceau_utilisateur AS mu JOIN morceau AS m ON mu.id = m.id WHERE mu.email = :email ORDER BY mu.date_ecoute DESC LIMIT 10';
+    $query = 'SELECT m.id, m.titre, m.duree, m.chemin, m.id_album FROM morceau_utilisateur AS mu JOIN morceau AS m ON mu.id = m.id WHERE mu.email = :email ORDER BY mu.date_ecoute DESC';
     $params = array(
       'email' => $email
     );
