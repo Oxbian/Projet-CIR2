@@ -45,21 +45,11 @@ function loadChangeSettings() {
   <input type="date" name="date-naissance" id="date-naissance"><label for="password">Mot de passe</label>
   <input type="password" name="password" id="password" placeholder="Mot de passe"><label for="password2">Confirmer le mot de passe</label>
   <input type="password" name="password2" id="password2" placeholder="Confirmer le mot de passe"></form>
-  </div><div class="button"><a class="btn btn-secondary" id="cancel">Annuler</a><a class="btn btn-primary" id="update">Enregistrer</a></div></div>`;
+  </div><div class="button"><a class="btn btn-secondary" onclick="loadSettings()">Annuler</a><a class="btn btn-primary" onclick="updateSettings()">Enregistrer</a></div></div>`;
 
   // Récupération des éléments
-  const cancelBtn = document.getElementById('cancel');
-  const updateBtn = document.getElementById('update');
   const passwordInput = document.getElementById('password');
   const confirmPasswordInput = document.getElementById('password2');
-
-  // Ajout des événements
-  if (cancelBtn) {
-    cancelBtn.addEventListener('click', loadSettings);
-  }
-  if (updateBtn) {
-    updateBtn.addEventListener('click', updateSettings);
-  }
 
   // Vérification du mot de passe et de la confirmation du mot de passe
   if (passwordInput && confirmPasswordInput) {
@@ -87,20 +77,8 @@ function loadChangeSettings() {
 function loadSettings() {
   document.getElementById('main').innerHTML = `<div class="container row"><div id="errors"><p>Error 404</p></div><div><h2 class="title">Utilisateur</h2><div class="parameters"><h3>Nom: </h3><p id="nom"></p>
     </div><div class="parameters"><h3>Prénom: </h3><p id="prenom"></p></div><div class="parameters"><h3>Date de naissance: </h3><p id="date-naissance"></p></div>
-    <div class="parameters"><h3>Email: </h3><p id="email"></p></div></div><div class="container row"><a class="btn btn-primary" id="change-settings">Modifier</a>
-    <a class="btn btn-secondary" id="disconnect">Déconnexion</a></div></div>`;
-
-  // Récupération des éléments
-  const changeSettingsBtn = document.getElementById('change-settings');
-  const disconnectBtn = document.getElementById('disconnect');
-
-  // Ajout des événements
-  if (changeSettingsBtn) {
-    changeSettingsBtn.addEventListener('click', loadChangeSettings);
-  }
-  if (disconnectBtn) {
-    disconnectBtn.addEventListener('click', disconnect);
-  }
+    <div class="parameters"><h3>Email: </h3><p id="email"></p></div></div><div class="container row"><a class="btn btn-primary" onclick="loadChangeSettings()">Modifier</a>
+    <a class="btn btn-secondary" onclick="disconnect()">Déconnexion</a></div></div>`;
 
   // Requête AJAX
   ajaxRequest('GET', '../php/request.php/user', (response) => {

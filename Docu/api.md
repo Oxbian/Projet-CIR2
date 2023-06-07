@@ -278,6 +278,32 @@ Puis utilisez ce token en tant que cookie d'authentification dans les requêtes 
     - 404: Morceaux favoris non trouvées
     - 200: Ok
 
+### Chercher une playlist
+
+- **GET** http://prj-cir-web-grp-56/php/request.php/playlist/search + form-encode avec les champs suivants:  
+    - nom_playlist
+
+- **Retourne:** les informations de la playlist favoris de l'utilisateur
+
+- **Code d'erreurs:**
+    - 400: Paramètres manquants ou incorrects
+    - 401: Utilisateur non connecté
+    - 404: Playlist favoris non trouvée
+    - 200: Ok
+
+### Vérifier qu'un morceau est dans les favoris
+
+- **GET** http://prj-cir-web-grp-56/php/request.php/playlist/checkfav + form-encode avec les champs suivants:  
+    - id_morceau
+
+- **Retourne:** un booléen indiquant si le morceau est dans les favoris ou non
+
+- **Code d'erreurs:**
+    - 400: Paramètres manquants ou incorrects
+    - 401: Utilisateur non connecté
+    - 404: Morceau non trouvé
+    - 200: Ok
+
 ### Créer une playlist
 
 - **POST** http://prj-cir-web-grp-56/php/request.php/playlist + form-encode avec les champs suivants:  
@@ -288,6 +314,7 @@ Puis utilisez ce token en tant que cookie d'authentification dans les requêtes 
 - **Code d'erreurs:**
     - 400: Paramètres manquants ou incorrects
     - 401: Utilisateur non connecté
+    - 409: Playlist déjà existante
     - 201: Playlist créée
 
 ### Ajouter un morceau à une playlist
@@ -302,6 +329,7 @@ Puis utilisez ce token en tant que cookie d'authentification dans les requêtes 
     - 400: Paramètres manquants ou incorrects
     - 401: Utilisateur non connecté
     - 404: Playlist ou morceau non trouvés
+    - 409: Morceau déjà dans la playlist
     - 201: Morceau ajouté à la playlist
 
 ### Mettre à jour les infos d'une playlist

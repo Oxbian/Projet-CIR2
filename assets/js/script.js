@@ -1,15 +1,35 @@
+/**
+ * Fonction pour formater le temps
+ * @param {*} time Temps à formatter
+ * @returns Temps formaté en minutes : secondes
+ */
+function formatTime(time) {
+  const times = time.split('.');
+  return `${times[0]}:${times[1].substring(0, times[1].length - 1)}`;
+}
+
+/**
+ * Fonction pour formatter une date en jj/mm/aaaa
+ * @param {*} date Date à formatter
+ * @returns Date formatée en jj/mm/aaaa
+ */
+function formatDate(date) {
+  const dates = date.split('-');
+  return `${dates[2]}/${dates[1]}/${dates[0]}`;
+}
+
+// Récupération des éléments
 const home = document.getElementById('home');
 const search = document.getElementById('recherche-icon');
 const settings = document.getElementById('param');
 
+// Gestion des évènements
 if (home) {
   home.addEventListener('click', loadAccueil);
 }
-
 if (search) {
   search.addEventListener('click', loadRecherche);
 }
-
 if (settings) {
   settings.addEventListener('click', loadSettings);
 }
@@ -23,7 +43,7 @@ const pauseButton = document.querySelector('#stop-go');
 
 // Obtenir le temps total à partir de l'élément HTML
 const totalDurationText = totalTimeElement.textContent;
-let [minutes, seconds] = totalDurationText.split(':');
+const [minutes, seconds] = totalDurationText.split(':');
 const totalDuration = parseInt(minutes, 10) * 60 + parseInt(seconds, 10);
 
 // Variables pour le temps écoulé, la barre de progression, l'intervalle et l'état de la pause
@@ -31,13 +51,6 @@ let currentTime = 0;
 let progressWidth = 0;
 let intervalId;
 let isPaused = false; // Variable pour suivre l'état de la pause
-
-// Fonction pour formater le temps au format mm:ss
-function formatTime(time) {
-  minutes = Math.floor(time / 60);
-  seconds = Math.floor(time % 60);
-  return `${minutes}:${seconds.toString().padStart(2, '0')}`;
-}
 
 // Fonction pour mettre à jour la barre de progression et le temps écoulé
 function updateProgress() {
@@ -65,14 +78,16 @@ function handlePinDrag(event) {
   updateProgress();
 }
 
-// Événement de déplacement du pin
-pin.addEventListener('mousedown', () => {
-  // Activer le suivi du déplacement du pin
-  document.addEventListener('mousemove', handlePinDrag);
+if (pin) {
+  // Événement de déplacement du pin
+  pin.addEventListener('mousedown', () => {
+    // Activer le suivi du déplacement du pin
+    document.addEventListener('mousemove', handlePinDrag);
 
-  // Désactiver la sélection de texte pendant le déplacement du pin
-  document.addEventListener('selectstart', (e) => e.preventDefault());
-});
+    // Désactiver la sélection de texte pendant le déplacement du pin
+    document.addEventListener('selectstart', (e) => e.preventDefault());
+  });
+}
 
 // Événement de fin de déplacement du pin
 document.addEventListener('mouseup', () => {
@@ -109,7 +124,6 @@ pauseButton.addEventListener('click', togglePause);
 
 // Initialisation de la barre de progression et du temps écoulé
 currentTimeElement.textContent = formatTime(currentTime);
-
 
 // Mise à jour du temps écoulé et de la barre de progression de current_time à total_time
 intervalId = setInterval(() => {

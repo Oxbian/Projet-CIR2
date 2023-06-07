@@ -1,16 +1,16 @@
 /**
  * Fonction pour demander le chargement de la page d'un artiste
+ * @param {*} artisteId Id de l'artiste à charger
  */
-function loadArtiste() {
-  const artisteId = document.getElementById('artiste').dataset.artiste;
+function loadArtiste(artisteId) {
   loadGroupPage(`../php/request.php/artist/albums/${artisteId}`, 'Artiste');
 }
 
 /**
  * Fonction pour demander le chargement la page d'un album
+ * @param {*} albumId Id de l'album à charger
  */
-function loadAlbum() {
-  const albumId = document.getElementById('album').dataset.album;
+function loadAlbum(albumId) {
   loadGroupPage(`../php/request.php/album/tracks/${albumId}`, 'Album');
 }
 
@@ -19,13 +19,16 @@ function loadAlbum() {
  * @param {*} data Informations de l'artiste
  */
 function loadArtistInfo(data) {
-  let artiste = document.getElementById('artiste-info');
-  if (artiste) {
-    artiste.innerHTML = `<p>Artiste : ${data.nom} ${data.prenom}<br>Type: ${data.type}</p>`;
+  // Récupération des éléments
+  const artisteInfo = document.getElementById('artiste-info');
+  const artiste = document.getElementById('artiste');
+
+  // Ajout des informations
+  if (artisteInfo) {
+    artisteInfo.innerHTML = `<p>Artiste : ${data.nom} ${data.prenom}<br>Type: ${data.type}</p>`;
   }
-  artiste = document.getElementById('artiste');
   if (artiste) {
-    artiste.dataset.artiste = data.id;
+    artiste.onclick = () => {loadArtiste(data.id);};
   }
 }
 
@@ -34,10 +37,12 @@ function loadArtistInfo(data) {
  * @param {*} data Informations de l'album
  */
 function loadAlbumInfo(data) {
+  // Récupération de l'album et ajout des infos
   const albumNom = document.getElementById('album');
+  // Modification onclick album
   if (albumNom) {
-    albumNom.innerHTML = `<p>Album : ${data.titre}<br>Date parution: ${data.date_parution}</p>`;
-    albumNom.dataset.album = data.id;
+    albumNom.innerHTML = `<p>Album : ${data.titre}<br>Date parution: ${formatDate(data.date_parution)}</p>`;
+    albumNom.onclick = () => {loadAlbum(data.id);};
   }
 
   // Chargement des informations de l'artiste de l'album
@@ -45,28 +50,34 @@ function loadAlbumInfo(data) {
 }
 
 /**
- * Fonction pour charger une musique dans une page
- * @param {*} event Objet musique sur laquelle l'utilisateur à cliqué
+ * Fonction pour charger un morceau dans une page
+ * @param {*} id Id du morceau à charger
  */
-function loadTrack(event) {
-  console.log(`Clicked on track${event.currentTarget.trackId}`);
-  const { trackId } = event.currentTarget;
-  // const player = document.getElementById('player');
+function loadTrack(id) {
   const audio = document.getElementById('player');
 
   // Chargement de l'album contenant le morceau actuel & de l'artiste du morceau
-  ajaxRequest('GET', `../php/request.php/track/${trackId}`, (data) => {
+  ajaxRequest('GET', `../php/request.php/track/${id}`, (data) => {
     // Lancement de l'audio
-    console.log(data);
     document.getElementById('musique').src = `../assets/musique/${data.chemin}`;
     audio.load();
-    document.querySelector('.total-time').innerHTML = data.duree;
+    document.querySelector('.total-time').innerHTML = formatTime(data.duree);
     document.querySelector('.current-time').innerHTML = '0:00';
+    document.getElementById('text').textContent = data.titre;
     // console.log(data.duree);
+    // Accéder à l'élément input range
+    stopGo.classList.add('clicked');
     audio.play();
 
+    // Ajout du click qui permet d'ajouter le morceau dans la playlist
+    document.getElementById('add').onclick = null;
+    document.getElementById('add').onclick = () => {addTrack(id);};
+
+    // Ajout du morceau dans les favoris
+    ajaxRequest('GET', '../php/request.php/playlist/checkfav', (data) => {setFav(id, data);}, `id_morceau=${id}`);
+
     // Ajout du morceau dans les musiques écoutées
-    ajaxRequest('POST', '../php/request.php/listened', null, `id_morceau=${trackId}`);
+    ajaxRequest('POST', '../php/request.php/listened', null, `id_morceau=${id}`);
 
     // Chargement des informations de l'album et de l'artiste du morceau
     ajaxRequest('GET', `../php/request.php/album/${data.id_album}`, loadAlbumInfo);
@@ -75,20 +86,21 @@ function loadTrack(event) {
 
 /**
  * Fonction pour demander le chargement d'une playlist
- * @param {*} event Objet playlist sur lequel l'utilisateur à cliqué
+ * @param {*} playlistId Id de la playlist à charger
+ * @param {*} playlistName Nom de la playlist à charger
  */
-function loadTrackPageEvent(event) {
-  console.log(`Clicked on playlist${event.currentTarget.playlistId}`);
-  loadTrackPage(`../php/request.php/playlist/tracks/${event.currentTarget.playlistId}`, `${event.currentTarget.playlistName}`);
+function loadTrackPageEvent(playlistId, playlistName) {
+  loadTrackPage(`../php/request.php/playlist/tracks/${playlistId}`, `${playlistName}`);
 }
 
 /**
  * Fonction pour charger une liste d'objets dans une page (musiques, playlists, albums)
  * @param {*} data Informations des musiques écoutées
+ * @param {*} playlistId Id de la playlist à charger
+ * @param {*} playlistName Nom de la playlist à charger
  */
-
-function loadObjects(data) {
-  console.log(data);
+function loadObjects(data, playlistId = null, playlistName = null) {
+  // Récupération du parent des objets à charger
   const listeObjet = document.getElementById('liste-morceau1');
 
   // Si on n'a pas de donnée à charger, on fait rien
@@ -97,54 +109,43 @@ function loadObjects(data) {
   }
 
   if (listeObjet) {
-    listeObjet.innerHTML = '';
     for (let index = 0; index < data.length; index += 1) {
       // Vérification s'il s'agit de l'élément à afficher ou non
       if (index === 0) {
-        // Vérification s'il s'agit d'une playlist, d'un artiste, d'un album ou de musiques
-        if (data[index].type) { // Si on charge un artiste
-          listeObjet.innerHTML += `<div class="box show" id="${data[index].id}"><h2>${data[index].nom} ${data[index].prenom}</h2></div>`;
-        } else if (data[index].nom) { // Si on charge une playlist
-          listeObjet.innerHTML += `<div class="box show" id="${data[index].id}"><h2>${data[index].nom}</h2></div>`;
-        } else if (data[index].date_parution) { // Si on charge un album
-          listeObjet.innerHTML += `<div class="box show" id="${data[index].id}"><h2>${data[index].titre}</h2></div>`;
+        // Vérification s'il s'agit d'un artiste (.type), d'une playlist (.nom),
+        // d'un album (.date_parution) ou de musiques
+        if (data[index].type) {
+          listeObjet.innerHTML += `<div class="box show" onclick="loadTrackPageEvent(${data[index].id}, 'Artiste')"><h2>${data[index].nom} ${data[index].prenom}</h2></div>`;
+        } else if (data[index].nom) {
+          listeObjet.innerHTML += `<div class="box show" onclick="loadTrackPageEvent(${data[index].id}, '${data[index].nom}')"><h2>${data[index].nom}</h2></div>`;
+        } else if (data[index].date_parution) {
+          listeObjet.innerHTML += `<div class="box show" onclick="loadAlbum(${data[index].id})"><h2>${data[index].titre}</h2></div>`;
 
-          // Chargement des infos de l'album actuel
-          ajaxRequest('GET', `../php/request.php/album/${data[index].id}`, loadAlbumInfo);
-        } else { // Si on charge un morceau
-          listeObjet.innerHTML += `<div class="box show" id="${data[index].id}"><h2>${data[index].titre}</h2><h2>${data[index].duree}</h2></div>`;
-
+          // Chargement des infos de l'artiste actuel
+          ajaxRequest('GET', `../php/request.php/artist/${data[index].id_artiste}`, loadArtistInfo);
+        } else {
+          if (playlistId) {
+            listeObjet.innerHTML += `<div class="box show" onclick="loadTrack(${data[index].id})"><div id="delete-track" onclick="deleteTrack(${data[index].id}, ${playlistId}, '${playlistName}')"></div><h2>${data[index].titre}</h2><h2>${formatTime(data[index].duree)}</h2></div></div>`;
+          } else {
+            listeObjet.innerHTML += `<div class="box show" onclick="loadTrack(${data[index].id})"><h2>${data[index].titre}</h2><h2>${formatTime(data[index].duree)}</h2></div>`;
+          }
           // Chargement des infos de l'album du morceau actuel
           ajaxRequest('GET', `../php/request.php/album/${data[index].id_album}`, loadAlbumInfo);
         }
-      } else if (data[index].type) { // Si on charge un artiste
-        listeObjet.innerHTML += `<div class="box show" id="${data[index].id}"><h2>${data[index].nom} ${data[index].prenom}</h2></div>`;
-      } else if (data[index].nom) { // Si on charge une playlist
-        listeObjet.innerHTML += `<div class="box" id="${data[index].id}"><h2>${data[index].nom}</h2></div>`;
-      } else if (data[index].date_parution) { // Si on charge un album
-        listeObjet.innerHTML += `<div class="box" id="${data[index].id}"><h2>${data[index].titre}</h2></div>`;
       } else {
-        listeObjet.innerHTML += `<div class="box" id="${data[index].id}"><h2>${data[index].titre}</h2><h2>${data[index].duree}</h2></div>`;
-      }
-
-      // Ajout de l'évènement sur l'objet
-      const objet = document.getElementById(`${data[index].id}`);
-      if (objet) {
-        // Si c'est une playlist alors on charge les musiques de la playlist
+        // Vérification s'il s'agit d'un artiste (.type), d'une playlist (.nom),
+        // d'un album (.date_parution) ou de musiques
+        // eslint-disable-next-line no-lonely-if
         if (data[index].type) {
-          objet.addEventListener('click', loadTrackPageEvent);
-          objet.playlistId = data[index].id;
-          objet.playlistName = 'Artiste';
-        } else if (data[index].date_parution) { // Si on charge un album
-          objet.addEventListener('click', loadAlbumInfo);
-          objet.albumId = data[index].id;
-        } else if (data[index].nom) { // Si on charge une playlist
-          objet.addEventListener('click', loadTrackPageEvent);
-          objet.playlistId = data[index].id;
-          objet.playlistName = data[index].nom;
-        } else { // sinon on charge une musique
-          objet.addEventListener('click', loadTrack);
-          objet.trackId = data[index].id;
+          listeObjet.innerHTML += `<div class="box" onclick="loadTrackPageEvent(${data[index].id},'Artiste')"><h2>${data[index].nom} ${data[index].prenom}</h2></div>`;
+        } else if (data[index].nom) {
+          listeObjet.innerHTML += `<div class="box" onclick="loadTrackPageEvent(${data[index].id}, '${data[index].nom}')"><h2>${data[index].nom}</h2></div>`;
+        } else if (data[index].date_parution) {
+          listeObjet.innerHTML += `<div class="box" onclick="loadAlbum(${data[index].id})"><h2>${data[index].titre}</h2></div>`;
+        } else if (playlistId) {
+          listeObjet.innerHTML += `<div class="box" onclick="loadTrack(${data[index].id})"><div id="delete-track" onclick="deleteTrack(${data[index].id}, ${playlistId}, '${playlistName}')"></div><h2>${data[index].titre}</h2><h2>${formatTime(data[index].duree)}</h2></div></div>`;
+        } else {
+          listeObjet.innerHTML += `<div class="box" onclick="loadTrack(${data[index].id})"><h2>${data[index].titre}</h2><h2>${formatTime(data[index].duree)}</h2></div>`;
         }
       }
     }
@@ -156,8 +157,8 @@ function loadObjects(data) {
  * @param {*} request Requête Ajax à effectuer
  * @param {*} pageTitle Titre de la page
  */
+// Si l'utilisateur n'est pas identifié
 function loadTrackPage(request, pageTitle) {
-  // Si l'utilisateur n'est pas identifié
   if (Cookies.get('token') === null) {
     return;
   }
@@ -172,36 +173,26 @@ function loadTrackPage(request, pageTitle) {
   if (request.includes('../php/request.php/playlist/tracks/')) {
     const playlistId = request.split('/')[5];
     // Chargement du contenu de la page
-    document.getElementById('main').innerHTML = `<h2 id="title" data-playlistId="${playlistId}">${pageTitle}</h2><div id="delete-btn"></div><div id="update-btn"></div><div class="container"><div class="info"><div class="artisteAlbum"><div class="artiste" id="artiste" data-artiste="">
-    </div><div class="album" id="album" data-album=""></div></div><div class="rectInfo" id="artiste-info"></div></div><div id="liste-morceau1">
+    document.getElementById('main').innerHTML = `<div class="container button"><h2>${pageTitle}</h2><div class="button"><div id="delete-btn" onclick="deletePlaylist(${playlistId})"></div><div id="update-btn" onclick="updatePlaylist(${playlistId})"></div></div></div>
+    <div class="container"><div class="info"><div class="artisteAlbum"><div class="artiste" id="artiste"></div><div class="album" id="album">
+    </div></div><div class="rectInfo" id="artiste-info"></div></div><div id="liste-morceau1">
     </div></div>`;
 
-    // Gestion des évènements
-    const deleteBtn = document.getElementById('delete-btn');
-    if (deleteBtn) {
-      deleteBtn.addEventListener('click', deletePlaylist);
-    }
-    const updateBtn = document.getElementById('update-btn');
-    if (updateBtn) {
-      updateBtn.addEventListener('click', updatePlaylist);
-    }
+    // Chargement des éléments
+    ajaxRequest('GET', request, (data) => { loadObjects(data, playlistId, pageTitle); });
   } else {
-    document.getElementById('main').innerHTML = `<h2>${pageTitle}</h2><div class="container"><div class="info"><div class="artisteAlbum"><div class="artiste" id="artiste" data-artiste="">
-      </div><div class="album" id="album" data-album=""></div></div><div class="rectInfo" id="artiste-info"></div></div><div id="liste-morceau1">
+    document.getElementById('main').innerHTML = `<h2>${pageTitle}</h2><div class="container"><div class="info"><div class="artisteAlbum"><div class="artiste" id="artiste">
+      </div><div class="album" id="album"></div></div><div class="rectInfo" id="artiste-info"></div></div><div id="liste-morceau1">
       </div></div>`;
-  }
 
-  // Ajout des évènements sur les boutons;
-  document.getElementById('artiste').addEventListener('click', loadArtiste);
-  document.getElementById('album').addEventListener('click', loadAlbum);
+    // Chargement des éléments
+    ajaxRequest('GET', request, loadObjects);
+  }
 
   const container = document.getElementById('liste-morceau1');
   if (container) {
     container.addEventListener('wheel', checkBox);
   }
-
-  // Chargement des éléments
-  ajaxRequest('GET', request, loadObjects);
 }
 
 /**
@@ -220,30 +211,17 @@ function loadGroupPage(request, pageTitle) {
   let html = `<h2>${pageTitle}</h2><div class="container">`;
 
   if (pageTitle === 'Playlists') {
-    html += '<div class="addP" id="add-btn"></div><div id="liste-morceau1"></div></div>';
+    html += '<div class="addP" id="add-btn" onclick="createPlaylist()"></div><div id="liste-morceau1"></div></div>';
     main.innerHTML = html;
-
-    // Ajout des évènements du bouton add
-    const addBtn = document.getElementById('add-btn');
-    if (addBtn) {
-      addBtn.addEventListener('click', createPlaylist);
-    }
   } else if (pageTitle === 'Artiste') {
-    html += `<div class="info"><div class="artisteAlbum"><div class="artiste" id="artiste" data-artiste=""></div></div>
+    html += `<div class="info"><div class="artisteAlbum"><div class="artiste" id="artiste"></div></div>
     <div class="rectInfo" id="artiste-info"></div></div><div id="liste-morceau1"></div></div>`;
     main.innerHTML = html;
-
-    // Ajout des évènements sur les boutons;
-    document.getElementById('artiste').addEventListener('click', loadArtiste);
   } else if (pageTitle === 'Album') {
-    html = `<div class="container"><div class="info"><div class="artisteAlbum"><div class="artiste" id="artiste" data-artiste="">
-    </div><div class="album" id="album" data-album=""></div></div><div class="rectInfo" id="artiste-info"></div></div><div id="liste-morceau1">
+    html += `<div class="info"><div class="artisteAlbum"><div class="artiste" id="artiste">
+    </div><div class="album" id="album"></div></div><div class="rectInfo" id="artiste-info"></div></div><div id="liste-morceau1">
     </div></div>`;
     main.innerHTML = html;
-
-    // Ajout des évènements sur les boutons;
-    document.getElementById('artiste').addEventListener('click', loadArtiste);
-    document.getElementById('album').addEventListener('click', loadAlbum);
   }
 
   const container = document.getElementById('liste-morceau1');
@@ -263,10 +241,6 @@ function checkBox() {
       box.classList.add('go');
       const child = box.childNodes;
 
-      // console.log(child);
-      if (child.length !== 3) {
-        console.log('yop');
-      }
       if (child.length === 2) {
         const rect = document.createElement('div');
         rect.classList.add('blue-rect');
@@ -320,11 +294,60 @@ function checkBox() {
   });
 }
 
+const elapsed = document.querySelector('.current-time');
+const audio = document.querySelector('audio');
+const track = document.querySelector('#track');
+const volume = document.querySelector('#volume');
+const volumeValue = document.querySelector('#volume-value');
+const trackTime = document.querySelector('.total-time');
+const volumeIcone = document.querySelector('.volumeIcone');
+const stopGo = document.getElementById('stop-go');
+
+volumeIcone.addEventListener('click', () => {
+  if (volume.style.display === 'none') {
+    volume.style.display = 'initial'; // Afficher la barre de volume
+    volumeValue.style.display = 'initial'; // afficher le pourcentage de volume
+  } else {
+    volume.style.display = 'none'; // Masquer la barre de volume
+    volumeValue.style.display = 'none'; // Masquer le pourcentage de volume
+  }
+});
+
+const { duration } = audio;
+trackTime.textContent = buildDuration(duration);
+
+
 function Play() {
   const audio = document.getElementById('player');
+  stopGo.classList.toggle('clicked');
   if (audio.paused) {
     audio.play();
+    audio.volume = volume.value;
   } else {
     audio.pause();
+    audio.volume = volume.value;
   }
+}
+
+audio.addEventListener('timeupdate', function () {
+  track.value = this.currentTime;
+  elapsed.textContent = buildDuration(this.currentTime);
+});
+
+track.addEventListener('input', function () {
+  elapsed.textContent = buildDuration(this.value);
+  audio.currentTime = this.value;
+});
+
+volume.addEventListener('input', function () {
+  audio.volume = this.value;
+  volumeValue.textContent = `${this.value * 100}%`;
+});
+
+function buildDuration(duration) {
+  const minutes = Math.floor(duration / 60);
+  const rest = duration % 60;
+  let secondes = Math.floor(rest);
+  secondes = String(secondes).padStart(2, '0');
+  return `${minutes}:${secondes}`;
 }
