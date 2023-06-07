@@ -210,6 +210,15 @@ footer {
   background-size: cover;
   margin-left: 5vw;
   justify-content: start;
+  
+}
+
+.liked {
+  width: 1.5rem;
+  height: 1.5rem;
+  background-size: cover;
+  margin-left: 5vw;
+  justify-content: start;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='25' height='25' fill='none'%3E%3Cpath fill='%23fff' fill-rule='evenodd' d='M12.5 2.19c6.935-7.603 24.272 5.703 0 22.81-24.272-17.107-6.935-30.413 0-22.81Z' clip-rule='evenodd'/%3E%3C/svg%3E");
 }
 

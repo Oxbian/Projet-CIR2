@@ -291,6 +291,19 @@ Puis utilisez ce token en tant que cookie d'authentification dans les requêtes 
     - 404: Playlist favoris non trouvée
     - 200: Ok
 
+### Vérifier qu'un morceau est dans les favoris
+
+- **GET** http://prj-cir-web-grp-56/php/request.php/playlist/checkfav + form-encode avec les champs suivants:  
+    - id_morceau
+
+- **Retourne:** un booléen indiquant si le morceau est dans les favoris ou non
+
+- **Code d'erreurs:**
+    - 400: Paramètres manquants ou incorrects
+    - 401: Utilisateur non connecté
+    - 404: Morceau non trouvé
+    - 200: Ok
+
 ### Créer une playlist
 
 - **POST** http://prj-cir-web-grp-56/php/request.php/playlist + form-encode avec les champs suivants:  

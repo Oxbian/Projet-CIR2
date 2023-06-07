@@ -28,7 +28,7 @@ function loadArtistInfo(data) {
     artisteInfo.innerHTML = `<p>Artiste : ${data.nom} ${data.prenom}<br>Type: ${data.type}</p>`;
   }
   if (artiste) {
-    artiste.onclick = () => { loadArtiste(data.id); };
+    artiste.onclick = () => {loadArtiste(data.id);};
   }
 }
 
@@ -42,7 +42,7 @@ function loadAlbumInfo(data) {
   // Modification onclick album
   if (albumNom) {
     albumNom.innerHTML = `<p>Album : ${data.titre}<br>Date parution: ${formatDate(data.date_parution)}</p>`;
-    albumNom.onclick = () => { loadAlbum(data.id); };
+    albumNom.onclick = () => {loadAlbum(data.id);};
   }
 
   // Chargement des informations de l'artiste de l'album
@@ -55,7 +55,6 @@ function loadAlbumInfo(data) {
  */
 function loadTrack(id) {
   const audio = document.getElementById('player');
-  audio.dataset.musiqueid = id;
 
   // Chargement de l'album contenant le morceau actuel & de l'artiste du morceau
   ajaxRequest('GET', `../php/request.php/track/${id}`, (data) => {
@@ -69,6 +68,13 @@ function loadTrack(id) {
     // Accéder à l'élément input range
     stopGo.classList.add('clicked');
     audio.play();
+
+    // Ajout du click qui permet d'ajouter le morceau dans la playlist
+    document.getElementById('add').onclick = null;
+    document.getElementById('add').onclick = () => {addTrack(id);};
+
+    // Ajout du morceau dans les favoris
+    ajaxRequest('GET', '../php/request.php/playlist/checkfav', (data) => {setFav(id, data);}, `id_morceau=${id}`);
 
     // Ajout du morceau dans les musiques écoutées
     ajaxRequest('POST', '../php/request.php/listened', null, `id_morceau=${id}`);
@@ -90,8 +96,10 @@ function loadTrackPageEvent(playlistId, playlistName) {
 /**
  * Fonction pour charger une liste d'objets dans une page (musiques, playlists, albums)
  * @param {*} data Informations des musiques écoutées
+ * @param {*} playlistId Id de la playlist à charger
+ * @param {*} playlistName Nom de la playlist à charger
  */
-function loadObjects(data) {
+function loadObjects(data, playlistId = null, playlistName = null) {
   // Récupération du parent des objets à charger
   const listeObjet = document.getElementById('liste-morceau1');
 
@@ -101,11 +109,10 @@ function loadObjects(data) {
   }
 
   if (listeObjet) {
-    listeObjet.innerHTML = '';
     for (let index = 0; index < data.length; index += 1) {
       // Vérification s'il s'agit de l'élément à afficher ou non
       if (index === 0) {
-        // Vérification s'il s'agit d'une playlist (.type), d'un artiste (.nom),
+        // Vérification s'il s'agit d'un artiste (.type), d'une playlist (.nom),
         // d'un album (.date_parution) ou de musiques
         if (data[index].type) {
           listeObjet.innerHTML += `<div class="box show" onclick="loadTrackPageEvent(${data[index].id}, 'Artiste')"><h2>${data[index].nom} ${data[index].prenom}</h2></div>`;
@@ -117,23 +124,28 @@ function loadObjects(data) {
           // Chargement des infos de l'artiste actuel
           ajaxRequest('GET', `../php/request.php/artist/${data[index].id_artiste}`, loadArtistInfo);
         } else {
-          listeObjet.innerHTML += `<div class="box show" onclick="loadTrack(${data[index].id})"><h2>${data[index].titre}</h2><h2>${formatTime(data[index].duree)}</h2></div>`;
-
+          if (playlistId) {
+            listeObjet.innerHTML += `<div class="box show" onclick="loadTrack(${data[index].id})"><div id="delete-track" onclick="deleteTrack(${data[index].id}, ${playlistId}, '${playlistName}')"></div><h2>${data[index].titre}</h2><h2>${formatTime(data[index].duree)}</h2></div></div>`;
+          } else {
+            listeObjet.innerHTML += `<div class="box show" onclick="loadTrack(${data[index].id})"><h2>${data[index].titre}</h2><h2>${formatTime(data[index].duree)}</h2></div>`;
+          }
           // Chargement des infos de l'album du morceau actuel
           ajaxRequest('GET', `../php/request.php/album/${data[index].id_album}`, loadAlbumInfo);
         }
       } else {
-        // Vérification s'il s'agit d'une playlist (.type), d'un artiste (.nom),
+        // Vérification s'il s'agit d'un artiste (.type), d'une playlist (.nom),
         // d'un album (.date_parution) ou de musiques
         // eslint-disable-next-line no-lonely-if
         if (data[index].type) {
-          listeObjet.innerHTML += `<div class="box" onclick="loadTrackPageEvent(${data[index].id},'Artiste'"><h2>${data[index].nom} ${data[index].prenom}</h2></div>`;
+          listeObjet.innerHTML += `<div class="box" onclick="loadTrackPageEvent(${data[index].id},'Artiste')"><h2>${data[index].nom} ${data[index].prenom}</h2></div>`;
         } else if (data[index].nom) {
           listeObjet.innerHTML += `<div class="box" onclick="loadTrackPageEvent(${data[index].id}, '${data[index].nom}')"><h2>${data[index].nom}</h2></div>`;
         } else if (data[index].date_parution) {
-          listeObjet.innerHTML += `<div class="box show" onclick="loadAlbum(${data[index].id})"><h2>${data[index].titre}</h2></div>`;
+          listeObjet.innerHTML += `<div class="box" onclick="loadAlbum(${data[index].id})"><h2>${data[index].titre}</h2></div>`;
+        } else if (playlistId) {
+          listeObjet.innerHTML += `<div class="box" onclick="loadTrack(${data[index].id})"><div id="delete-track" onclick="deleteTrack(${data[index].id}, ${playlistId}, '${playlistName}')"></div><h2>${data[index].titre}</h2><h2>${formatTime(data[index].duree)}</h2></div></div>`;
         } else {
-          listeObjet.innerHTML += `<div class="box show" onclick="loadTrack(${data[index].id})"><h2>${data[index].titre}</h2><h2>${formatTime(data[index].duree)}</h2></div>`;
+          listeObjet.innerHTML += `<div class="box" onclick="loadTrack(${data[index].id})"><h2>${data[index].titre}</h2><h2>${formatTime(data[index].duree)}</h2></div>`;
         }
       }
     }
@@ -145,8 +157,8 @@ function loadObjects(data) {
  * @param {*} request Requête Ajax à effectuer
  * @param {*} pageTitle Titre de la page
  */
+// Si l'utilisateur n'est pas identifié
 function loadTrackPage(request, pageTitle) {
-  // Si l'utilisateur n'est pas identifié
   if (Cookies.get('token') === null) {
     return;
   }
@@ -161,23 +173,26 @@ function loadTrackPage(request, pageTitle) {
   if (request.includes('../php/request.php/playlist/tracks/')) {
     const playlistId = request.split('/')[5];
     // Chargement du contenu de la page
-    document.getElementById('main').innerHTML = `<h2>${pageTitle}</h2><div id="delete-btn" onclick="deletePlaylist(${playlistId}"></div><div id="update-btn" onclick="updatePlaylist(${playlistId}"></div>
+    document.getElementById('main').innerHTML = `<div class="container button"><h2>${pageTitle}</h2><div class="button"><div id="delete-btn" onclick="deletePlaylist(${playlistId})"></div><div id="update-btn" onclick="updatePlaylist(${playlistId})"></div></div></div>
     <div class="container"><div class="info"><div class="artisteAlbum"><div class="artiste" id="artiste"></div><div class="album" id="album">
     </div></div><div class="rectInfo" id="artiste-info"></div></div><div id="liste-morceau1">
     </div></div>`;
+
+    // Chargement des éléments
+    ajaxRequest('GET', request, (data) => { loadObjects(data, playlistId, pageTitle); });
   } else {
     document.getElementById('main').innerHTML = `<h2>${pageTitle}</h2><div class="container"><div class="info"><div class="artisteAlbum"><div class="artiste" id="artiste">
-      </div><div class="album" id="album" data-album=""></div></div><div class="rectInfo" id="artiste-info"></div></div><div id="liste-morceau1">
+      </div><div class="album" id="album"></div></div><div class="rectInfo" id="artiste-info"></div></div><div id="liste-morceau1">
       </div></div>`;
+
+    // Chargement des éléments
+    ajaxRequest('GET', request, loadObjects);
   }
 
   const container = document.getElementById('liste-morceau1');
   if (container) {
     container.addEventListener('wheel', checkBox);
   }
-
-  // Chargement des éléments
-  ajaxRequest('GET', request, loadObjects);
 }
 
 /**
@@ -202,18 +217,11 @@ function loadGroupPage(request, pageTitle) {
     html += `<div class="info"><div class="artisteAlbum"><div class="artiste" id="artiste"></div></div>
     <div class="rectInfo" id="artiste-info"></div></div><div id="liste-morceau1"></div></div>`;
     main.innerHTML = html;
-
-    // Ajout des évènements sur les boutons;
-    document.getElementById('artiste').addEventListener('click', loadArtiste);
   } else if (pageTitle === 'Album') {
     html += `<div class="info"><div class="artisteAlbum"><div class="artiste" id="artiste">
     </div><div class="album" id="album"></div></div><div class="rectInfo" id="artiste-info"></div></div><div id="liste-morceau1">
     </div></div>`;
     main.innerHTML = html;
-
-    // Ajout des évènements sur les boutons;
-    document.getElementById('artiste').addEventListener('click', loadArtiste);
-    document.getElementById('album').addEventListener('click', loadAlbum);
   }
 
   const container = document.getElementById('liste-morceau1');
@@ -233,10 +241,6 @@ function checkBox() {
       box.classList.add('go');
       const child = box.childNodes;
 
-      // console.log(child);
-      if (child.length !== 3) {
-        console.log('yop');
-      }
       if (child.length === 2) {
         const rect = document.createElement('div');
         rect.classList.add('blue-rect');

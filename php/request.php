@@ -272,6 +272,9 @@ if ($requestRessource == "playlist") {
         $data = $db->dbCheckPlaylist($_GET['nom_playlist'], $login);
       } else if ($id == 'favoris') { // Si on veut récupérer les morceaux de la playlist favoris de l'utilisateur
         $data = $db->dbGetFavoris($login);
+      } else if ($id == 'checkfav' && isset($_GET['id_morceau'])) { // Si on veut vérifier qu'un morceau est déjà présent dans les favoris
+        $favoris_infos = $db->dbCheckPlaylist('Favoris', $login);
+        $data = $db->dbCheckMorceauPlaylist($_GET['id_morceau'], $favoris_infos['id']);
       } else if ($id != null) { // Si on veut récupérer une playlist par ID
         $data = $db->dbInfoPlaylist($id);
       } else {
