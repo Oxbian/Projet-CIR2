@@ -53,11 +53,11 @@ function setFav(id, data) {
   const like = document.getElementById('like');
   if (like) {
     like.onclick = null;
-    if (data != 404 && data != 400) {
-      like.classList.add('liked');
+    if (data !== 404 && data !== 400) {
+      like.style.backgroundImage = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='25' height='25' fill='none'%3E%3Cpath fill='%23FF4644' fill-rule='evenodd' d='M12.5 2.19c6.935-7.603 24.272 5.703 0 22.81-24.272-17.107-6.935-30.413 0-22.81Z' clip-rule='evenodd'/%3E%3C/svg%3E")`;
       like.onclick = () => { unlikeTrack(id); };
     } else {
-      like.classList.remove('liked');
+      like.style.backgroundImage = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='25' height='25' fill='none'%3E%3Cpath fill='%23fff' fill-rule='evenodd' d='M12.5 2.19c6.935-7.603 24.272 5.703 0 22.81-24.272-17.107-6.935-30.413 0-22.81Z' clip-rule='evenodd'/%3E%3C/svg%3E")`;
       like.onclick = () => { likeTrack(id); };
     }
   }
