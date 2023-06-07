@@ -235,7 +235,7 @@ function loadGroupPage(request, pageTitle) {
 
 function checkBox() {
   const boxes = document.querySelectorAll('.box');
-  const triggerBottom = (window.innerHeight / 10) * 6;
+  const triggerBottom = (window.innerHeight / 7) * 6;
   boxes.forEach((box, index) => {
     box.addEventListener('click', () => {
       box.classList.add('go');
