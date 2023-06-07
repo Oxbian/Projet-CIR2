@@ -258,10 +258,10 @@ div.parameters {
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
+  color: white;
 }
 
 div.parameters > h3 {
-  color: white;
   font-weight: 800;
 }
 

@@ -18,16 +18,20 @@ cd /var/www/projet-cir2
 git clone https://github.com/Oxbian/Projet-CIR2.git .
 sudo tee -a /etc/apache2/sites-available/prj-web-cir2-grp-56.conf << EOF
 <VirtualHost *:80>
-	ServerName prj-web-cir2-grp-56
-	ServerAlias www.prj-web-cir2-grp-56
-	DocumentRoot "/var/www/projet-cir2"
-	<Directory "/var/www/projet-cir2">
-		Options FollowSymLinks
-		AllowOverride all
-		Require all granted
-	</Directory>
-	ErrorLog /var/log/apache2/error-prj-grp-56.log
-	CustomLog /var/log/apache2/access-prj-grp-56.log combined
+        ServerName prj-web-cir2-grp-56
+        ServerAlias www.prj-web-cir2-grp-56
+        DocumentRoot "/var/www/projet-cir2"
+        RedirectMatch 301 ^/$ /pages
+        <Directory "/var/www/projet-cir2">
+                Options FollowSymLinks
+                AllowOverride all
+                Require all granted
+        </Directory>
+        <Location "/pages">
+                DirectoryIndex login.html
+        </Location>
+        ErrorLog /var/log/apache2/error-prj-grp-56.log
+        CustomLog /var/log/apache2/access-prj-grp-56.log combined
 </VirtualHost>
 EOF
 
