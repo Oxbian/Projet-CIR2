@@ -48,7 +48,10 @@ executeRequest("INSERT INTO album (titre, date_parution, image, id_artiste) VALU
 executeRequest("INSERT INTO style (style) VALUES (?)", [("Rock", "Pop", "Electro", "Classique")])
 
 # Ajout de morceau
-val = [("Legendary", 2.58, "legendary.mp3", 1), ("Pan Flute", 3.45, "pan-flute.mp3", 2), ("The Arkansas Traveler", 2.25, "the-arkansas-traveler.mp3", 2), ("Chinese Flute On London Bridge", 1.03, "chinese-flute-on-london-bridge.mp3", 2), ("A French christmas", 1.0, "a-french-christmas.mp3", 3), ("O Little town of Bethlehem", 0.51, "o-little-town-of-bethlehem.mp3", 3)]
+val = [("Legendary", 2.58, "legendary.mp3", 1), ("Pan Flute", 3.45, "pan-flute.mp3", 2), ("The Arkansas Traveler", 2.25, "the-arkansas-traveler.mp3", 2), 
+("Chinese Flute On London Bridge", 1.03, "chinese-flute-on-london-bridge.mp3", 2), ("A French christmas", 1.0, "a-french-christmas.mp3", 3), ("O Little town of Bethlehem", 0.51, "o-little-town-of-bethlehem.mp3", 3),
+("A little bit of rythm", 1.26, "a-little-bit-of-rythm.mp3", 3), ("Different", 3.13, "different.mp3", 3), ("High Fidelity", 2.36, "high-fidelity.mp3", 2), ("Make it happen", 2.11, "make-it-happen.mp3", 2),
+("Mechanical", 2.11, "mechanical.mp3", 1), ("Meeting point", 2.3, "meeting-point.mp3", 1), ("Only the braves", 2.26, "only-the-braves.mp3", 2), ("Spirit of fire", 3.08, "spirit-of-fire.mp3", 3)]
 executeRequest("INSERT INTO morceau (titre, duree, chemin, id_album) VALUES (?, ?, ?, ?)", val)
 
 # Ajout de playlist
