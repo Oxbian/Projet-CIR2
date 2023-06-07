@@ -32,6 +32,8 @@ npm init -y
 npm install eslint eslint-config-airbnb-base eslint eslint-plugin-import htmlhint
 ```
 
+[Thunder client](https://www.thunderclient.io/) est un plugin pour VSCode permettant de tester les requêtes HTTP, un fichier de requête importable dans une collection est disponible [ici](thunder-collection_Projet-CIR2.json).
+
 ## Ressources
 
 ### Logiciels utilisés 
