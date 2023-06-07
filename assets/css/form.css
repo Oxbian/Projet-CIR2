@@ -27,6 +27,7 @@ h1.title {
   font-size: 2.5rem;
   text-align: center;
   -webkit-user-select: none;
+  color: white;
 }
 
 input {
