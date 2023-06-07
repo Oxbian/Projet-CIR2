@@ -52,3 +52,7 @@ npm install eslint eslint-config-airbnb-base eslint eslint-plugin-import htmlhin
 ## Documentation
 
 L'API REST est documentée dans le fichier `Docu/api.md` [ici](Docu/api.md) et le code est documenté avec Doxygen. 
+
+## Modifications
+
+- [x] Modification de bugs graphiques (couleurs en noirs, artiste modifiable / supprimable)
