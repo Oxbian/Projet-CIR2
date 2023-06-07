@@ -17,6 +17,7 @@
   height: 15vw;
   border-radius: 100%;
   background-color: #dedede;
+  box-shadow: 2px 4px 5px #000;
 }
 
 .album {

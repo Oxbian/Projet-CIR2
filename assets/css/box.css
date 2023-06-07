@@ -28,6 +28,13 @@
   cursor: pointer;
 }
 
+.blue{
+  background-color: blue;
+}
+.green{
+  background-color: green;
+}
+
 .box.show {
   transform: translateX(13vw);
 }
@@ -52,5 +59,5 @@
   margin-left: 5vw;
   font-size: medium;
   color: #000;
-  text-shadow: 2px 3px 5px #000;
+  /* text-shadow: 2px 3px 5px #000; */
 }

@@ -116,7 +116,7 @@ function loadObjects(data, playlistId = null, playlistName = null) {
         // Vérification s'il s'agit d'un artiste (.type), d'une playlist (.nom),
         // d'un album (.date_parution) ou de musiques
         if (data[index].type) {
-          listeObjet.innerHTML += `<div class="box show" onclick="loadArtiste(${data[index].id})"><h2>${data[index].nom} ${data[index].prenom}</h2></div>`;
+          listeObjet.innerHTML += `<div class="box show green" onclick="loadArtiste(${data[index].id})"><h2>${data[index].nom} ${data[index].prenom}</h2></div>`;
         } else if (data[index].nom) {
           listeObjet.innerHTML += `<div class="box show" onclick="loadTrackPageEvent(${data[index].id}, '${data[index].nom}')"><h2>${data[index].nom}</h2></div>`;
         } else if (data[index].date_parution) {
@@ -128,7 +128,7 @@ function loadObjects(data, playlistId = null, playlistName = null) {
           if (playlistId) {
             listeObjet.innerHTML += `<div class="box show" onclick="loadTrack(${data[index].id})"><div id="delete-track" onclick="deleteTrack(${data[index].id}, ${playlistId}, '${playlistName}')"></div><h2>${data[index].titre}</h2><h2>${formatTime(data[index].duree)}</h2></div></div>`;
           } else {
-            listeObjet.innerHTML += `<div class="box show" onclick="loadTrack(${data[index].id})"><h2>${data[index].titre}</h2><h2>${formatTime(data[index].duree)}</h2></div>`;
+            listeObjet.innerHTML += `<div class="box show blue" onclick="loadTrack(${data[index].id})"><h2>${data[index].titre}</h2><h2>${formatTime(data[index].duree)}</h2></div>`;
           }
           // Chargement des infos de l'album du morceau actuel
           ajaxRequest('GET', `../php/request.php/album/${data[index].id_album}`, loadAlbumInfo);
@@ -137,7 +137,7 @@ function loadObjects(data, playlistId = null, playlistName = null) {
         // Vérification s'il s'agit d'un artiste (.type), d'une playlist (.nom),
         // d'un album (.date_parution) ou de musiques
         if (data[index].type) {
-          listeObjet.innerHTML += `<div class="box" onclick="loadArtiste(${data[index].id})"><h2>${data[index].nom} ${data[index].prenom}</h2></div>`;
+          listeObjet.innerHTML += `<div class="box green" onclick="loadArtiste(${data[index].id})"><h2>${data[index].nom} ${data[index].prenom}</h2></div>`;
         } else if (data[index].nom) {
           listeObjet.innerHTML += `<div class="box" onclick="loadTrackPageEvent(${data[index].id}, '${data[index].nom}')"><h2>${data[index].nom}</h2></div>`;
         } else if (data[index].date_parution) {
@@ -145,7 +145,7 @@ function loadObjects(data, playlistId = null, playlistName = null) {
         } else if (playlistId) {
           listeObjet.innerHTML += `<div class="box" onclick="loadTrack(${data[index].id})"><div id="delete-track" onclick="deleteTrack(${data[index].id}, ${playlistId}, '${playlistName}')"></div><h2>${data[index].titre}</h2><h2>${formatTime(data[index].duree)}</h2></div></div>`;
         } else {
-          listeObjet.innerHTML += `<div class="box" onclick="loadTrack(${data[index].id})"><h2>${data[index].titre}</h2><h2>${formatTime(data[index].duree)}</h2></div>`;
+          listeObjet.innerHTML += `<div class="box blue" onclick="loadTrack(${data[index].id})"><h2>${data[index].titre}</h2><h2>${formatTime(data[index].duree)}</h2></div>`;
         }
       }
     }
